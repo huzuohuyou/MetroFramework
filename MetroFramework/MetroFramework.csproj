@@ -13,7 +13,7 @@
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>../MetroFramework.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>MetroFramework.snk</AssemblyOriginatorKeyFile>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <UpgradeBackupLocation>
@@ -123,9 +123,7 @@
     <Compile Include="Controls\MetroScrollBar.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\MetroTabControl.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="Controls\MetroTabControl.cs" />
     <Compile Include="Controls\MetroTabPage.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -139,6 +137,9 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\MetroTrackBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\MetroTreeView.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\MetroUserControl.cs">
@@ -189,6 +190,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="MetroFramework.pfx" />
+    <None Include="MetroFramework.Public.snk" />
+    <None Include="MetroFramework.snk" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
