@@ -157,6 +157,39 @@ namespace MetroFramework.Controls
         #endregion
 
         #region Fields
+        private MetroTabControlSize metroLabelSize = MetroTabControlSize.Medium;
+        [DefaultValue(MetroTabControlSize.Medium)]
+        [Category(MetroDefaults.PropertyCategory.Appearance)]
+        public MetroTabControlSize FontSize
+        {
+            get { return metroLabelSize; }
+            set { metroLabelSize = value; }
+        }
+
+        private MetroTabControlWeight metroLabelWeight = MetroTabControlWeight.Light;
+        [DefaultValue(MetroTabControlWeight.Light)]
+        [Category(MetroDefaults.PropertyCategory.Appearance)]
+        public MetroTabControlWeight FontWeight
+        {
+            get { return metroLabelWeight; }
+            set { metroLabelWeight = value; }
+        }
+
+        private ContentAlignment textAlign = ContentAlignment.MiddleLeft;
+        [DefaultValue(ContentAlignment.MiddleLeft)]
+        [Category(MetroDefaults.PropertyCategory.Appearance)]
+        public ContentAlignment TextAlign
+        {
+            get
+            {
+                return textAlign;
+            }
+            set
+            {
+                textAlign = value;
+            }
+        }
+
         private Size ExpandButtonSize = new Size(16, 16);
         private Color _ExpandButtonColor = Color.FromArgb(255, 255, 255);
         /// <summary>
@@ -406,7 +439,7 @@ namespace MetroFramework.Controls
                     g.DrawPath(new Pen(Color.FromArgb(255, 150, 0, 0), 2f), gp);
 
                     //绘制分组的文本
-                    TextRenderer.DrawText(g, e.Node.Text, this.Font, GroupTitleBounds(e.Bounds), this.GroupTitleColor,
+                    TextRenderer.DrawText(g, e.Node.Text, MetroFonts.TabControl(metroLabelSize, metroLabelWeight), GroupTitleBounds(e.Bounds), this.GroupTitleColor,
                         TextFormatFlags.Left | TextFormatFlags.VerticalCenter | TextFormatFlags.EndEllipsis);
                 }
             }
