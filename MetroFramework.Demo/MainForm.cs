@@ -210,8 +210,9 @@ namespace MetroFramework.Demo
 
         }
 
+        private void metroTreeView1_AfterSelect(object sender, TreeViewEventArgs e)
+        {
 
-
-      
+        }
     }
 }

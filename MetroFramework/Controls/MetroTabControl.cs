@@ -263,9 +263,22 @@ namespace MetroFramework.Controls
             }
         }
 
+        public override Rectangle DisplayRectangle
+        {
+            get
+            {
+                Rectangle rect = base.DisplayRectangle;
+                return new Rectangle(rect.Left , rect.Top , rect.Width + 10, rect.Height );
+            }
+        }
+
         #endregion
 
         #region Constructor
+
+        private int iconWidth = 15;
+        private int iconHeight = 13;
+        private Image icon = null;
 
         public MetroTabControl()
         {
@@ -276,7 +289,41 @@ namespace MetroFramework.Controls
                      ControlStyles.SupportsTransparentBackColor, true);
 
             Padding = new Point(6, 8);
+
+            this.DrawMode = TabDrawMode.OwnerDrawFixed;
+
+            icon = MetroFramework.Properties.Resources.close4;
+            iconWidth = icon.Width;
+            iconHeight = icon.Height;
+            
         }
+
+        //protected override void OnDrawItem(DrawItemEventArgs e)
+        //{
+
+        //    Graphics g = e.Graphics;
+        //    Rectangle r = GetTabRect(e.Index);
+
+        //    g.FillRectangle(Brushes.Black, r);
+        //    string title = this.TabPages[e.Index].Text;
+        //    g.DrawString(title, this.Font, new SolidBrush(Color.Black), new PointF(r.X + 2, r.Y + 2));
+
+        //    r.Offset(r.Width - iconWidth - 3, 2);
+        //    g.DrawImage(icon, new Point(r.X, r.Y));
+
+
+        //}
+
+        //protected override void OnMouseClick(MouseEventArgs e)
+        //{
+        //    Point p = e.Location;
+        //    Rectangle r = GetTabRect(this.SelectedIndex);
+        //    r.Offset(r.Width - iconWidth - 3, 2);
+        //    r.Width = iconWidth;
+        //    r.Height = iconHeight;
+        //    if (r.Contains(p)) this.TabPages.RemoveAt(this.SelectedIndex);
+        //}
+
 
         #endregion
 
@@ -309,6 +356,7 @@ namespace MetroFramework.Controls
             }
         }
 
+      
         protected override void OnPaint(PaintEventArgs e)
         {
             try
@@ -378,7 +426,7 @@ namespace MetroFramework.Controls
                                                          MetroPaint.GetTextFormatFlags(TextAlign) |
                                                          TextFormatFlags.NoPadding);
             }
-            return preferredSize;
+            return  preferredSize;
         }
 
         private void DrawTab(int index, Graphics graphics)
@@ -424,8 +472,18 @@ namespace MetroFramework.Controls
                 graphics.FillRectangle(bgBrush, bgRect);
             }
 
-            TextRenderer.DrawText(graphics, tabPage.Text, MetroFonts.TabControl(metroLabelSize, metroLabelWeight),
-                                  tabRect, foreColor, backColor, MetroPaint.GetTextFormatFlags(TextAlign));
+            TextRenderer.DrawText(
+                graphics, 
+                $@"{tabPage.Text}", 
+                MetroFonts.TabControl(metroLabelSize, metroLabelWeight),
+                tabRect,
+                foreColor, backColor, MetroPaint.GetTextFormatFlags(TextAlign));
+            //Pen p = new Pen(MetroPaint.ForeColor.TabControl.Normal(Theme));
+            //p.Width = 2;
+            //graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            //graphics.DrawLine(p, (float)tabRect.X, (float)tabRect.Y, (float)(tabRect.X + tabRect.Width), (float)(tabRect.Y + tabRect.Height));
+            //graphics.Dispose();
+            //DrawImage(icon, new Point(tabRect.X + tabRect.Width - icon.Width - 22, tabRect.Y + 9));
         }
 
         [SecuritySafeCritical]
