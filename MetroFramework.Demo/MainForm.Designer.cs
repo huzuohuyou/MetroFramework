@@ -29,18 +29,29 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("节点2");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("节点3");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("节点0", new System.Windows.Forms.TreeNode[] {
+            treeNode1,
+            treeNode2});
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("节点4");
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("节点1", new System.Windows.Forms.TreeNode[] {
+            treeNode4});
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("节点4");
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("节点0", new System.Windows.Forms.TreeNode[] {
+            treeNode6});
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("节点2");
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("节点3");
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("节点1", new System.Windows.Forms.TreeNode[] {
+            treeNode8,
+            treeNode9});
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("节点4");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("节点0", new System.Windows.Forms.TreeNode[] {
-            treeNode1});
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("节点2");
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("节点3");
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("节点1", new System.Windows.Forms.TreeNode[] {
-            treeNode3,
-            treeNode4});
             this.metroTabControl1 = new MetroFramework.Controls.MetroTabControl();
+            this.metroTabPage8 = new MetroFramework.Controls.MetroTabPage();
+            this.cTreeTaskBox1 = new MetroFramework.Controls.CTreeTaskBox();
+            this.metroTreeView1 = new MetroFramework.Controls.MetroTreeView();
             this.metroTabPage6 = new MetroFramework.Controls.MetroTabPage();
             this.metroButton12 = new MetroFramework.Controls.MetroButton();
             this.metroButton11 = new MetroFramework.Controls.MetroButton();
@@ -117,8 +128,6 @@
             this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
             this.metroTextBox1 = new MetroFramework.Controls.MetroTextBox();
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
-            this.metroTabPage8 = new MetroFramework.Controls.MetroTabPage();
-            this.metroTreeView1 = new MetroFramework.Controls.MetroTreeView();
             this.metroToolTip = new MetroFramework.Components.MetroToolTip();
             this.metroContextMenu1 = new MetroFramework.Controls.MetroContextMenu(this.components);
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -129,6 +138,7 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.metroStyleManager = new MetroFramework.Components.MetroStyleManager(this.components);
             this.metroTabControl1.SuspendLayout();
+            this.metroTabPage8.SuspendLayout();
             this.metroTabPage6.SuspendLayout();
             this.metroTabPage7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.metroGrid1)).BeginInit();
@@ -137,29 +147,107 @@
             this.metroTabPage2.SuspendLayout();
             this.metroTabPage3.SuspendLayout();
             this.metroTabPage4.SuspendLayout();
-            this.metroTabPage8.SuspendLayout();
             this.metroContextMenu1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager)).BeginInit();
             this.SuspendLayout();
             // 
             // metroTabControl1
             // 
+            this.metroTabControl1.Controls.Add(this.metroTabPage4);
+            this.metroTabControl1.Controls.Add(this.metroTabPage8);
             this.metroTabControl1.Controls.Add(this.metroTabPage6);
             this.metroTabControl1.Controls.Add(this.metroTabPage7);
             this.metroTabControl1.Controls.Add(this.metroTabPage5);
             this.metroTabControl1.Controls.Add(this.metroTabPage1);
             this.metroTabControl1.Controls.Add(this.metroTabPage2);
             this.metroTabControl1.Controls.Add(this.metroTabPage3);
-            this.metroTabControl1.Controls.Add(this.metroTabPage4);
-            this.metroTabControl1.Controls.Add(this.metroTabPage8);
             this.metroTabControl1.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
             this.metroTabControl1.ItemSize = new System.Drawing.Size(120, 34);
             this.metroTabControl1.Location = new System.Drawing.Point(3, 34);
             this.metroTabControl1.Name = "metroTabControl1";
-            this.metroTabControl1.SelectedIndex = 7;
+            this.metroTabControl1.SelectedIndex = 0;
             this.metroTabControl1.Size = new System.Drawing.Size(647, 344);
             this.metroTabControl1.TabIndex = 0;
             this.metroTabControl1.UseSelectable = true;
+            // 
+            // metroTabPage8
+            // 
+            this.metroTabPage8.BackColor = System.Drawing.SystemColors.Control;
+            this.metroTabPage8.Controls.Add(this.cTreeTaskBox1);
+            this.metroTabPage8.Controls.Add(this.metroTreeView1);
+            this.metroTabPage8.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.metroTabPage8.HorizontalScrollbarBarColor = true;
+            this.metroTabPage8.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroTabPage8.HorizontalScrollbarSize = 6;
+            this.metroTabPage8.Location = new System.Drawing.Point(4, 38);
+            this.metroTabPage8.Name = "metroTabPage8";
+            this.metroTabPage8.Size = new System.Drawing.Size(649, 302);
+            this.metroTabPage8.TabIndex = 7;
+            this.metroTabPage8.Text = "TreeView";
+            this.metroTabPage8.VerticalScrollbarBarColor = true;
+            this.metroTabPage8.VerticalScrollbarHighlightOnWheel = false;
+            this.metroTabPage8.VerticalScrollbarSize = 10;
+            // 
+            // cTreeTaskBox1
+            // 
+            this.cTreeTaskBox1.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.cTreeTaskBox1.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawAll;
+            this.cTreeTaskBox1.ExpandButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.cTreeTaskBox1.FullRowSelect = true;
+            this.cTreeTaskBox1.GroupBgColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(162)))), ((int)(((byte)(211)))));
+            this.cTreeTaskBox1.GroupTitleColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.cTreeTaskBox1.ItemHeight = 30;
+            this.cTreeTaskBox1.Location = new System.Drawing.Point(223, 3);
+            this.cTreeTaskBox1.Name = "cTreeTaskBox1";
+            treeNode1.Name = "节点2";
+            treeNode1.Text = "节点2";
+            treeNode2.Name = "节点3";
+            treeNode2.Text = "节点3";
+            treeNode3.Name = "节点0";
+            treeNode3.Text = "节点0";
+            treeNode4.Name = "节点4";
+            treeNode4.Text = "节点4";
+            treeNode5.Name = "节点1";
+            treeNode5.Text = "节点1";
+            this.cTreeTaskBox1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode3,
+            treeNode5});
+            this.cTreeTaskBox1.OverForeColor = System.Drawing.Color.DeepSkyBlue;
+            this.cTreeTaskBox1.Size = new System.Drawing.Size(172, 296);
+            this.cTreeTaskBox1.TabIndex = 3;
+            // 
+            // metroTreeView1
+            // 
+            this.metroTreeView1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(87)))), ((int)(((byte)(109)))));
+            this.metroTreeView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.metroTreeView1.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawAll;
+            this.metroTreeView1.ExpandButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.metroTreeView1.FontSize = MetroFramework.MetroTileTextSize.Medium;
+            this.metroTreeView1.FontWeight = MetroFramework.MetroTileTextWeight.Bold;
+            this.metroTreeView1.FullRowSelect = true;
+            this.metroTreeView1.GroupBgColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(162)))), ((int)(((byte)(211)))));
+            this.metroTreeView1.GroupTitleColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.metroTreeView1.ItemHeight = 30;
+            this.metroTreeView1.Location = new System.Drawing.Point(3, 3);
+            this.metroTreeView1.Name = "metroTreeView1";
+            treeNode6.Name = "节点4";
+            treeNode6.Text = "节点4";
+            treeNode7.Name = "节点0";
+            treeNode7.Text = "节点0";
+            treeNode8.Name = "节点2";
+            treeNode8.Text = "节点2";
+            treeNode9.Name = "节点3";
+            treeNode9.Text = "节点3";
+            treeNode10.Name = "节点1";
+            treeNode10.Text = "节点1";
+            this.metroTreeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode7,
+            treeNode10});
+            this.metroTreeView1.OverForeColor = System.Drawing.Color.DeepSkyBlue;
+            this.metroTreeView1.Size = new System.Drawing.Size(164, 296);
+            this.metroTreeView1.TabIndex = 2;
+            this.metroTreeView1.UseSelectable = true;
+            this.metroTreeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.metroTreeView1_AfterSelect);
             // 
             // metroTabPage6
             // 
@@ -1133,52 +1221,6 @@
             this.metroLabel2.TabIndex = 2;
             this.metroLabel2.Text = "MetroLabel";
             // 
-            // metroTabPage8
-            // 
-            this.metroTabPage8.BackColor = System.Drawing.SystemColors.Control;
-            this.metroTabPage8.Controls.Add(this.metroTreeView1);
-            this.metroTabPage8.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.metroTabPage8.HorizontalScrollbarBarColor = true;
-            this.metroTabPage8.HorizontalScrollbarHighlightOnWheel = false;
-            this.metroTabPage8.HorizontalScrollbarSize = 6;
-            this.metroTabPage8.Location = new System.Drawing.Point(4, 38);
-            this.metroTabPage8.Name = "metroTabPage8";
-            this.metroTabPage8.Size = new System.Drawing.Size(649, 302);
-            this.metroTabPage8.TabIndex = 7;
-            this.metroTabPage8.Text = "TreeView";
-            this.metroTabPage8.VerticalScrollbarBarColor = true;
-            this.metroTabPage8.VerticalScrollbarHighlightOnWheel = false;
-            this.metroTabPage8.VerticalScrollbarSize = 10;
-            // 
-            // metroTreeView1
-            // 
-            this.metroTreeView1.DrawMode = System.Windows.Forms.TreeViewDrawMode.OwnerDrawAll;
-            this.metroTreeView1.ExpandButtonColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.metroTreeView1.FullRowSelect = true;
-            this.metroTreeView1.GroupBgColor = System.Drawing.Color.FromArgb(((int)(((byte)(95)))), ((int)(((byte)(162)))), ((int)(((byte)(211)))));
-            this.metroTreeView1.GroupTitleColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.metroTreeView1.ItemHeight = 30;
-            this.metroTreeView1.Location = new System.Drawing.Point(3, 3);
-            this.metroTreeView1.Name = "metroTreeView1";
-            treeNode1.Name = "节点4";
-            treeNode1.Text = "节点4";
-            treeNode2.Name = "节点0";
-            treeNode2.Text = "节点0";
-            treeNode3.Name = "节点2";
-            treeNode3.Text = "节点2";
-            treeNode4.Name = "节点3";
-            treeNode4.Text = "节点3";
-            treeNode5.Name = "节点1";
-            treeNode5.Text = "节点1";
-            this.metroTreeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode2,
-            treeNode5});
-            this.metroTreeView1.OverForeColor = System.Drawing.Color.DeepSkyBlue;
-            this.metroTreeView1.Size = new System.Drawing.Size(164, 296);
-            this.metroTreeView1.TabIndex = 2;
-            this.metroTreeView1.UseSelectable = true;
-            this.metroTreeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.metroTreeView1_AfterSelect);
-            // 
             // metroToolTip
             // 
             this.metroToolTip.Style = MetroFramework.MetroColorStyle.Blue;
@@ -1254,6 +1296,7 @@
             this.Theme = MetroFramework.MetroThemeStyle.Default;
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.metroTabControl1.ResumeLayout(false);
+            this.metroTabPage8.ResumeLayout(false);
             this.metroTabPage6.ResumeLayout(false);
             this.metroTabPage7.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.metroGrid1)).EndInit();
@@ -1267,7 +1310,6 @@
             this.metroTabPage3.PerformLayout();
             this.metroTabPage4.ResumeLayout(false);
             this.metroTabPage4.PerformLayout();
-            this.metroTabPage8.ResumeLayout(false);
             this.metroContextMenu1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.metroStyleManager)).EndInit();
             this.ResumeLayout(false);
@@ -1364,6 +1406,7 @@
         private Components.MetroStyleManager metroStyleManager;
         private Controls.MetroTabPage metroTabPage8;
         private Controls.MetroTreeView metroTreeView1;
+        private Controls.CTreeTaskBox cTreeTaskBox1;
     }
 }
 

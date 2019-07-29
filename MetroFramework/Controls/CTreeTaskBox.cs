@@ -1,7 +1,4 @@
-﻿using MetroFramework.Components;
-using MetroFramework.Drawing;
-using MetroFramework.Interfaces;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -9,193 +6,29 @@ using System.Windows.Forms;
 
 namespace MetroFramework.Controls
 {
-    //[Designer("MetroFramework.Design.Controls.MetroTabControlDesigner, " + AssemblyRef.MetroFrameworkDesignSN)]
-    [ToolboxBitmap(typeof(TreeView))]
-    public class MetroTreeView : TreeView, IMetroControl
+    /// <summary>
+    /// 基于树视图的任务控件
+    /// </summary>
+    public class CTreeTaskBox : TreeView
     {
-        #region Interface
-
-        [Category(MetroDefaults.PropertyCategory.Appearance)]
-        public event EventHandler<MetroPaintEventArgs> CustomPaintBackground;
-        protected virtual void OnCustomPaintBackground(MetroPaintEventArgs e)
-        {
-            
-            if (GetStyle(ControlStyles.UserPaint) && CustomPaintBackground != null)
-            {
-                
-                CustomPaintBackground(this, e);
-            }
-        }
-
-        [Category(MetroDefaults.PropertyCategory.Appearance)]
-        public event EventHandler<MetroPaintEventArgs> CustomPaint;
-        protected virtual void OnCustomPaint(MetroPaintEventArgs e)
-        {
-            if (GetStyle(ControlStyles.UserPaint) && CustomPaint != null)
-            {
-                CustomPaint(this, e);
-            }
-        }
-
-        [Category(MetroDefaults.PropertyCategory.Appearance)]
-        public event EventHandler<MetroPaintEventArgs> CustomPaintForeground;
-        protected virtual void OnCustomPaintForeground(MetroPaintEventArgs e)
-        {
-            if (GetStyle(ControlStyles.UserPaint) && CustomPaintForeground != null)
-            {
-                CustomPaintForeground(this, e);
-            }
-        }
-
-        private MetroColorStyle metroStyle = MetroColorStyle.Default;
-        [Category(MetroDefaults.PropertyCategory.Appearance)]
-        [DefaultValue(MetroColorStyle.Default)]
-        public MetroColorStyle Style
-        {
-            get
-            {
-                if (DesignMode || metroStyle != MetroColorStyle.Default)
-                {
-                    return metroStyle;
-                }
-
-                if (StyleManager != null && metroStyle == MetroColorStyle.Default)
-                {
-                    return StyleManager.Style;
-                }
-                if (StyleManager == null && metroStyle == MetroColorStyle.Default)
-                {
-                    return MetroDefaults.Style;
-                }
-
-                return metroStyle;
-            }
-            set { metroStyle = value; }
-        }
-
-        private MetroThemeStyle metroTheme = MetroThemeStyle.Default;
-        [Category(MetroDefaults.PropertyCategory.Appearance)]
-        [DefaultValue(MetroThemeStyle.Default)]
-        public MetroThemeStyle Theme
-        {
-            get
-            {
-                if (DesignMode || metroTheme != MetroThemeStyle.Default)
-                {
-                    return metroTheme;
-                }
-
-                if (StyleManager != null && metroTheme == MetroThemeStyle.Default)
-                {
-                    return StyleManager.Theme;
-                }
-                if (StyleManager == null && metroTheme == MetroThemeStyle.Default)
-                {
-                    return MetroDefaults.Theme;
-                }
-
-                return metroTheme;
-            }
-            set { metroTheme = value; }
-        }
-
-        private MetroStyleManager metroStyleManager = null;
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public MetroStyleManager StyleManager
-        {
-            get { return metroStyleManager; }
-            set { metroStyleManager = value; }
-        }
-
-        private bool useCustomBackColor = false;
-        [DefaultValue(false)]
-        [Category(MetroDefaults.PropertyCategory.Appearance)]
-        public bool UseCustomBackColor
-        {
-            get { return useCustomBackColor; }
-            set { useCustomBackColor = value; }
-        }
-
-        private bool useCustomForeColor = false;
-        [DefaultValue(false)]
-        [Category(MetroDefaults.PropertyCategory.Appearance)]
-        public bool UseCustomForeColor
-        {
-            get { return useCustomForeColor; }
-            set { useCustomForeColor = value; }
-        }
-
-        private bool useStyleColors = false;
-        [DefaultValue(false)]
-        [Category(MetroDefaults.PropertyCategory.Appearance)]
-        public bool UseStyleColors
-        {
-            get { return useStyleColors; }
-            set { useStyleColors = value; }
-        }
-
-        [Browsable(false)]
-        [Category(MetroDefaults.PropertyCategory.Behaviour)]
-        [DefaultValue(false)]
-        public bool UseSelectable
-        {
-            get { return GetStyle(ControlStyles.Selectable); }
-            set { SetStyle(ControlStyles.Selectable, value); }
-        }
-
-        #endregion
-
-        #region   Constructor
-        public MetroTreeView()
+        #region //construckor
+        /// <summary>
+        /// 
+        /// </summary>
+        public CTreeTaskBox()
         {
             FullRowSelect = true;
-            ShowLines = false;
+            ShowLines = true;
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             this.DrawMode = TreeViewDrawMode.OwnerDrawAll;
             this.ItemHeight = 30;
             this.ShowLines = true;
-
-            //this.SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.AllPaintingInWmPaint, true);
-            //this.SetStyle(ControlStyles.EnableNotifyMessage, true);
-            //BackColor = ChangeColor(MetroPaint.GetStyleColor(Style), -0.5f);
         }
         #endregion
-
-        #region Fields
-        private MetroTileTextSize metroLabelSize = MetroTileTextSize.Medium;
-        [DefaultValue(MetroTabControlSize.Medium)]
-        [Category(MetroDefaults.PropertyCategory.Appearance)]
-        public MetroTileTextSize FontSize
-        {
-            get { return metroLabelSize; }
-            set { metroLabelSize = value; }
-        }
-
-        private MetroTileTextWeight metroLabelWeight = MetroTileTextWeight.Bold;
-        [DefaultValue(MetroTabControlWeight.Light)]
-        [Category(MetroDefaults.PropertyCategory.Appearance)]
-        public MetroTileTextWeight FontWeight
-        {
-            get { return metroLabelWeight; }
-            set { metroLabelWeight = value; }
-        }
-
-        private ContentAlignment textAlign = ContentAlignment.MiddleLeft;
-        [DefaultValue(ContentAlignment.MiddleLeft)]
-        [Category(MetroDefaults.PropertyCategory.Appearance)]
-        public ContentAlignment TextAlign
-        {
-            get
-            {
-                return textAlign;
-            }
-            set
-            {
-                textAlign = value;
-            }
-        }
-
+        #region //field & property
+        /// <summary>
+        /// 展开按扭的大小
+        /// </summary>
         private Size ExpandButtonSize = new Size(16, 16);
         private Color _ExpandButtonColor = Color.FromArgb(255, 255, 255);
         /// <summary>
@@ -296,49 +129,11 @@ namespace MetroFramework.Controls
                 }
             }
         }
+
         #endregion
-
-        #region Overridden Methods
-        protected override void OnPaintBackground(PaintEventArgs e)
-        {
-            try
-            {
-                Color backColor = BackColor;
-
-
-                if (!useCustomBackColor)
-                {
-                    backColor = MetroPaint.BackColor.Button.Normal(Theme);
-                }
-
-
-                if (backColor.A == 255 && BackgroundImage == null)
-                {
-                    e.Graphics.Clear(backColor);
-                    return;
-                }
-
-                base.OnPaintBackground(e);
-
-                OnCustomPaintBackground(new MetroPaintEventArgs(backColor, Color.Empty, e.Graphics));
-            }
-            catch
-            {
-                Invalidate();
-            }
-        }
-
-        protected override void OnNotifyMessage(Message m)
-        {
-            if (m.Msg != 0x14)
-            {
-                base.OnNotifyMessage(m);
-            }
-        }
-
+        #region //override
         protected override void OnDrawNode(DrawTreeNodeEventArgs e)
         {
-            
             //base.OnDrawNode(e);
             DrawNodeItem(e);
         }
@@ -438,7 +233,7 @@ namespace MetroFramework.Controls
         }
         #endregion
 
-        #region private method
+        #region //private method
         /// <summary>
         /// 自定义绘制节点
         /// </summary>
@@ -450,16 +245,15 @@ namespace MetroFramework.Controls
             {
                 using (Graphics g = e.Graphics)
                 {
-                    if (!BackColor.Equals(ChangeColor(MetroPaint.GetStyleColor(Style), -0.5f)))
-                    {
-                        BackColor = ChangeColor(MetroPaint.GetStyleColor(Style), -0.5f);
-                    }
                     //绘制分组的背景
-                    RenderBackgroundInternalRate(
-                        g,
+                    RenderBackgroundInternalRate(g,
                         e.Bounds,
-                        MetroPaint.GetStyleColor(Style),
-                        false);
+                        GroupBgColor,
+                        GroupBgColor,
+                        Color.FromArgb(200, 255, 255, 255),
+                        0.45f,
+                        true,
+                        300);
                     //绘制展开按扭
                     g.FillEllipse(new SolidBrush(ExpandButtonColor), ExpandButtonBounds(e.Bounds));
                     g.DrawEllipse(new Pen(Color.LightGray), ExpandButtonBounds(e.Bounds));
@@ -484,11 +278,7 @@ namespace MetroFramework.Controls
                     g.DrawPath(new Pen(Color.FromArgb(255, 150, 0, 0), 2f), gp);
 
                     //绘制分组的文本
-                    TextRenderer.DrawText(
-                        g, 
-                        e.Node.Text, 
-                        MetroFonts.Tile(metroLabelSize, metroLabelWeight), GroupTitleBounds(e.Bounds), 
-                        Color.White,
+                    TextRenderer.DrawText(g, e.Node.Text, this.Font, GroupTitleBounds(e.Bounds), this.GroupTitleColor,
                         TextFormatFlags.Left | TextFormatFlags.VerticalCenter | TextFormatFlags.EndEllipsis);
                 }
             }
@@ -500,71 +290,17 @@ namespace MetroFramework.Controls
                 {
                     if (tn.IsSelected)
                     {
-                        RenderBackgroundInternalRate(
-                        g,
-                        e.Bounds,
-                        ChangeColor(MetroPaint.GetStyleColor(Style),0.3f),
-                        false
-                       );
-                        TextRenderer.DrawText(
-                            g, 
-                            e.Node.Text, 
-                            MetroFonts.Tile(metroLabelSize, metroLabelWeight), 
-                            new Rectangle { X = e.Bounds.X + 40, Y = e.Bounds.Y, Width = e.Bounds.Width, Height = e.Bounds.Height }, 
-                            Color.White,
-                            TextFormatFlags.Left | TextFormatFlags.VerticalCenter);
+                        TextRenderer.DrawText(g, e.Node.Text, new Font(this.Font.FontFamily.Name, this.Font.Size, FontStyle.Underline), e.Bounds, OverForeColor,
+                                TextFormatFlags.Left | TextFormatFlags.VerticalCenter);
                     }
                     else
                     {
-                        TextRenderer.DrawText(
-                            g, 
-                            e.Node.Text,
-                            MetroFonts.Tile(metroLabelSize, MetroTileTextWeight.Light), 
-                            new Rectangle {X= e.Bounds.X+ 40, Y= e.Bounds.Y,Width= e.Bounds.Width,Height= e.Bounds.Height } ,
-                            Color.White,
-                            TextFormatFlags.Left | TextFormatFlags.VerticalCenter);
+                        TextRenderer.DrawText(g, e.Node.Text, this.Font, e.Bounds, this.ForeColor,
+                                TextFormatFlags.Left | TextFormatFlags.VerticalCenter);
                     }
                 }
             }
         }
-
-        public static Color ChangeColor(Color color, float correctionFactor)
-        {
-            float red = (float)color.R;
-            float green = (float)color.G;
-            float blue = (float)color.B;
-
-            if (correctionFactor < 0)
-            {
-                correctionFactor = 1 + correctionFactor;
-                red *= correctionFactor;
-                green *= correctionFactor;
-                blue *= correctionFactor;
-            }
-            else
-            {
-                red = (255 - red) * correctionFactor + red;
-                green = (255 - green) * correctionFactor + green;
-                blue = (255 - blue) * correctionFactor + blue;
-            }
-
-            if (red < 0) red = 0;
-
-            if (red > 255) red = 255;
-
-            if (green < 0) green = 0;
-
-            if (green > 255) green = 255;
-
-            if (blue < 0) blue = 0;
-
-            if (blue > 255) blue = 255;
-
-
-
-            return Color.FromArgb(color.A, (int)red, (int)green, (int)blue);
-        }
-
         /// <summary>
         /// 展开按扭区域  一级菜单后面的展开按钮
         /// </summary>
@@ -589,7 +325,7 @@ namespace MetroFramework.Controls
         }
         #endregion
 
-        #region draw
+        #region //draw
         internal void RenderBackgroundInternal(
    Graphics g,
    Rectangle rect,
@@ -649,24 +385,63 @@ namespace MetroFramework.Controls
                 }
             }
         }
-
         internal void RenderBackgroundInternalRate(
    Graphics g,
    Rectangle rect,
    Color baseColor,
-
-   bool drawBorder)
+   Color borderColor,
+   Color innerBorderColor,
+   float basePosition,
+   bool drawBorder, float rate)
         {
             if (drawBorder)
             {
                 rect.Width--;
                 rect.Height--;
             }
-            using (Brush brush = new SolidBrush(baseColor))
+            using (LinearGradientBrush brush = new LinearGradientBrush(
+               rect, Color.Transparent, Color.Transparent, rate))
             {
+                Color[] colors = new Color[4];
+                colors[0] = GetColor(baseColor, 0, 35, 24, 9);
+                colors[1] = GetColor(baseColor, 0, 13, 8, 3);
+                colors[2] = baseColor;
+                colors[3] = GetColor(baseColor, 0, 68, 69, 54);
+                ColorBlend blend = new ColorBlend();
+                blend.Positions = new float[] { 0.0f, basePosition, basePosition + 0.05f, 1.0f };
+                blend.Colors = colors;
+                brush.InterpolationColors = blend;
                 g.FillRectangle(brush, rect);
             }
-           
+            if (baseColor.A > 80)
+            {
+                Rectangle rectTop = rect;
+                if (true/*mode == LinearGradientMode.Vertical*/)
+                {
+                    rectTop.Height = (int)(rectTop.Height * basePosition);
+                }
+                else
+                {
+                    rectTop.Width = (int)(rect.Width * basePosition);
+                }
+                using (SolidBrush brushAlpha =
+                    new SolidBrush(Color.FromArgb(80, 255, 255, 255)))
+                {
+                    g.FillRectangle(brushAlpha, rectTop);
+                }
+            }
+            if (drawBorder)
+            {
+                using (Pen pen = new Pen(borderColor))
+                {
+                    g.DrawRectangle(pen, rect);
+                }
+                rect.Inflate(-1, -1);
+                using (Pen pen = new Pen(innerBorderColor))
+                {
+                    g.DrawRectangle(pen, rect);
+                }
+            }
         }
 
         private Color GetColor(Color colorBase, int a, int r, int g, int b)
