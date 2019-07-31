@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 
 namespace MetroFramework.Demo
 {
-    public partial class MainForm : MetroForm
+    public partial class MainForm : MetroDemo
     {
         [StructLayout(LayoutKind.Sequential)]
         public struct MARGINS

@@ -163,7 +163,7 @@ namespace MetroFramework.Controls
         #endregion
 
         #region Fields
-        private MetroTileTextSize metroLabelSize = MetroTileTextSize.Medium;
+        private MetroTileTextSize metroLabelSize = MetroTileTextSize.Tall;
         [DefaultValue(MetroTabControlSize.Medium)]
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         public MetroTileTextSize FontSize
@@ -506,6 +506,12 @@ namespace MetroFramework.Controls
                         ChangeColor(MetroPaint.GetStyleColor(Style),0.3f),
                         false
                        );
+                        RenderBackgroundInternalRate(
+                       g,
+                       new Rectangle { X = e.Bounds.X,Y=e.Bounds.Y,Height=e.Bounds.Height,Width=5 },
+                       ChangeColor(MetroPaint.GetStyleColor(Style), -0.8f),
+                       false
+                      );
                         TextRenderer.DrawText(
                             g, 
                             e.Node.Text, 
