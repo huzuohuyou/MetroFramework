@@ -461,27 +461,28 @@ namespace MetroFramework.Controls
                         MetroPaint.GetStyleColor(Style),
                         false);
                     //绘制展开按扭
-                    g.FillEllipse(new SolidBrush(ExpandButtonColor), ExpandButtonBounds(e.Bounds));
-                    g.DrawEllipse(new Pen(Color.LightGray), ExpandButtonBounds(e.Bounds));
-                    Point p1;
-                    Point p2;
-                    Point p3;
+                    //g.FillEllipse(new SolidBrush(ExpandButtonColor), ExpandButtonBounds(e.Bounds));
+                    //g.DrawEllipse(new Pen(Color.LightGray), ExpandButtonBounds(e.Bounds));
+                    PointF p1;
+                    PointF p2;
+                    PointF p3;
                     if (tn.IsExpanded)
                     {
-                        p1 = new Point(ExpandButtonBounds(e.Bounds).X + 3, ExpandButtonBounds(e.Bounds).Bottom - 4);
-                        p2 = new Point(ExpandButtonBounds(e.Bounds).X + (ExpandButtonSize.Width) / 2, ExpandButtonBounds(e.Bounds).Top + 5);
-                        p3 = new Point(ExpandButtonBounds(e.Bounds).Right - 3, ExpandButtonBounds(e.Bounds).Bottom - 4);
+                        p1 = new PointF(ExpandButtonBounds(e.Bounds).X + 3, ExpandButtonBounds(e.Bounds).Bottom - 4);
+                        p2 = new PointF(ExpandButtonBounds(e.Bounds).X + (ExpandButtonSize.Width) / 2, ExpandButtonBounds(e.Bounds).Top + 5);
+                        p3 = new PointF(ExpandButtonBounds(e.Bounds).Right - 3, ExpandButtonBounds(e.Bounds).Bottom - 4);
                     }
                     else
                     {
-                        p1 = new Point(ExpandButtonBounds(e.Bounds).X + 3, ExpandButtonBounds(e.Bounds).Y + 4);
-                        p2 = new Point(ExpandButtonBounds(e.Bounds).X + (ExpandButtonSize.Width) / 2, ExpandButtonBounds(e.Bounds).Bottom - 5);
-                        p3 = new Point(ExpandButtonBounds(e.Bounds).Right - 3, ExpandButtonBounds(e.Bounds).Y + 4);
+                        p1 = new PointF(ExpandButtonBounds(e.Bounds).X + 3, ExpandButtonBounds(e.Bounds).Y + 4);
+                        p2 = new PointF(ExpandButtonBounds(e.Bounds).X + (ExpandButtonSize.Width) / 2, ExpandButtonBounds(e.Bounds).Bottom - 5);
+                        p3 = new PointF(ExpandButtonBounds(e.Bounds).Right - 3, ExpandButtonBounds(e.Bounds).Y + 4);
                     }
                     GraphicsPath gp = new GraphicsPath();
+                    e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
                     gp.AddLine(p1, p2);
                     gp.AddLine(p2, p3);
-                    g.DrawPath(new Pen(Color.FromArgb(255, 150, 0, 0), 2f), gp);
+                    g.DrawPath(new Pen(Color.FromArgb(255, 255, 255, 255), 2f), gp);
 
                     //绘制分组的文本
                     TextRenderer.DrawText(
