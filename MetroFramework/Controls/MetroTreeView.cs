@@ -458,7 +458,7 @@ namespace MetroFramework.Controls
                     RenderBackgroundInternalRate(
                         g,
                         e.Bounds,
-                        MetroPaint.GetStyleColor(Style),
+                        BackColor,
                         false);
                     //绘制展开按扭
                     //g.FillEllipse(new SolidBrush(ExpandButtonColor), ExpandButtonBounds(e.Bounds));
@@ -479,7 +479,7 @@ namespace MetroFramework.Controls
                         p3 = new PointF(ExpandButtonBounds(e.Bounds).Right - 3, ExpandButtonBounds(e.Bounds).Y + 4);
                     }
                     GraphicsPath gp = new GraphicsPath();
-                    e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+                    e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
                     gp.AddLine(p1, p2);
                     gp.AddLine(p2, p3);
                     g.DrawPath(new Pen(Color.FromArgb(255, 255, 255, 255), 2f), gp);
@@ -523,6 +523,11 @@ namespace MetroFramework.Controls
                     }
                     else
                     {
+                        RenderBackgroundInternalRate(
+                        g,
+                        e.Bounds,
+                        BackColor,
+                        false);
                         TextRenderer.DrawText(
                             g, 
                             e.Node.Text,
@@ -530,6 +535,7 @@ namespace MetroFramework.Controls
                             new Rectangle {X= e.Bounds.X+ 40, Y= e.Bounds.Y,Width= e.Bounds.Width,Height= e.Bounds.Height } ,
                             Color.White,
                             TextFormatFlags.Left | TextFormatFlags.VerticalCenter);
+                        
                     }
                 }
             }

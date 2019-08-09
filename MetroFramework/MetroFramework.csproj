@@ -81,6 +81,9 @@
     <Compile Include="Components\MetroToolTip.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\AntButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\CTreeTaskBox.cs">
       <SubType>Component</SubType>
     </Compile>

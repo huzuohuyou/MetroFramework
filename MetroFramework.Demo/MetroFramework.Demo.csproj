@@ -60,6 +60,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Button\UcButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Button\UcButton.Designer.cs">
+      <DependentUpon>UcButton.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -86,6 +92,9 @@
     <Compile Include="TaskWindowControl.Designer.cs">
       <DependentUpon>TaskWindowControl.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Button\UcButton.resx">
+      <DependentUpon>UcButton.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
