@@ -34,7 +34,7 @@ namespace MetroFramework.Controls
     using MetroFramework.Drawing;
     using MetroFramework.Interfaces;
 
-    [Designer("MetroFramework.Design.Controls.MetroButtonDesigner, " + AssemblyRef.MetroFrameworkDesignSN)]
+    [Designer("MetroFramework.Design.Controls.AntButtonDesigner, " + AssemblyRef.MetroFrameworkDesignSN)]
     [ToolboxBitmap(typeof(Button))]
     [DefaultEvent("Click")]
     public class AntButton : Button, IMetroControl
@@ -283,7 +283,7 @@ namespace MetroFramework.Controls
             try
             {
                 base.OnPaint(e);
-
+                Height = 45;
                 if (GetStyle(ControlStyles.AllPaintingInWmPaint))
                 {
                     OnPaintBackground(e);

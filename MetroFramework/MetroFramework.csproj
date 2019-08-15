@@ -87,6 +87,7 @@
     <Compile Include="Controls\CTreeTaskBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\Enum\AntSize.cs" />
     <Compile Include="Controls\MetroButton.cs">
       <SubType>Component</SubType>
     </Compile>

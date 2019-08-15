@@ -36,7 +36,7 @@
             this.antButton1.BackColor = System.Drawing.Color.Transparent;
             this.antButton1.Location = new System.Drawing.Point(17, 25);
             this.antButton1.Name = "antButton1";
-            this.antButton1.Size = new System.Drawing.Size(124, 47);
+            this.antButton1.Size = new System.Drawing.Size(205, 32);
             this.antButton1.TabIndex = 0;
             this.antButton1.Text = "antButton1";
             this.antButton1.UseSelectable = true;
