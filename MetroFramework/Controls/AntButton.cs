@@ -31,6 +31,7 @@ namespace MetroFramework.Controls
     using System.Windows.Forms;
 
     using MetroFramework.Components;
+    using MetroFramework.Controls.Enum;
     using MetroFramework.Drawing;
     using MetroFramework.Interfaces;
 
@@ -173,6 +174,16 @@ namespace MetroFramework.Controls
 
         #region Fields
 
+        private AntSize antStyle = AntSize.Default;
+        [DefaultValue(AntSize.Default)]
+        [Category(MetroDefaults.PropertyCategory.Appearance)]
+        public AntSize AntStyle
+        {
+            get { return antStyle; }
+            set { antStyle = value; }
+        }
+
+
         private bool displayFocusRectangle = false;
         [DefaultValue(false)]
         [Category(MetroDefaults.PropertyCategory.Appearance)]
@@ -267,7 +278,7 @@ namespace MetroFramework.Controls
 
                 using (Brush brush = new SolidBrush(backColor))
                 {
-                    var rec = DrawRoundRect(0, 0, Width, Height, 50);
+                    var rec = DrawRoundRect(0, 0, Width, Height, (int)AntStyle+4);
                     e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
                     e.Graphics.FillPath(brush, rec);
                 }
@@ -283,7 +294,7 @@ namespace MetroFramework.Controls
             try
             {
                 base.OnPaint(e);
-                Height = 45;
+                Height =(int)AntStyle;
                 if (GetStyle(ControlStyles.AllPaintingInWmPaint))
                 {
                     OnPaintBackground(e);

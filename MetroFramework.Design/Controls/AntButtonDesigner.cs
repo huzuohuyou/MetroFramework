@@ -58,8 +58,6 @@ namespace MetroFramework.Design.Controls
 
             properties.Remove("Font");
             properties.Remove("RightToLeft");
-            properties.Remove("Size");
-            properties.Add("AntSize","Large");
 
             base.PreFilterProperties(properties);
         }

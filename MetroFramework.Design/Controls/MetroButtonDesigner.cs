@@ -57,7 +57,6 @@ namespace MetroFramework.Design.Controls
 
             properties.Remove("Font");
             properties.Remove("RightToLeft");
-
             base.PreFilterProperties(properties);
         }
     }
