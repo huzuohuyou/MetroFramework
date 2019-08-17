@@ -5,7 +5,7 @@ using System.Text;
 namespace MetroFramework.Controls.Enum
 {
 
-    public enum AntSize
+    public enum AntButtonSize
     {
         Large=36,
         Default=28,

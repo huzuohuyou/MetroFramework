@@ -14,5 +14,10 @@ namespace MetroFramework.Demo.Button
         {
             InitializeComponent();
         }
+
+        private void UcButton_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

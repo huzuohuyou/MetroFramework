@@ -33,23 +33,29 @@
             // 
             // antButton1
             // 
-            this.antButton1.AntStyle = MetroFramework.Controls.Enum.AntSize.Large;
+            this.antButton1.AntCircular = false;
+            this.antButton1.AntSize = MetroFramework.Controls.Enum.AntButtonSize.Large;
+            this.antButton1.AntStyle = MetroFramework.Controls.Enum.AntButtonSytle.Secondary;
             this.antButton1.BackColor = System.Drawing.Color.Transparent;
-            this.antButton1.Location = new System.Drawing.Point(57, 20);
+            this.antButton1.FontSize = MetroFramework.MetroButtonSize.Tall;
+            this.antButton1.ForeColor = System.Drawing.Color.White;
+            this.antButton1.Location = new System.Drawing.Point(64, 27);
             this.antButton1.Name = "antButton1";
-            this.antButton1.Size = new System.Drawing.Size(285, 36);
+            this.antButton1.Size = new System.Drawing.Size(166, 36);
             this.antButton1.TabIndex = 0;
-            this.antButton1.Text = "antButton1";
+            this.antButton1.Text = "123456";
             this.antButton1.UseSelectable = true;
             // 
             // UcButton
             // 
+            this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.antButton1);
             this.Name = "UcButton";
             this.Size = new System.Drawing.Size(726, 609);
+            this.Load += new System.EventHandler(this.UcButton_Load);
             this.ResumeLayout(false);
 
         }

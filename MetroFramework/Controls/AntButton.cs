@@ -174,10 +174,32 @@ namespace MetroFramework.Controls
 
         #region Fields
 
-        private AntSize antStyle = AntSize.Default;
-        [DefaultValue(AntSize.Default)]
+        private AntButtonSize antSize = AntButtonSize.Default;
+        [DefaultValue(AntButtonSize.Default)]
         [Category(MetroDefaults.PropertyCategory.Appearance)]
-        public AntSize AntStyle
+        public AntButtonSize AntSize
+        {
+            get { return antSize; }
+            set { antSize = value; }
+        }
+
+        
+        private bool antCircular = true;
+        /// <summary>
+        /// true 圆形按钮，false 方形圆角 按钮 
+        /// </summary>
+        [DefaultValue(true)]
+        [Category(MetroDefaults.PropertyCategory.Appearance)]
+        public bool AntCircular
+        {
+            get { return antCircular; }
+            set { antCircular = value; }
+        }
+
+        private AntButtonSytle antStyle = AntButtonSytle.Main;
+        [DefaultValue(AntButtonSytle.Main)]
+        [Category(MetroDefaults.PropertyCategory.Appearance)]
+        public AntButtonSytle AntStyle
         {
             get { return antStyle; }
             set { antStyle = value; }
@@ -251,36 +273,71 @@ namespace MetroFramework.Controls
             try
             {
                 Color backColor = BackColor;
+                switch (AntStyle
+)
+                {
+                    case AntButtonSytle.Main:
+                        if (isHovered && !isPressed && Enabled)
+                        {
+                            backColor = MetroTreeView.ChangeColor(MetroPaint.GetStyleColor(Style), 0.1f);
+                        }
+                        else if (isHovered && isPressed && Enabled)
+                        {
+                            backColor = MetroTreeView.ChangeColor(MetroPaint.GetStyleColor(Style), -0.5f);
+                        }
+                        else if (!Enabled)
+                        {
+                            backColor = MetroPaint.BackColor.Button.Disabled(Theme);
+                        }
+                        else if (Highlight && Enabled)
+                        {
+                            backColor = MetroTreeView.ChangeColor(MetroPaint.GetStyleColor(Style), 0.3f);
+                        }
+                        else
+                        {
+                            if (!useCustomBackColor)
+                            {
+                                backColor = MetroTreeView.ChangeColor(MetroPaint.GetStyleColor(Style), 0);
+                            }
+                        }
+                        break;
+                   
+                   
+                    case AntButtonSytle.Danger:
+                        backColor = ColorTranslator.FromHtml("#d9363e");
+                        break;
+                    case AntButtonSytle.Link:
+                        backColor = Color.White;
+                        break;
+                    default:
+                        break;
+                }
+                
+                if (AntStyle.Equals(AntButtonSytle.Secondary)|| AntStyle.Equals(AntButtonSytle.Dotted))
+                {
+                    using (Pen MyPen = new Pen(Color.Red, 1f))
+                    {
+                        var myPath = CreateRoundedRectanglePath(new Rectangle()
+                        {
+                            X = 0,
+                            Y = 0,
+                            Width = Width-1,
+                            Height = Height-1
+                        }, 5);
+                        e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
-                if (isHovered && !isPressed && Enabled)
-                {
-                    backColor =MetroTreeView.ChangeColor( MetroPaint.GetStyleColor(Style) ,0.1f);
-                }
-                else if (isHovered && isPressed && Enabled)
-                {
-                    backColor = MetroTreeView.ChangeColor(MetroPaint.GetStyleColor(Style), -0.5f);
-                }
-                else if (!Enabled)
-                {
-                    backColor = MetroPaint.BackColor.Button.Disabled(Theme);
-                }
-                else if (Highlight && Enabled)
-                {
-                    backColor = MetroTreeView.ChangeColor(MetroPaint.GetStyleColor(Style), 0.3f);
+                        e.Graphics.DrawPath(new Pen(Color.Red, 1), myPath);
+
+                    }
                 }
                 else
                 {
-                    if (!useCustomBackColor)
+                    using (Brush brush = new SolidBrush(backColor))
                     {
-                        backColor = MetroTreeView.ChangeColor(MetroPaint.GetStyleColor(Style), 0);
+                        var rec = DrawRoundRect(0, 0, Width - 1, Height - 1, antCircular ? (int)AntSize + 4 : 10);
+                        e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+                        e.Graphics.FillPath(brush, rec);
                     }
-                }
-
-                using (Brush brush = new SolidBrush(backColor))
-                {
-                    var rec = DrawRoundRect(0, 0, Width, Height, (int)AntStyle+4);
-                    e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                    e.Graphics.FillPath(brush, rec);
                 }
             }
             catch
@@ -289,12 +346,27 @@ namespace MetroFramework.Controls
             }
         }
 
+        internal static GraphicsPath CreateRoundedRectanglePath(Rectangle rect, int cornerRadius)
+        {
+            GraphicsPath roundedRect = new GraphicsPath();
+            roundedRect.AddArc(rect.X, rect.Y, cornerRadius * 2, cornerRadius * 2, 180, 90);
+            roundedRect.AddLine(rect.X + cornerRadius, rect.Y, rect.Right - cornerRadius * 2, rect.Y);
+            roundedRect.AddArc(rect.X + rect.Width - cornerRadius * 2, rect.Y, cornerRadius * 2, cornerRadius * 2, 270, 90);
+            roundedRect.AddLine(rect.Right, rect.Y + cornerRadius * 2, rect.Right, rect.Y + rect.Height - cornerRadius * 2);
+            roundedRect.AddArc(rect.X + rect.Width - cornerRadius * 2, rect.Y + rect.Height - cornerRadius * 2, cornerRadius * 2, cornerRadius * 2, 0, 90);
+            roundedRect.AddLine(rect.Right - cornerRadius * 2, rect.Bottom, rect.X + cornerRadius * 2, rect.Bottom);
+            roundedRect.AddArc(rect.X, rect.Bottom - cornerRadius * 2, cornerRadius * 2, cornerRadius * 2, 90, 90);
+            roundedRect.AddLine(rect.X, rect.Bottom - cornerRadius * 2, rect.X, rect.Y + cornerRadius * 2);
+            roundedRect.CloseFigure();
+            return roundedRect;
+        }
+
         protected override void OnPaint(PaintEventArgs e)
         {
             try
             {
                 base.OnPaint(e);
-                Height =(int)AntStyle;
+                Height =(int)AntSize;
                 if (GetStyle(ControlStyles.AllPaintingInWmPaint))
                 {
                     OnPaintBackground(e);
@@ -382,7 +454,11 @@ namespace MetroFramework.Controls
                     e.Graphics.DrawRectangle(p, borderRect);
                 }
             }*/
-
+            if (AntStyle.Equals(AntButtonSytle.Secondary)||AntStyle.Equals(AntButtonSytle.Dotted))
+            {
+                ForeColor = Color.White;
+            }
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
             TextRenderer.DrawText(e.Graphics, Text, MetroFonts.Button(metroButtonSize, metroButtonWeight), ClientRectangle, foreColor, MetroPaint.GetTextFormatFlags(TextAlign));
 
             OnCustomPaintForeground(new MetroPaintEventArgs(Color.Empty, foreColor, e.Graphics));
