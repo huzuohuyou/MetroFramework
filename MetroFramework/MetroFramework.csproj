@@ -89,13 +89,20 @@
     <Compile Include="Controls\Button\DashedButton.cs" />
     <Compile Include="Controls\Button\DefaultButton.cs" />
     <Compile Include="Controls\Button\ICanDrawButtonStyle.cs" />
+    <Compile Include="Controls\Button\ICanPaintBackground.cs" />
+    <Compile Include="Controls\Button\ICanPaint.cs" />
+    <Compile Include="Controls\Button\LinkButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\CTreeTaskBox.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\Button\Enum\AntButtonSytle.cs" />
     <Compile Include="Controls\Button\Enum\AntButtonSize.cs" />
     <Compile Include="Controls\ICanManageStatusColor.cs" />
-    <Compile Include="Controls\Button\PrimaryButton.cs" />
+    <Compile Include="Controls\Button\PrimaryButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\MetroButton.cs">
       <SubType>Component</SubType>
     </Compile>

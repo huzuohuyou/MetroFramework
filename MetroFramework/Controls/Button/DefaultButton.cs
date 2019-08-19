@@ -1,9 +1,7 @@
 ﻿using MetroFramework.Drawing;
-using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Text;
+using System.Windows.Forms;
 
 namespace MetroFramework.Controls
 {
@@ -11,8 +9,10 @@ namespace MetroFramework.Controls
     class DefaultButton : BaseAntButton
     {
         bool isHovered, isPressed, Enabled;
-        public DefaultButton(Graphics _Graphics, int _Width, int _Height, AntButtonSize _AntSize, bool _IsFullCircle, MetroThemeStyle _Theme, MetroColorStyle _Style) : base(_Graphics, _Width, _Height, _AntSize, _IsFullCircle, _Theme, _Style)
+        public DefaultButton(Graphics _Graphics, int Width, int Height, AntButtonSize AntSize, bool IsFullCircle, MetroThemeStyle Theme, MetroColorStyle Style, string Text)
+            : base(_Graphics, Width, Height, AntSize, IsFullCircle, Theme, Style, Text)
         {
+
         }
 
         public override void DrawButton()
@@ -80,7 +80,25 @@ namespace MetroFramework.Controls
 
         public override Color GetForegroundColorByStatus(bool _isHovered, bool _isPressed, bool _Enabled)
         {
-            throw new NotImplementedException();
+            return Color.Empty;
+            //Color  foreColor;
+
+            //if (isHovered && !isPressed && Enabled)
+            //{
+            //    foreColor = MetroPaint.ForeColor.Button.Hover(Theme);
+            //}
+            //else if (isHovered && isPressed && Enabled)
+            //{
+            //    foreColor = MetroPaint.ForeColor.Button.Press(Theme);
+            //}
+            //else if (!Enabled)
+            //{
+            //    foreColor = MetroPaint.ForeColor.Button.Disabled(Theme);
+            //}
+            //Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+            //TextRenderer.DrawText(Graphics, Text, MetroFonts.Button(metroButtonSize, metroButtonWeight), ClientRectangle, foreColor, MetroPaint.GetTextFormatFlags(TextAlign));
+
+            
         }
     }
 }

@@ -14,8 +14,14 @@ namespace MetroFramework.Controls
         public int Height { get; set; }
         public AntButtonSize AntSize { get; set; }
         public bool IsFullCircle { get; set; }
+        public string Text { get; set; }
 
-        public BaseAntButton(Graphics _Graphics, int _Width, int _Height, AntButtonSize _AntSize, bool _IsFullCircle, MetroThemeStyle _Theme, MetroColorStyle _Style)
+        public BaseAntButton(Graphics _Graphics
+            , int _Width, int _Height
+            , AntButtonSize _AntSize
+            , bool _IsFullCircle
+            , MetroThemeStyle _Theme, MetroColorStyle _Style
+            ,string _Text)
         {
             Width = _Width;
             Height = _Height;
@@ -24,6 +30,7 @@ namespace MetroFramework.Controls
             Graphics = _Graphics;
             Theme = _Theme;
             Style = _Style;
+            Text = _Text;
         }
         public abstract Color GetBackgroundColorByStatus(bool _isHovered, bool _isPressed, bool _Enabled);
         public abstract Color GetForegroundColorByStatus(bool _isHovered, bool _isPressed, bool _Enabled);
@@ -31,11 +38,12 @@ namespace MetroFramework.Controls
 
         public void Paint(bool isHovered, bool isPressed, bool Enabled)
         {
+            GetForegroundColorByStatus(isHovered, isPressed, Enabled);
             GetBackgroundColorByStatus(isHovered, isPressed, Enabled);
             DrawButton();
         }
 
-        protected GraphicsPath DrawRoundRect(int x, int y, int width, int height, int radius)
+        public static GraphicsPath DrawRoundRect(int x, int y, int width, int height, int radius)
         {
             //四边圆角
             GraphicsPath gp = new GraphicsPath();
@@ -47,7 +55,7 @@ namespace MetroFramework.Controls
             return gp;
         }
 
-        protected GraphicsPath CreateRoundedRectanglePath(Rectangle rect, int cornerRadius)
+        public static GraphicsPath CreateRoundedRectanglePath(Rectangle rect, int cornerRadius)
         {
             GraphicsPath roundedRect = new GraphicsPath();
             roundedRect.AddArc(rect.X, rect.Y, cornerRadius * 2, cornerRadius * 2, 180, 90);

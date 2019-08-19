@@ -40,6 +40,8 @@ namespace MetroFramework.Controls
     {
         #region Interface
 
+        public ICanPaint ICanPaint { get; set; }
+
         BaseAntButton Button { get; set; }
 
 
@@ -183,18 +185,19 @@ namespace MetroFramework.Controls
             get { return antSize; }
             set { antSize = value; }
         }
-
         
-        private bool antCircular = true;
+
+
+        private bool isRounded = true;
         /// <summary>
         /// true 圆形按钮，false 方形圆角 按钮 
         /// </summary>
         [DefaultValue(true)]
         [Category(MetroDefaults.PropertyCategory.Appearance)]
-        public bool AntCircular
+        public bool IsRounded
         {
-            get { return antCircular; }
-            set { antCircular = value; }
+            get { return isRounded; }
+            set { isRounded = value; }
         }
 
         private AntButtonSytle antSytle = AntButtonSytle.Primary;
@@ -225,7 +228,7 @@ namespace MetroFramework.Controls
             set { highlight = value; }
         }
 
-        private MetroButtonSize metroButtonSize = MetroButtonSize.Small;
+        protected MetroButtonSize metroButtonSize = MetroButtonSize.Small;
         [DefaultValue(MetroButtonSize.Small)]
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         public MetroButtonSize FontSize
@@ -234,7 +237,7 @@ namespace MetroFramework.Controls
             set { metroButtonSize = value; }
         }
 
-        private MetroButtonWeight metroButtonWeight = MetroButtonWeight.Bold;
+        protected MetroButtonWeight metroButtonWeight = MetroButtonWeight.Bold;
         [DefaultValue(MetroButtonWeight.Bold)]
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         public MetroButtonWeight FontWeight
@@ -243,9 +246,9 @@ namespace MetroFramework.Controls
             set { metroButtonWeight = value; }
         }
 
-        private bool isHovered = false;
-        private bool isPressed = false;
-        private bool isFocused = false;
+        protected bool isHovered = false;
+        protected bool isPressed = false;
+        protected bool isFocused = false;
 
         #endregion
 
@@ -260,10 +263,12 @@ namespace MetroFramework.Controls
             FlatAppearance.MouseOverBackColor = Color.Transparent;
             BackColor = Color.Transparent;
             ForeColor = Color.Transparent;
+            //ICanPaint = _ICanPaint;
+
             //SetStyle(ControlStyles.SupportsTransparentBackColor |
-                     //ControlStyles.OptimizedDoubleBuffer |
-                     //ControlStyles.ResizeRedraw |
-                     //ControlStyles.UserPaint, true);
+            //ControlStyles.OptimizedDoubleBuffer |
+            //ControlStyles.ResizeRedraw |
+            //ControlStyles.UserPaint, true);
         }
 
         #endregion
@@ -276,26 +281,25 @@ namespace MetroFramework.Controls
         {
             try
             {
-                Color backColor = BackColor;
-                switch (AntSytle)
-                {
-                    case AntButtonSytle.Primary:
-                        Button = new PrimaryButton(e.Graphics,Width,Height,AntSize,AntCircular,Theme, Style);
-                        break;
-
-                    case AntButtonSytle.Danger:
-                        Button = new DangerButton(e.Graphics, Width, Height, AntSize, AntCircular, Theme, Style);
-                        break;
-                    case AntButtonSytle.Dashed:
-                        Button = new DashedButton(e.Graphics, Width, Height, AntSize, AntCircular, Theme, Style);
-                        break;
-                    case AntButtonSytle.Link:
-                        backColor = Color.White;
-                        break;
-                    default:
-                        break;
-                }
-                Button.Paint(isHovered, isPressed, Enabled);
+                //Color backColor = BackColor;
+                //switch (AntSytle)
+                //{
+                //    case AntButtonSytle.Primary:
+                //        Button = new PrimaryButton(e.Graphics,Width,Height,AntSize,IsRounded,Theme, Style,Text);
+                //        break;
+                //    case AntButtonSytle.Danger:
+                //        Button = new DangerButton(e.Graphics, Width, Height, AntSize, IsRounded, Theme, Style, Text);
+                //        break;
+                //    case AntButtonSytle.Dashed:
+                //        Button = new DashedButton(e.Graphics, Width, Height, AntSize, IsRounded, Theme, Style, Text);
+                //        break;
+                //    case AntButtonSytle.Default:
+                //        Button = new DefaultButton(e.Graphics, Width, Height, AntSize, IsRounded, Theme, Style, Text);
+                //        break;
+                //    default:
+                //        break;
+                //}
+                //Button.Paint(isHovered, isPressed, Enabled);
 
             }
             catch
@@ -314,15 +318,13 @@ namespace MetroFramework.Controls
                 Height =(int)AntSize;
                 if (GetStyle(ControlStyles.AllPaintingInWmPaint))
                 {
-                    OnPaintBackground(e);
+                    ICanPaint.Background(e);
+                    //OnPaintBackground(e);
                 }
 
-                OnCustomPaint(new MetroPaintEventArgs(Color.Empty, Color.Empty, e.Graphics));
-                OnPaintForeground(e);
-
-
-
-
+                //OnCustomPaint(new MetroPaintEventArgs(Color.Empty, Color.Empty, e.Graphics));
+                ICanPaint.Foreground(e);
+                //OnPaintForeground(e);
             }
             catch
             {
@@ -334,71 +336,71 @@ namespace MetroFramework.Controls
         
         protected virtual void OnPaintForeground(PaintEventArgs e)
         {
-            Color borderColor, foreColor;
+            //Color borderColor, foreColor;
 
-            if (isHovered && !isPressed && Enabled)
-            {
-                borderColor = MetroPaint.BorderColor.Button.Hover(Theme);
-                foreColor = MetroPaint.ForeColor.Button.Hover(Theme);
-            }
-            else if (isHovered && isPressed && Enabled)
-            {
-                borderColor = MetroPaint.BorderColor.Button.Press(Theme);
-                foreColor = MetroPaint.ForeColor.Button.Press(Theme);
-            }
-            else if (!Enabled)
-            {
-                borderColor = MetroPaint.BorderColor.Button.Disabled(Theme);
-                foreColor = MetroPaint.ForeColor.Button.Disabled(Theme);
-            }
-            else
-            {
-                borderColor = MetroPaint.BorderColor.Button.Normal(Theme);
-                if (useCustomForeColor)
-                {
-                    foreColor = ForeColor;
-                }
-                else if (Highlight)
-                {
-                    foreColor = MetroPaint.BackColor.Form(Theme);
-                }
-                else if (useStyleColors)
-                {
-                    foreColor = MetroPaint.GetStyleColor(Style);
-                }
-                else
-                {
-                    foreColor = MetroPaint.ForeColor.Button.Normal(Theme);
-                }
-            }
+            //if (isHovered && !isPressed && Enabled)
+            //{
+            //    borderColor = MetroPaint.BorderColor.Button.Hover(Theme);
+            //    foreColor = MetroPaint.ForeColor.Button.Hover(Theme);
+            //}
+            //else if (isHovered && isPressed && Enabled)
+            //{
+            //    borderColor = MetroPaint.BorderColor.Button.Press(Theme);
+            //    foreColor = MetroPaint.ForeColor.Button.Press(Theme);
+            //}
+            //else if (!Enabled)
+            //{
+            //    borderColor = MetroPaint.BorderColor.Button.Disabled(Theme);
+            //    foreColor = MetroPaint.ForeColor.Button.Disabled(Theme);
+            //}
+            //else
+            //{
+            //    borderColor = MetroPaint.BorderColor.Button.Normal(Theme);
+            //    if (useCustomForeColor)
+            //    {
+            //        foreColor = ForeColor;
+            //    }
+            //    else if (Highlight)
+            //    {
+            //        foreColor = MetroPaint.BackColor.Form(Theme);
+            //    }
+            //    else if (useStyleColors)
+            //    {
+            //        foreColor = MetroPaint.GetStyleColor(Style);
+            //    }
+            //    else
+            //    {
+            //        foreColor = MetroPaint.ForeColor.Button.Normal(Theme);
+            //    }
+            //}
 
-            /*using (Pen p = new Pen(borderColor))
-            {
-                Rectangle borderRect = new Rectangle(0, 0, Width - 1, Height - 1);
-                e.Graphics.DrawRectangle(p, borderRect);
-            }
+            ///*using (Pen p = new Pen(borderColor))
+            //{
+            //    Rectangle borderRect = new Rectangle(0, 0, Width - 1, Height - 1);
+            //    e.Graphics.DrawRectangle(p, borderRect);
+            //}
 
-            if (Highlight && !isHovered && !isPressed && Enabled)
-            {
-                using (Pen p = MetroPaint.GetStylePen(Style))
-                {
-                    Rectangle borderRect = new Rectangle(0, 0, Width - 1, Height - 1);
-                    e.Graphics.DrawRectangle(p, borderRect);
-                    borderRect = new Rectangle(1, 1, Width - 3, Height - 3);
-                    e.Graphics.DrawRectangle(p, borderRect);
-                }
-            }*/
-            if (AntSytle.Equals(AntButtonSytle.Default)||AntSytle.Equals(AntButtonSytle.Dashed))
-            {
-                ForeColor = Color.White;
-            }
-            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-            TextRenderer.DrawText(e.Graphics, Text, MetroFonts.Button(metroButtonSize, metroButtonWeight), ClientRectangle, foreColor, MetroPaint.GetTextFormatFlags(TextAlign));
+            //if (Highlight && !isHovered && !isPressed && Enabled)
+            //{
+            //    using (Pen p = MetroPaint.GetStylePen(Style))
+            //    {
+            //        Rectangle borderRect = new Rectangle(0, 0, Width - 1, Height - 1);
+            //        e.Graphics.DrawRectangle(p, borderRect);
+            //        borderRect = new Rectangle(1, 1, Width - 3, Height - 3);
+            //        e.Graphics.DrawRectangle(p, borderRect);
+            //    }
+            //}*/
+            //if (AntSytle.Equals(AntButtonSytle.Default)||AntSytle.Equals(AntButtonSytle.Dashed))
+            //{
+            //    ForeColor = Color.White;
+            //}
+            //e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+            //TextRenderer.DrawText(e.Graphics, Text, MetroFonts.Button(metroButtonSize, metroButtonWeight), ClientRectangle, foreColor, MetroPaint.GetTextFormatFlags(TextAlign));
 
-            OnCustomPaintForeground(new MetroPaintEventArgs(Color.Empty, foreColor, e.Graphics));
+            //OnCustomPaintForeground(new MetroPaintEventArgs(Color.Empty, foreColor, e.Graphics));
 
-            if (displayFocusRectangle && isFocused)
-                ControlPaint.DrawFocusRectangle(e.Graphics, ClientRectangle);
+            //if (displayFocusRectangle && isFocused)
+            //    ControlPaint.DrawFocusRectangle(e.Graphics, ClientRectangle);
         }
 
         #endregion

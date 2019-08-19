@@ -2,37 +2,26 @@
 using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Windows.Forms;
 
 namespace MetroFramework.Controls
 {
-
-    class PrimaryButton : BaseAntButton
+    public class PrimaryButton : AntButton,ICanPaint
     {
-        public PrimaryButton(Graphics _Graphics, int Width, int Height, AntButtonSize AntSize, bool IsFullCircle, MetroThemeStyle Theme, MetroColorStyle Style)
-            : base(_Graphics, Width, Height, AntSize, IsFullCircle, Theme, Style)
+        public PrimaryButton() 
         {
-
+            ICanPaint = this;
         }
 
-        public override void DrawButton()
-        {
-            using (Brush brush = new SolidBrush(BackColor))
-            {
-                var rec = DrawRoundRect(0, 0, Width - 1, Height - 1, IsFullCircle ? (int)AntSize : 10);
-                Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                Graphics.FillPath(brush, rec);
-            }
-        }
-
-        public override Color GetBackgroundColorByStatus(bool isHovered, bool isPressed, bool Enabled)
+        void ICanPaint.Background(PaintEventArgs e)
         {
             if (isHovered && !isPressed && Enabled)
             {
-                BackColor = ChangeColor(MetroPaint.GetStyleColor(Style), 0.2f);
+                BackColor = BaseAntButton.ChangeColor(MetroPaint.GetStyleColor(Style), 0.2f);
             }
             else if (isHovered && isPressed && Enabled)
             {
-                BackColor = ChangeColor(MetroPaint.GetStyleColor(Style), -0.3f);
+                BackColor = BaseAntButton.ChangeColor(MetroPaint.GetStyleColor(Style), -0.3f);
             }
             else if (!Enabled)
             {
@@ -40,14 +29,39 @@ namespace MetroFramework.Controls
             }
             else if (Enabled)
             {
-                BackColor = ChangeColor(MetroPaint.GetStyleColor(Style), 0f);
+                BackColor = BaseAntButton.ChangeColor(MetroPaint.GetStyleColor(Style), 0f);
             }
-            return BackColor;
+
+            using (Brush brush = new SolidBrush(BackColor))
+            {
+                var rec = BaseAntButton.DrawRoundRect(0, 0, Width - 1, Height - 1, IsRounded ? (int)AntSize : 10);
+                e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+                e.Graphics.FillPath(brush, rec);
+            }
         }
 
-        public override Color GetForegroundColorByStatus(bool isHovered, bool isPressed, bool Enabled)
+        void ICanPaint.Foreground(PaintEventArgs e)
         {
-            throw new NotImplementedException();
+            Color  foreColor=Color.Empty;
+
+            if (isHovered && !isPressed && Enabled)
+            {
+                foreColor = MetroPaint.ForeColor.Button.Hover(Theme);
+            }
+            else if (isHovered && isPressed && Enabled)
+            {
+                foreColor = MetroPaint.ForeColor.Button.Press(Theme);
+            }
+            else if (!Enabled)
+            {
+                foreColor = MetroPaint.ForeColor.Button.Disabled(Theme);
+            }
+           
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+            TextRenderer.DrawText(e.Graphics, Text, MetroFonts.Button(metroButtonSize, metroButtonWeight), ClientRectangle, foreColor, MetroPaint.GetTextFormatFlags(TextAlign));
+
+            OnCustomPaintForeground(new MetroPaintEventArgs(Color.Empty, foreColor, e.Graphics));
+
         }
     }
 }

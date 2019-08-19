@@ -9,10 +9,10 @@ namespace MetroFramework.Controls
     class DangerButton : BaseAntButton
     {
         bool isHovered,  isPressed,  Enabled;
-        public DangerButton(Graphics _Graphics, int Width, int Height, AntButtonSize AntSize, bool IsFullCircle, MetroThemeStyle Theme, MetroColorStyle Style)
-            : base(_Graphics, Width, Height, AntSize, IsFullCircle, Theme, Style)
+        public DangerButton(Graphics _Graphics, int Width, int Height, AntButtonSize AntSize, bool IsFullCircle, MetroThemeStyle Theme, MetroColorStyle Style, string Text)
+            : base(_Graphics, Width, Height, AntSize, IsFullCircle, Theme, Style, Text)
         {
-            BackColor = ColorTranslator.FromHtml("#f0413");
+
         }
 
         public override void DrawButton()
@@ -85,7 +85,8 @@ namespace MetroFramework.Controls
 
         public override Color GetForegroundColorByStatus(bool isHovered, bool isPressed, bool Enabled)
         {
-            throw new NotImplementedException();
+            return new Color();
+            //throw new NotImplementedException();
         }
     }
 }
