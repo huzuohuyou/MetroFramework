@@ -24,8 +24,8 @@ namespace MetroFramework.Controls
             Theme = _Theme;
             Style = _Style;
         }
-        public abstract Color GetBackgroundColorByStatus(bool isHovered, bool isPressed, bool Enabled);
-        public abstract Color GetForegroundColorByStatus(bool isHovered, bool isPressed, bool Enabled);
+        public abstract Color GetBackgroundColorByStatus(bool _isHovered, bool _isPressed, bool _Enabled);
+        public abstract Color GetForegroundColorByStatus(bool _isHovered, bool _isPressed, bool _Enabled);
         public abstract void DrawButton();
 
         public void Paint(bool isHovered, bool isPressed, bool Enabled)
@@ -61,6 +61,42 @@ namespace MetroFramework.Controls
             return roundedRect;
         }
 
+        public static Color ChangeColor(Color color, float correctionFactor)
+        {
+            float red = (float)color.R;
+            float green = (float)color.G;
+            float blue = (float)color.B;
+
+            if (correctionFactor < 0)
+            {
+                correctionFactor = 1 + correctionFactor;
+                red *= correctionFactor;
+                green *= correctionFactor;
+                blue *= correctionFactor;
+            }
+            else
+            {
+                red = (255 - red) * correctionFactor + red;
+                green = (255 - green) * correctionFactor + green;
+                blue = (255 - blue) * correctionFactor + blue;
+            }
+
+            if (red < 0) red = 0;
+
+            if (red > 255) red = 255;
+
+            if (green < 0) green = 0;
+
+            if (green > 255) green = 255;
+
+            if (blue < 0) blue = 0;
+
+            if (blue > 255) blue = 255;
+
+
+
+            return Color.FromArgb(color.A, (int)red, (int)green, (int)blue);
+        }
 
 
     }

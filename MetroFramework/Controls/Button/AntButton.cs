@@ -39,6 +39,7 @@ namespace MetroFramework.Controls
     public class AntButton : Button, IMetroControl
     {
         #region Interface
+
         BaseAntButton Button { get; set; }
 
 
@@ -258,6 +259,7 @@ namespace MetroFramework.Controls
             FlatAppearance.MouseDownBackColor = Color.Transparent;
             FlatAppearance.MouseOverBackColor = Color.Transparent;
             BackColor = Color.Transparent;
+            ForeColor = Color.Transparent;
             //SetStyle(ControlStyles.SupportsTransparentBackColor |
                      //ControlStyles.OptimizedDoubleBuffer |
                      //ControlStyles.ResizeRedraw |
@@ -279,12 +281,13 @@ namespace MetroFramework.Controls
                 {
                     case AntButtonSytle.Primary:
                         Button = new PrimaryButton(e.Graphics,Width,Height,AntSize,AntCircular,Theme, Style);
-                        Button.Paint(isHovered, isPressed, Enabled);
                         break;
 
                     case AntButtonSytle.Danger:
                         Button = new DangerButton(e.Graphics, Width, Height, AntSize, AntCircular, Theme, Style);
-                        Button.Paint(isHovered, isPressed, Enabled);
+                        break;
+                    case AntButtonSytle.Dotted:
+                        Button = new DashedButton(e.Graphics, Width, Height, AntSize, AntCircular, Theme, Style);
                         break;
                     case AntButtonSytle.Link:
                         backColor = Color.White;
@@ -292,8 +295,8 @@ namespace MetroFramework.Controls
                     default:
                         break;
                 }
+                Button.Paint(isHovered, isPressed, Enabled);
 
-                
             }
             catch
             {

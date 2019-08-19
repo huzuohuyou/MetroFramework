@@ -1,38 +1,45 @@
 ﻿using MetroFramework.Drawing;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Text;
 
 namespace MetroFramework.Controls
 {
 
-    class DangerButton : BaseAntButton
+    class DashedButton : BaseAntButton
     {
-        bool isHovered,  isPressed,  Enabled;
-        public DangerButton(Graphics _Graphics, int Width, int Height, AntButtonSize AntSize, bool IsFullCircle, MetroThemeStyle Theme, MetroColorStyle Style)
+        bool isHovered, isPressed, Enabled;
+        public DashedButton(Graphics _Graphics, int Width, int Height, AntButtonSize AntSize, bool IsFullCircle, MetroThemeStyle Theme, MetroColorStyle Style)
             : base(_Graphics, Width, Height, AntSize, IsFullCircle, Theme, Style)
         {
-            BackColor = ColorTranslator.FromHtml("#f0413");
+
         }
 
         public override void DrawButton()
         {
             if (isHovered && !isPressed && Enabled)
             {
-                using (Brush brush = new SolidBrush(Color.FromArgb(240, 65, 52)))
+                using (Pen pen = new Pen(BackColor))
                 {
+                    pen.DashStyle = DashStyle.Dash;
+                    pen.DashPattern = new float[] { 4f, 2f };
                     var rec = DrawRoundRect(0, 0, Width - 1, Height - 1, IsFullCircle ? (int)AntSize : 10);
+
                     Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                    Graphics.FillPath(brush, rec);
+                    Graphics.DrawPath(pen, rec);
                 }
             }
             else if (isHovered && isPressed && Enabled)
             {
-                using (Brush brush = new SolidBrush(ChangeColor(Color.FromArgb(240, 65, 52),-0.1f)))
+                using (Pen pen = new Pen(BackColor))
                 {
+                    pen.DashStyle = DashStyle.Dash;
+                    pen.DashPattern = new float[] { 4f, 2f };
                     var rec = DrawRoundRect(0, 0, Width - 1, Height - 1, IsFullCircle ? (int)AntSize : 10);
                     Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                    Graphics.FillPath(brush, rec);
+                    Graphics.DrawPath(pen, rec);
                 }
             }
             else if (!Enabled)
@@ -43,14 +50,13 @@ namespace MetroFramework.Controls
             {
                 using (Pen pen = new Pen(Color.FromArgb(217, 217, 217)))
                 {
+                    pen.DashStyle = DashStyle.Dash;
+                    pen.DashPattern = new float[] { 4f, 2f };
                     var rec = DrawRoundRect(0, 0, Width - 1, Height - 1, IsFullCircle ? (int)AntSize : 10);
                     Graphics.SmoothingMode = SmoothingMode.AntiAlias;
                     Graphics.DrawPath(pen, rec);
                 }
             }
-
-
-
         }
 
         public override Color GetBackgroundColorByStatus(bool _isHovered, bool _isPressed, bool _Enabled)
@@ -60,19 +66,19 @@ namespace MetroFramework.Controls
             Enabled = _Enabled;
             if (isHovered && !isPressed && Enabled)
             {
-                BackColor = ColorTranslator.FromHtml("#f7f7f7");
+                BackColor = MetroTreeView.ChangeColor(MetroPaint.GetStyleColor(Style), 0.2f);
             }
             else if (isHovered && isPressed && Enabled)
             {
-                BackColor = ColorTranslator.FromHtml("#f0413");
+                BackColor = MetroTreeView.ChangeColor(MetroPaint.GetStyleColor(Style), -0.3f);
             }
             else if (!Enabled)
             {
-                BackColor = ColorTranslator.FromHtml("#d9d9d9");
+                BackColor = MetroPaint.BackColor.Button.Disabled(Theme);
             }
             else if (Enabled)
             {
-                BackColor = ColorTranslator.FromHtml("#f0413");
+                BackColor = MetroTreeView.ChangeColor(MetroPaint.GetStyleColor(Style), 0f);
             }
             return BackColor;
         }

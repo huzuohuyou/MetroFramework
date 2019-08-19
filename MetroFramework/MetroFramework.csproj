@@ -86,6 +86,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\Button\DangerButton.cs" />
+    <Compile Include="Controls\Button\DashedButton.cs" />
     <Compile Include="Controls\Button\ICanDrawButtonStyle.cs" />
     <Compile Include="Controls\CTreeTaskBox.cs">
       <SubType>Component</SubType>
