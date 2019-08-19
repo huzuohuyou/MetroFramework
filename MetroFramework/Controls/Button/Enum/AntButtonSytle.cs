@@ -23,11 +23,11 @@ namespace MetroFramework.Controls
         /// <summary>
         /// 次按钮
         /// </summary>
-        Secondary = 2,
+        Default = 2,
         /// <summary>
         /// 虚线按钮
         /// </summary>
-        Dotted = 3,
+        Dashed = 3,
         /// <summary>
         /// 危险按钮
         /// </summary>

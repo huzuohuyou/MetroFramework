@@ -286,7 +286,7 @@ namespace MetroFramework.Controls
                     case AntButtonSytle.Danger:
                         Button = new DangerButton(e.Graphics, Width, Height, AntSize, AntCircular, Theme, Style);
                         break;
-                    case AntButtonSytle.Dotted:
+                    case AntButtonSytle.Dashed:
                         Button = new DashedButton(e.Graphics, Width, Height, AntSize, AntCircular, Theme, Style);
                         break;
                     case AntButtonSytle.Link:
@@ -388,7 +388,7 @@ namespace MetroFramework.Controls
                     e.Graphics.DrawRectangle(p, borderRect);
                 }
             }*/
-            if (AntSytle.Equals(AntButtonSytle.Secondary)||AntSytle.Equals(AntButtonSytle.Dotted))
+            if (AntSytle.Equals(AntButtonSytle.Default)||AntSytle.Equals(AntButtonSytle.Dashed))
             {
                 ForeColor = Color.White;
             }

@@ -14,6 +14,7 @@ namespace MetroFramework.Controls
         public int Height { get; set; }
         public AntButtonSize AntSize { get; set; }
         public bool IsFullCircle { get; set; }
+
         public BaseAntButton(Graphics _Graphics, int _Width, int _Height, AntButtonSize _AntSize, bool _IsFullCircle, MetroThemeStyle _Theme, MetroColorStyle _Style)
         {
             Width = _Width;

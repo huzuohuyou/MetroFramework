@@ -28,20 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.metroButton1 = new MetroFramework.Controls.MetroButton();
             this.antButton3 = new MetroFramework.Controls.AntButton();
             this.antButton2 = new MetroFramework.Controls.AntButton();
             this.antButton1 = new MetroFramework.Controls.AntButton();
+            this.antButton4 = new MetroFramework.Controls.AntButton();
             this.SuspendLayout();
-            // 
-            // metroButton1
-            // 
-            this.metroButton1.Location = new System.Drawing.Point(39, 114);
-            this.metroButton1.Name = "metroButton1";
-            this.metroButton1.Size = new System.Drawing.Size(75, 23);
-            this.metroButton1.TabIndex = 3;
-            this.metroButton1.Text = "metroButton1";
-            this.metroButton1.UseSelectable = true;
             // 
             // antButton3
             // 
@@ -49,7 +40,7 @@
             this.antButton3.AntSytle = MetroFramework.Controls.AntButtonSytle.Danger;
             this.antButton3.BackColor = System.Drawing.Color.Transparent;
             this.antButton3.ForeColor = System.Drawing.Color.Transparent;
-            this.antButton3.Location = new System.Drawing.Point(234, 33);
+            this.antButton3.Location = new System.Drawing.Point(633, 33);
             this.antButton3.Name = "antButton3";
             this.antButton3.Size = new System.Drawing.Size(148, 36);
             this.antButton3.TabIndex = 2;
@@ -72,7 +63,7 @@
             // antButton1
             // 
             this.antButton1.AntSize = MetroFramework.Controls.AntButtonSize.Large;
-            this.antButton1.AntSytle = MetroFramework.Controls.AntButtonSytle.Dotted;
+            this.antButton1.AntSytle = MetroFramework.Controls.AntButtonSytle.Dashed;
             this.antButton1.BackColor = System.Drawing.Color.Transparent;
             this.antButton1.ForeColor = System.Drawing.Color.White;
             this.antButton1.Location = new System.Drawing.Point(440, 33);
@@ -82,18 +73,31 @@
             this.antButton1.Text = "Dashed";
             this.antButton1.UseSelectable = true;
             // 
+            // antButton4
+            // 
+            this.antButton4.AntSize = MetroFramework.Controls.AntButtonSize.Large;
+            this.antButton4.AntSytle = MetroFramework.Controls.AntButtonSytle.Default;
+            this.antButton4.BackColor = System.Drawing.Color.Transparent;
+            this.antButton4.ForeColor = System.Drawing.Color.White;
+            this.antButton4.Location = new System.Drawing.Point(238, 33);
+            this.antButton4.Name = "antButton4";
+            this.antButton4.Size = new System.Drawing.Size(134, 36);
+            this.antButton4.TabIndex = 3;
+            this.antButton4.Text = "antButton4";
+            this.antButton4.UseSelectable = true;
+            // 
             // UcButton
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.Controls.Add(this.metroButton1);
+            this.Controls.Add(this.antButton4);
             this.Controls.Add(this.antButton3);
             this.Controls.Add(this.antButton2);
             this.Controls.Add(this.antButton1);
             this.Name = "UcButton";
-            this.Size = new System.Drawing.Size(726, 609);
+            this.Size = new System.Drawing.Size(915, 609);
             this.Load += new System.EventHandler(this.UcButton_Load);
             this.ResumeLayout(false);
 
@@ -104,6 +108,6 @@
         private Controls.AntButton antButton1;
         private Controls.AntButton antButton2;
         private Controls.AntButton antButton3;
-        private Controls.MetroButton metroButton1;
+        private Controls.AntButton antButton4;
     }
 }

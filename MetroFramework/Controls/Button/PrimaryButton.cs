@@ -28,11 +28,11 @@ namespace MetroFramework.Controls
         {
             if (isHovered && !isPressed && Enabled)
             {
-                BackColor = MetroTreeView.ChangeColor(MetroPaint.GetStyleColor(Style), 0.2f);
+                BackColor = ChangeColor(MetroPaint.GetStyleColor(Style), 0.2f);
             }
             else if (isHovered && isPressed && Enabled)
             {
-                BackColor = MetroTreeView.ChangeColor(MetroPaint.GetStyleColor(Style), -0.3f);
+                BackColor = ChangeColor(MetroPaint.GetStyleColor(Style), -0.3f);
             }
             else if (!Enabled)
             {
@@ -40,7 +40,7 @@ namespace MetroFramework.Controls
             }
             else if (Enabled)
             {
-                BackColor = MetroTreeView.ChangeColor(MetroPaint.GetStyleColor(Style), 0f);
+                BackColor = ChangeColor(MetroPaint.GetStyleColor(Style), 0f);
             }
             return BackColor;
         }
