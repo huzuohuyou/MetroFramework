@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MetroFramework.Controls.Enum
+namespace MetroFramework.Controls
 {
 
     public enum AntButtonSize

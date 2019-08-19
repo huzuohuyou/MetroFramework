@@ -81,14 +81,19 @@
     <Compile Include="Components\MetroToolTip.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\AntButton.cs">
+    <Compile Include="Controls\Button\BaseAntButton.cs" />
+    <Compile Include="Controls\Button\AntButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\Button\DangerButton.cs" />
+    <Compile Include="Controls\Button\ICanDrawButtonStyle.cs" />
     <Compile Include="Controls\CTreeTaskBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\Enum\AntButtonSytle.cs" />
-    <Compile Include="Controls\Enum\AntButtonSize.cs" />
+    <Compile Include="Controls\Button\Enum\AntButtonSytle.cs" />
+    <Compile Include="Controls\Button\Enum\AntButtonSize.cs" />
+    <Compile Include="Controls\ICanManageStatusColor.cs" />
+    <Compile Include="Controls\Button\PrimaryButton.cs" />
     <Compile Include="Controls\MetroButton.cs">
       <SubType>Component</SubType>
     </Compile>

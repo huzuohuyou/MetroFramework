@@ -19,5 +19,10 @@ namespace MetroFramework.Demo.Button
         {
 
         }
+
+        private void antButton2_CustomPaintBackground(object sender, Drawing.MetroPaintEventArgs e)
+        {
+
+        }
     }
 }

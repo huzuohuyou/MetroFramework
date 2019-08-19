@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MetroFramework.Controls.Enum
+namespace MetroFramework.Controls
 {
     /// <summary>
     /// 按钮类型
@@ -19,7 +19,7 @@ namespace MetroFramework.Controls.Enum
         /// <summary>
         /// 主按钮
         /// </summary>
-        Main = 1,
+        Primary = 1,
         /// <summary>
         /// 次按钮
         /// </summary>

@@ -24,16 +24,14 @@
 
 namespace MetroFramework.Controls
 {
+    using MetroFramework.Components;
+    using MetroFramework.Drawing;
+    using MetroFramework.Interfaces;
     using System;
     using System.ComponentModel;
     using System.Drawing;
     using System.Drawing.Drawing2D;
     using System.Windows.Forms;
-
-    using MetroFramework.Components;
-    using MetroFramework.Controls.Enum;
-    using MetroFramework.Drawing;
-    using MetroFramework.Interfaces;
 
     [Designer("MetroFramework.Design.Controls.AntButtonDesigner, " + AssemblyRef.MetroFrameworkDesignSN)]
     [ToolboxBitmap(typeof(Button))]
@@ -41,6 +39,8 @@ namespace MetroFramework.Controls
     public class AntButton : Button, IMetroControl
     {
         #region Interface
+        BaseAntButton Button { get; set; }
+
 
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         public event EventHandler<MetroPaintEventArgs> CustomPaintBackground;
@@ -196,13 +196,13 @@ namespace MetroFramework.Controls
             set { antCircular = value; }
         }
 
-        private AntButtonSytle antStyle = AntButtonSytle.Main;
-        [DefaultValue(AntButtonSytle.Main)]
+        private AntButtonSytle antSytle = AntButtonSytle.Primary;
+        [DefaultValue(AntButtonSytle.Primary)]
         [Category(MetroDefaults.PropertyCategory.Appearance)]
-        public AntButtonSytle AntStyle
+        public AntButtonSytle AntSytle
         {
-            get { return antStyle; }
-            set { antStyle = value; }
+            get { return antSytle; }
+            set { antSytle = value; }
         }
 
 
@@ -268,43 +268,23 @@ namespace MetroFramework.Controls
 
         #region Paint Methods
 
+       
+
         protected override void OnPaintBackground(PaintEventArgs e)
         {
             try
             {
                 Color backColor = BackColor;
-                switch (AntStyle
-)
+                switch (AntSytle)
                 {
-                    case AntButtonSytle.Main:
-                        if (isHovered && !isPressed && Enabled)
-                        {
-                            backColor = MetroTreeView.ChangeColor(MetroPaint.GetStyleColor(Style), 0.1f);
-                        }
-                        else if (isHovered && isPressed && Enabled)
-                        {
-                            backColor = MetroTreeView.ChangeColor(MetroPaint.GetStyleColor(Style), -0.5f);
-                        }
-                        else if (!Enabled)
-                        {
-                            backColor = MetroPaint.BackColor.Button.Disabled(Theme);
-                        }
-                        else if (Highlight && Enabled)
-                        {
-                            backColor = MetroTreeView.ChangeColor(MetroPaint.GetStyleColor(Style), 0.3f);
-                        }
-                        else
-                        {
-                            if (!useCustomBackColor)
-                            {
-                                backColor = MetroTreeView.ChangeColor(MetroPaint.GetStyleColor(Style), 0);
-                            }
-                        }
+                    case AntButtonSytle.Primary:
+                        Button = new PrimaryButton(e.Graphics,Width,Height,AntSize,AntCircular,Theme, Style);
+                        Button.Paint(isHovered, isPressed, Enabled);
                         break;
-                   
-                   
+
                     case AntButtonSytle.Danger:
-                        backColor = ColorTranslator.FromHtml("#d9363e");
+                        Button = new DangerButton(e.Graphics, Width, Height, AntSize, AntCircular, Theme, Style);
+                        Button.Paint(isHovered, isPressed, Enabled);
                         break;
                     case AntButtonSytle.Link:
                         backColor = Color.White;
@@ -312,33 +292,8 @@ namespace MetroFramework.Controls
                     default:
                         break;
                 }
+
                 
-                if (AntStyle.Equals(AntButtonSytle.Secondary)|| AntStyle.Equals(AntButtonSytle.Dotted))
-                {
-                    using (Pen MyPen = new Pen(Color.Red, 1f))
-                    {
-                        var myPath = CreateRoundedRectanglePath(new Rectangle()
-                        {
-                            X = 0,
-                            Y = 0,
-                            Width = Width-1,
-                            Height = Height-1
-                        }, 5);
-                        e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-
-                        e.Graphics.DrawPath(new Pen(Color.Red, 1), myPath);
-
-                    }
-                }
-                else
-                {
-                    using (Brush brush = new SolidBrush(backColor))
-                    {
-                        var rec = DrawRoundRect(0, 0, Width - 1, Height - 1, antCircular ? (int)AntSize + 4 : 10);
-                        e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                        e.Graphics.FillPath(brush, rec);
-                    }
-                }
             }
             catch
             {
@@ -346,20 +301,7 @@ namespace MetroFramework.Controls
             }
         }
 
-        internal static GraphicsPath CreateRoundedRectanglePath(Rectangle rect, int cornerRadius)
-        {
-            GraphicsPath roundedRect = new GraphicsPath();
-            roundedRect.AddArc(rect.X, rect.Y, cornerRadius * 2, cornerRadius * 2, 180, 90);
-            roundedRect.AddLine(rect.X + cornerRadius, rect.Y, rect.Right - cornerRadius * 2, rect.Y);
-            roundedRect.AddArc(rect.X + rect.Width - cornerRadius * 2, rect.Y, cornerRadius * 2, cornerRadius * 2, 270, 90);
-            roundedRect.AddLine(rect.Right, rect.Y + cornerRadius * 2, rect.Right, rect.Y + rect.Height - cornerRadius * 2);
-            roundedRect.AddArc(rect.X + rect.Width - cornerRadius * 2, rect.Y + rect.Height - cornerRadius * 2, cornerRadius * 2, cornerRadius * 2, 0, 90);
-            roundedRect.AddLine(rect.Right - cornerRadius * 2, rect.Bottom, rect.X + cornerRadius * 2, rect.Bottom);
-            roundedRect.AddArc(rect.X, rect.Bottom - cornerRadius * 2, cornerRadius * 2, cornerRadius * 2, 90, 90);
-            roundedRect.AddLine(rect.X, rect.Bottom - cornerRadius * 2, rect.X, rect.Y + cornerRadius * 2);
-            roundedRect.CloseFigure();
-            return roundedRect;
-        }
+        
 
         protected override void OnPaint(PaintEventArgs e)
         {
@@ -386,18 +328,7 @@ namespace MetroFramework.Controls
         }
 
 
-        GraphicsPath DrawRoundRect(int x, int y, int width, int height, int radius)
-        {
-            //四边圆角
-            GraphicsPath gp = new GraphicsPath();
-            gp.AddArc(x, y, radius, radius, 180, 90);
-            gp.AddArc(width - radius, y, radius, radius, 270, 90);
-            gp.AddArc(width - radius, height - radius, radius, radius, 0, 90);
-            gp.AddArc(x, height - radius, radius, radius, 90, 90);
-            gp.CloseAllFigures();
-            return gp;
-        }
-
+        
         protected virtual void OnPaintForeground(PaintEventArgs e)
         {
             Color borderColor, foreColor;
@@ -454,7 +385,7 @@ namespace MetroFramework.Controls
                     e.Graphics.DrawRectangle(p, borderRect);
                 }
             }*/
-            if (AntStyle.Equals(AntButtonSytle.Secondary)||AntStyle.Equals(AntButtonSytle.Dotted))
+            if (AntSytle.Equals(AntButtonSytle.Secondary)||AntSytle.Equals(AntButtonSytle.Dotted))
             {
                 ForeColor = Color.White;
             }
