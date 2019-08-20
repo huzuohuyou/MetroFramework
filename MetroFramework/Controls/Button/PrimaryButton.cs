@@ -9,6 +9,8 @@ namespace MetroFramework.Controls
 {
     public class PrimaryButton : AntButton
     {
+        private Label label1 { get; set; }
+
         public PrimaryButton()
         {
             FlatStyle = FlatStyle.Flat;
@@ -17,10 +19,19 @@ namespace MetroFramework.Controls
             FlatAppearance.MouseDownBackColor = Color.Transparent;
             FlatAppearance.MouseOverBackColor = Color.Transparent;
             BackColor = Color.Transparent;
-            //ForeColor = Color.Transparent;
-            Text = "\uE670";
-            Font = new Font("anticon", 16);
-            ForeColor = Color.Green;
+            ForeColor = Color.Transparent;
+
+            this.label1 = new Label();
+            this.label1.AutoSize = true;
+            this.label1.Location = new Point(2, 5);
+            this.label1.Name = "label1";
+            this.label1.Size = new Size(30, 12);
+            this.label1.TabIndex = 6;
+            this.label1.BackColor = Color.Transparent;
+            this.label1.Text = "\uE670";
+            this.label1.Font = new Font("anticon", 16);
+            this.label1.ForeColor = Color.White;
+            this.Controls.Add(this.label1);
         }
 
         protected override void OnPaintBackground(PaintEventArgs e)
@@ -92,15 +103,15 @@ namespace MetroFramework.Controls
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
 
-            int val = FontAwesome.TypeDict["fa-glass"];
-            Bitmap bmp = FontAwesome.GetImage(val);
-            Rectangle rg = new Rectangle(10, 10, 30, 30);
-           
-            using (Graphics g = Graphics.FromImage(bmp))
-            {
-                g.DrawImage(bmp, rg);
-            }
-            TextRenderer.DrawText(e.Graphics, "\uE670", MetroFonts.Icon(16), ClientRectangle, Color.Red, MetroPaint.GetTextFormatFlags(TextAlign));
+            //int val = FontAwesome.TypeDict["fa-glass"];
+            //Bitmap bmp = FontAwesome.GetImage(val);
+            //Rectangle rg = new Rectangle(10, 10, 30, 30);
+
+            //using (Graphics g = Graphics.FromImage(bmp))
+            //{
+            //    g.DrawImage(bmp, rg);
+            //}
+            //TextRenderer.DrawText(e.Graphics, "\uE670", MetroFonts.Icon(16), ClientRectangle, Color.Red, MetroPaint.GetTextFormatFlags(TextAlign));
 
             TextRenderer.DrawText(e.Graphics, Text, MetroFonts.Button(metroButtonSize, metroButtonWeight), ClientRectangle, foreColor, MetroPaint.GetTextFormatFlags(TextAlign));
 

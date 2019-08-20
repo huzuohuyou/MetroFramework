@@ -414,72 +414,67 @@ namespace MetroFramework.Controls
         
         protected virtual void OnPaintForeground(PaintEventArgs e)
         {
-            
-            //Color borderColor, foreColor;
+            Color borderColor, foreColor;
 
-            //if (isHovered && !isPressed && Enabled)
-            //{
-            //    borderColor = MetroPaint.BorderColor.Button.Hover(Theme);
-            //    foreColor = MetroPaint.ForeColor.Button.Hover(Theme);
-            //}
-            //else if (isHovered && isPressed && Enabled)
-            //{
-            //    borderColor = MetroPaint.BorderColor.Button.Press(Theme);
-            //    foreColor = MetroPaint.ForeColor.Button.Press(Theme);
-            //}
-            //else if (!Enabled)
-            //{
-            //    borderColor = MetroPaint.BorderColor.Button.Disabled(Theme);
-            //    foreColor = MetroPaint.ForeColor.Button.Disabled(Theme);
-            //}
-            //else
-            //{
-            //    borderColor = MetroPaint.BorderColor.Button.Normal(Theme);
-            //    if (useCustomForeColor)
-            //    {
-            //        foreColor = ForeColor;
-            //    }
-            //    else if (Highlight)
-            //    {
-            //        foreColor = MetroPaint.BackColor.Form(Theme);
-            //    }
-            //    else if (useStyleColors)
-            //    {
-            //        foreColor = MetroPaint.GetStyleColor(Style);
-            //    }
-            //    else
-            //    {
-            //        foreColor = MetroPaint.ForeColor.Button.Normal(Theme);
-            //    }
-            //}
+            if (isHovered && !isPressed && Enabled)
+            {
+                borderColor = MetroPaint.BorderColor.Button.Hover(Theme);
+                foreColor = MetroPaint.ForeColor.Button.Hover(Theme);
+            }
+            else if (isHovered && isPressed && Enabled)
+            {
+                borderColor = MetroPaint.BorderColor.Button.Press(Theme);
+                foreColor = MetroPaint.ForeColor.Button.Press(Theme);
+            }
+            else if (!Enabled)
+            {
+                borderColor = MetroPaint.BorderColor.Button.Disabled(Theme);
+                foreColor = MetroPaint.ForeColor.Button.Disabled(Theme);
+            }
+            else
+            {
+                borderColor = MetroPaint.BorderColor.Button.Normal(Theme);
+                if (useCustomForeColor)
+                {
+                    foreColor = ForeColor;
+                }
+                else if (Highlight)
+                {
+                    foreColor = MetroPaint.BackColor.Form(Theme);
+                }
+                else if (useStyleColors)
+                {
+                    foreColor = MetroPaint.GetStyleColor(Style);
+                }
+                else
+                {
+                    foreColor = MetroPaint.ForeColor.Button.Normal(Theme);
+                }
+            }
 
-            ///*using (Pen p = new Pen(borderColor))
-            //{
-            //    Rectangle borderRect = new Rectangle(0, 0, Width - 1, Height - 1);
-            //    e.Graphics.DrawRectangle(p, borderRect);
-            //}
+            /*using (Pen p = new Pen(borderColor))
+            {
+                Rectangle borderRect = new Rectangle(0, 0, Width - 1, Height - 1);
+                e.Graphics.DrawRectangle(p, borderRect);
+            }
 
-            //if (Highlight && !isHovered && !isPressed && Enabled)
-            //{
-            //    using (Pen p = MetroPaint.GetStylePen(Style))
-            //    {
-            //        Rectangle borderRect = new Rectangle(0, 0, Width - 1, Height - 1);
-            //        e.Graphics.DrawRectangle(p, borderRect);
-            //        borderRect = new Rectangle(1, 1, Width - 3, Height - 3);
-            //        e.Graphics.DrawRectangle(p, borderRect);
-            //    }
-            //}*/
-            //if (AntSytle.Equals(AntButtonSytle.Default)||AntSytle.Equals(AntButtonSytle.Dashed))
-            //{
-            //    ForeColor = Color.White;
-            //}
-            //e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-            //TextRenderer.DrawText(e.Graphics, Text, MetroFonts.Button(metroButtonSize, metroButtonWeight), ClientRectangle, foreColor, MetroPaint.GetTextFormatFlags(TextAlign));
+            if (Highlight && !isHovered && !isPressed && Enabled)
+            {
+                using (Pen p = MetroPaint.GetStylePen(Style))
+                {
+                    Rectangle borderRect = new Rectangle(0, 0, Width - 1, Height - 1);
+                    e.Graphics.DrawRectangle(p, borderRect);
+                    borderRect = new Rectangle(1, 1, Width - 3, Height - 3);
+                    e.Graphics.DrawRectangle(p, borderRect);
+                }
+            }*/
 
-            //OnCustomPaintForeground(new MetroPaintEventArgs(Color.Empty, foreColor, e.Graphics));
+            TextRenderer.DrawText(e.Graphics, Text, MetroFonts.Button(metroButtonSize, metroButtonWeight), ClientRectangle, foreColor, MetroPaint.GetTextFormatFlags(TextAlign));
 
-            //if (displayFocusRectangle && isFocused)
-            //    ControlPaint.DrawFocusRectangle(e.Graphics, ClientRectangle);
+            OnCustomPaintForeground(new MetroPaintEventArgs(Color.Empty, foreColor, e.Graphics));
+
+            if (displayFocusRectangle && isFocused)
+                ControlPaint.DrawFocusRectangle(e.Graphics, ClientRectangle);
         }
 
         #endregion

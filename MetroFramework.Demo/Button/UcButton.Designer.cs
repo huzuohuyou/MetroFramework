@@ -40,6 +40,7 @@
             this.dangerButtonV22 = new MetroFramework.Controls.DangerButtonV2();
             this.primaryButton5 = new MetroFramework.Controls.PrimaryButton();
             this.primaryButton2 = new MetroFramework.Controls.PrimaryButton();
+            this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.SuspendLayout();
             // 
             // label1
@@ -160,7 +161,7 @@
             this.primaryButton5.Name = "primaryButton5";
             this.primaryButton5.Size = new System.Drawing.Size(108, 32);
             this.primaryButton5.TabIndex = 0;
-            this.primaryButton5.Text = "primaryButton1";
+            this.primaryButton5.Text = "\\uE670";
             this.primaryButton5.UseSelectable = true;
             // 
             // primaryButton2
@@ -171,8 +172,17 @@
             this.primaryButton2.Name = "primaryButton2";
             this.primaryButton2.Size = new System.Drawing.Size(108, 32);
             this.primaryButton2.TabIndex = 0;
-            this.primaryButton2.Text = "primaryButton1";
+            this.primaryButton2.Text = "";
             this.primaryButton2.UseSelectable = true;
+            // 
+            // metroLabel2
+            // 
+            this.metroLabel2.AutoSize = true;
+            this.metroLabel2.Location = new System.Drawing.Point(212, 378);
+            this.metroLabel2.Name = "metroLabel2";
+            this.metroLabel2.Size = new System.Drawing.Size(83, 19);
+            this.metroLabel2.TabIndex = 7;
+            this.metroLabel2.Text = "metroLabel2";
             // 
             // UcButton
             // 
@@ -180,6 +190,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.metroLabel2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.metroLabel1);
             this.Controls.Add(this.linkButton5);
@@ -214,5 +225,6 @@
         private Controls.LinkButton linkButton5;
         private Controls.MetroLabel metroLabel1;
         private System.Windows.Forms.Label label1;
+        private Controls.MetroLabel metroLabel2;
     }
 }

@@ -16,6 +16,11 @@ namespace MetroFramework.Demo.Button
             this.label1.Text = "\uE670";
             this.label1.Font = new Font("anticon", 16);
             this.label1.ForeColor = Color.Green;
+            
+
+                this.metroLabel2.Text = "\uE670";
+            this.metroLabel2.Font = new Font("anticon", 16);
+            this.metroLabel2.ForeColor = Color.Green;
         }
 
         private void UcButton_Load(object sender, EventArgs e)
