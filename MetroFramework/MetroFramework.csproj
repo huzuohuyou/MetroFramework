@@ -219,6 +219,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="font\iconfont.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="MetroFramework.pfx" />
     <None Include="MetroFramework.Public.snk" />
     <None Include="MetroFramework.snk" />
@@ -226,6 +229,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Resources\iconfont.ttf" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

@@ -3,6 +3,8 @@ using MetroFramework.Drawing;
 using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Drawing.Text;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace MetroFramework.Controls
@@ -27,9 +29,32 @@ namespace MetroFramework.Controls
             this.label1.Name = "label1";
             this.label1.BackColor = Color.Transparent;
             this.label1.Text = "\uE670";
-            this.label1.Font = new Font("anticon", 16);
+            this.label1.Font = GetFontbyFile(20);// GetResoruceFont(Properties.Resources.iconfont);// new Font("anticon", 16);
             this.label1.ForeColor = Color.White;
             this.Controls.Add(this.label1);
+        }
+        /// <summary>
+        /// 如何使用资源文件中的字体，无安装无释放
+        /// </summary>
+        /// <param name="bytes">资源文件中的字体文件,如Properties.Resources.华文行楷</param>
+        /// <returns></returns>
+        public Font GetResoruceFont(byte[] bytes)
+        {
+            System.Drawing.Text.PrivateFontCollection pfc = new System.Drawing.Text.PrivateFontCollection();
+            IntPtr MeAdd = Marshal.AllocHGlobal(bytes.Length);
+            Marshal.Copy(bytes, 0, MeAdd, bytes.Length);
+            pfc.AddMemoryFont(MeAdd, bytes.Length);
+            return new Font(pfc.Families[0], 15, FontStyle.Regular);
+        }
+
+        public Font GetFontbyFile(float size)
+        {
+            PrivateFontCollection pfc = new PrivateFontCollection();
+            string appPath = Application.StartupPath + "\\font\\";//font是程序目录下放字体的文件夹
+            string fontFile1 = appPath + "iconfont.ttf";
+            pfc.AddFontFile(fontFile1);//字体文件的路径
+            Font myFont1 = new Font(pfc.Families[0], size, FontStyle.Regular, GraphicsUnit.Point, 0);
+            return myFont1;
         }
 
         protected override void OnPaintBackground(PaintEventArgs e)
