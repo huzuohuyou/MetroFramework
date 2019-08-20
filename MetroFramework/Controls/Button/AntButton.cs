@@ -40,10 +40,8 @@ namespace MetroFramework.Controls
     {
         #region Interface
 
-        public ICanPaint ICanPaint { get; set; }
 
-        BaseAntButton Button { get; set; }
-
+        //SvgDocument
 
         [Category(MetroDefaults.PropertyCategory.Appearance)]
         public event EventHandler<MetroPaintEventArgs> CustomPaintBackground;
@@ -200,14 +198,14 @@ namespace MetroFramework.Controls
             set { isRounded = value; }
         }
 
-        private AntButtonSytle antSytle = AntButtonSytle.Primary;
-        [DefaultValue(AntButtonSytle.Primary)]
-        [Category(MetroDefaults.PropertyCategory.Appearance)]
-        public AntButtonSytle AntSytle
-        {
-            get { return antSytle; }
-            set { antSytle = value; }
-        }
+        //private AntButtonSytle antSytle = AntButtonSytle.Danger;
+        //[DefaultValue(AntButtonSytle.Danger)]
+        //[Category(MetroDefaults.PropertyCategory.Appearance)]
+        //public AntButtonSytle AntSytle
+        //{
+        //    get { return antSytle; }
+        //    set { antSytle = value; }
+        //}
 
 
         private bool displayFocusRectangle = false;
@@ -275,17 +273,44 @@ namespace MetroFramework.Controls
 
         #region Paint Methods
 
-       
+
 
         protected override void OnPaintBackground(PaintEventArgs e)
         {
             try
             {
+                //v3
+                //ICanPaint.Background(e);
+                //v2
+                //if (isHovered && !isPressed && Enabled)
+                //{
+                //    BackColor = BaseAntButton.ChangeColor(MetroPaint.GetStyleColor(Style), 0.2f);
+                //}
+                //else if (isHovered && isPressed && Enabled)
+                //{
+                //    BackColor = BaseAntButton.ChangeColor(MetroPaint.GetStyleColor(Style), -0.3f);
+                //}
+                //else if (!Enabled)
+                //{
+                //    BackColor = MetroPaint.BackColor.Button.Disabled(Theme);
+                //}
+                //else if (Enabled)
+                //{
+                //    BackColor = BaseAntButton.ChangeColor(MetroPaint.GetStyleColor(Style), 0f);
+                //}
+                //base.OnPaintBackground(e);
+                //using (Pen pen = new Pen(Color.FromArgb(217, 217, 217)))
+                //{
+                //    var rec = BaseAntButton.DrawRoundRect(0, 0, Width - 1, Height - 1, IsRounded ? (int)AntSize : 10);
+                //    e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+                //    e.Graphics.DrawPath(pen, rec);
+                //}
+                //v1
                 //Color backColor = BackColor;
                 //switch (AntSytle)
                 //{
                 //    case AntButtonSytle.Primary:
-                //        Button = new PrimaryButton(e.Graphics,Width,Height,AntSize,IsRounded,Theme, Style,Text);
+                //        //Button = new PrimaryButton(e.Graphics, Width, Height, AntSize, IsRounded, Theme, Style, Text);
                 //        break;
                 //    case AntButtonSytle.Danger:
                 //        Button = new DangerButton(e.Graphics, Width, Height, AntSize, IsRounded, Theme, Style, Text);
@@ -300,6 +325,60 @@ namespace MetroFramework.Controls
                 //        break;
                 //}
                 //Button.Paint(isHovered, isPressed, Enabled);
+                //v0
+                //if (isHovered && !isPressed && Enabled)
+                //{
+                //    BackColor = ColorTranslator.FromHtml("#f7f7f7");
+                //}
+                //else if (isHovered && isPressed && Enabled)
+                //{
+                //    BackColor = ColorTranslator.FromHtml("#f0413");
+                //}
+                //else if (!Enabled)
+                //{
+                //    BackColor = ColorTranslator.FromHtml("#d9d9d9");
+                //}
+                //else if (Enabled)
+                //{
+                //    BackColor = ColorTranslator.FromHtml("#f0413");
+                //}
+                //if (isHovered && !isPressed && Enabled)
+                //{
+                //    using (Brush brush = new SolidBrush(Color.FromArgb(240, 65, 52)))
+                //    {
+                //        var rec = BaseAntButton.DrawRoundRect(0, 0, Width - 1, Height - 1, IsRounded ? (int)AntSize : 10);
+                //        e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+                //        e.Graphics.FillPath(brush, rec);
+                //    }
+                //}
+                //else if (isHovered && isPressed && Enabled)
+                //{
+                //    using (Brush brush = new SolidBrush(BaseAntButton.ChangeColor(Color.FromArgb(240, 65, 52), -0.1f)))
+                //    {
+                //        var rec = BaseAntButton.DrawRoundRect(0, 0, Width - 1, Height - 1, IsRounded ? (int)AntSize : 10);
+                //        e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+                //        e.Graphics.FillPath(brush, rec);
+                //    }
+                //}
+                //else if (!Enabled)
+                //{
+                //    //BackColor = ColorTranslator.FromHtml("#d9d9d9");
+                //}
+                //else if (Enabled)
+                //{
+                //    using (Pen pen = new Pen(Color.FromArgb(217, 217, 217)))
+                //    {
+                //        var rec = BaseAntButton.DrawRoundRect(0, 0, Width - 1, Height - 1, IsRounded ? (int)AntSize : 10);
+                //        e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+                //        e.Graphics.DrawPath(pen, rec);
+                //    }
+                //    using (Brush brush = new SolidBrush(Color.FromArgb(247, 247, 247)))
+                //    {
+                //        var rec = BaseAntButton.DrawRoundRect(0, 0, Width - 1, Height - 1, IsRounded ? (int)AntSize : 10);
+                //        e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+                //        e.Graphics.FillPath(brush, rec);
+                //    }
+                //}
 
             }
             catch
@@ -312,19 +391,18 @@ namespace MetroFramework.Controls
 
         protected override void OnPaint(PaintEventArgs e)
         {
+            
             try
             {
+                Height = (int)AntSize;
                 base.OnPaint(e);
-                Height =(int)AntSize;
                 if (GetStyle(ControlStyles.AllPaintingInWmPaint))
                 {
-                    ICanPaint.Background(e);
-                    //OnPaintBackground(e);
+                    OnPaintBackground(e);
                 }
 
-                //OnCustomPaint(new MetroPaintEventArgs(Color.Empty, Color.Empty, e.Graphics));
-                ICanPaint.Foreground(e);
-                //OnPaintForeground(e);
+                OnCustomPaint(new MetroPaintEventArgs(Color.Empty, Color.Empty, e.Graphics));
+                OnPaintForeground(e);
             }
             catch
             {
@@ -336,6 +414,7 @@ namespace MetroFramework.Controls
         
         protected virtual void OnPaintForeground(PaintEventArgs e)
         {
+            
             //Color borderColor, foreColor;
 
             //if (isHovered && !isPressed && Enabled)

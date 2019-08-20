@@ -156,7 +156,7 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(917, 656);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(990, 698);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // metroTreeView1
@@ -299,7 +299,7 @@
             treeNode53,
             treeNode57});
             this.metroTreeView1.OverForeColor = System.Drawing.Color.DeepSkyBlue;
-            this.metroTreeView1.Size = new System.Drawing.Size(240, 656);
+            this.metroTreeView1.Size = new System.Drawing.Size(240, 698);
             this.metroTreeView1.TabIndex = 0;
             this.metroTreeView1.UseSelectable = true;
             this.metroTreeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.metroTreeView1_AfterSelect);
@@ -310,7 +310,7 @@
             this.metroTabControl1.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
             this.metroTabControl1.Location = new System.Drawing.Point(243, 3);
             this.metroTabControl1.Name = "metroTabControl1";
-            this.metroTabControl1.Size = new System.Drawing.Size(671, 650);
+            this.metroTabControl1.Size = new System.Drawing.Size(744, 692);
             this.metroTabControl1.TabIndex = 1;
             this.metroTabControl1.UseSelectable = true;
             // 
@@ -319,7 +319,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = MetroFramework.Forms.MetroFormBorderStyle.FixedSingle;
-            this.ClientSize = new System.Drawing.Size(951, 726);
+            this.ClientSize = new System.Drawing.Size(1024, 768);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "MetroDemo";
             this.Text = "MetroForm";

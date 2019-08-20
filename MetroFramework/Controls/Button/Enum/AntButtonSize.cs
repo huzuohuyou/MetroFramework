@@ -7,8 +7,8 @@ namespace MetroFramework.Controls
 
     public enum AntButtonSize
     {
-        Large=36,
-        Default=28,
-        Small=22
+        Large=40,
+        Default=32,
+        Small=24
     }
 }

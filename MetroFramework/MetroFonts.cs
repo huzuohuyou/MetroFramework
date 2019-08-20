@@ -226,6 +226,11 @@ namespace MetroFramework
             return FontResolver.ResolveFont("Segoe UI", size, FontStyle.Regular, GraphicsUnit.Pixel);
         }
 
+        public static Font AntIcon(float size)
+        {
+            return FontResolver.ResolveFont("anticon", size, FontStyle.Regular, GraphicsUnit.Pixel);
+        }
+
         public static Font DefaultBold(float size)
         {
             return FontResolver.ResolveFont("Segoe UI", size, FontStyle.Bold, GraphicsUnit.Pixel);
@@ -541,6 +546,11 @@ namespace MetroFramework
             }
 
             return Default(12f);
+        }
+
+        public static Font Icon(float size)
+        {
+            return AntIcon(size);
         }
 
         public static Font Button(MetroButtonSize linkSize, MetroButtonWeight linkWeight)

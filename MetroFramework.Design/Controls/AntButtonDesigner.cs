@@ -45,7 +45,7 @@ namespace MetroFramework.Design.Controls
             properties.Remove("FlatAppearance");
             properties.Remove("FlatStyle");
             properties.Remove("AutoEllipsis");
-            properties.Remove("UseCompatibleTextRendering");            
+            properties.Remove("UseCompatibleTextRendering");
 
             properties.Remove("Image");
             properties.Remove("ImageAlign");

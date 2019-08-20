@@ -4,7 +4,7 @@ using System.Drawing.Drawing2D;
 namespace MetroFramework.Controls
 {
 
-    internal abstract class BaseAntButton : ICanManageStatusColor, ICanDrawButtonStyle
+    internal abstract class BaseAntButton : ICanManageStatusColor
     {
         public MetroThemeStyle Theme { get; set; }
         public MetroColorStyle Style { get; set; }

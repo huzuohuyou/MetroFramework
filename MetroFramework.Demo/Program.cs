@@ -11,6 +11,7 @@ namespace MetroFramework.Demo
         [STAThread]
         static void Main()
         {
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MetroDemo());//MetroDemo MainForm

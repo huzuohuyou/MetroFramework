@@ -59,6 +59,10 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FontAwesomeNet, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\FontAwesomeNet.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
@@ -85,12 +89,16 @@
     <Compile Include="Controls\Button\AntButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\Button\DangerButtonV2.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\Button\DangerButton.cs" />
-    <Compile Include="Controls\Button\DashedButton.cs" />
-    <Compile Include="Controls\Button\DefaultButton.cs" />
-    <Compile Include="Controls\Button\ICanDrawButtonStyle.cs" />
-    <Compile Include="Controls\Button\ICanPaintBackground.cs" />
-    <Compile Include="Controls\Button\ICanPaint.cs" />
+    <Compile Include="Controls\Button\DashedButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\Button\DefaultButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\Button\LinkButton.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -258,6 +266,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\close4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\check-circle.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="FontAwesomeNet.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
