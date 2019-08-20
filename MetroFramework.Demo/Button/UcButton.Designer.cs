@@ -39,8 +39,7 @@
             this.defaultButton2 = new MetroFramework.Controls.DefaultButton();
             this.dangerButtonV25 = new MetroFramework.Controls.DangerButtonV2();
             this.dangerButtonV22 = new MetroFramework.Controls.DangerButtonV2();
-            this.primaryButton5 = new MetroFramework.Controls.PrimaryButton();
-            this.primaryButton2 = new MetroFramework.Controls.PrimaryButton();
+            this.primaryButton1 = new MetroFramework.Controls.PrimaryButton();
             this.SuspendLayout();
             // 
             // label1
@@ -161,29 +160,16 @@
             this.dangerButtonV22.Text = "dangerButtonV21";
             this.dangerButtonV22.UseSelectable = true;
             // 
-            // primaryButton5
+            // primaryButton1
             // 
-            this.primaryButton5.AntSize = MetroFramework.Controls.AntButtonSize.Large;
-            this.primaryButton5.BackColor = System.Drawing.Color.Transparent;
-            this.primaryButton5.ForeColor = System.Drawing.Color.Transparent;
-            this.primaryButton5.IsRounded = false;
-            this.primaryButton5.Location = new System.Drawing.Point(25, 83);
-            this.primaryButton5.Name = "primaryButton5";
-            this.primaryButton5.Size = new System.Drawing.Size(108, 32);
-            this.primaryButton5.TabIndex = 0;
-            this.primaryButton5.Text = "\\uE670";
-            this.primaryButton5.UseSelectable = true;
-            // 
-            // primaryButton2
-            // 
-            this.primaryButton2.BackColor = System.Drawing.Color.Transparent;
-            this.primaryButton2.ForeColor = System.Drawing.Color.Transparent;
-            this.primaryButton2.Location = new System.Drawing.Point(25, 23);
-            this.primaryButton2.Name = "primaryButton2";
-            this.primaryButton2.Size = new System.Drawing.Size(108, 32);
-            this.primaryButton2.TabIndex = 0;
-            this.primaryButton2.Text = "";
-            this.primaryButton2.UseSelectable = true;
+            this.primaryButton1.BackColor = System.Drawing.Color.Transparent;
+            this.primaryButton1.ForeColor = System.Drawing.Color.Transparent;
+            this.primaryButton1.Location = new System.Drawing.Point(162, 268);
+            this.primaryButton1.Name = "primaryButton1";
+            this.primaryButton1.Size = new System.Drawing.Size(245, 32);
+            this.primaryButton1.TabIndex = 8;
+            this.primaryButton1.Text = "primaryButton1";
+            this.primaryButton1.UseSelectable = true;
             // 
             // UcButton
             // 
@@ -191,6 +177,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.primaryButton1);
             this.Controls.Add(this.metroLabel2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.metroLabel1);
@@ -202,8 +189,6 @@
             this.Controls.Add(this.defaultButton2);
             this.Controls.Add(this.dangerButtonV25);
             this.Controls.Add(this.dangerButtonV22);
-            this.Controls.Add(this.primaryButton5);
-            this.Controls.Add(this.primaryButton2);
             this.Name = "UcButton";
             this.Size = new System.Drawing.Size(744, 692);
             this.Load += new System.EventHandler(this.UcButton_Load);
@@ -214,12 +199,12 @@
 
 
         #endregion
-        private Controls.PrimaryButton primaryButton2;
+        //private Controls.PrimaryButton primaryButton2;
         private Controls.DangerButtonV2 dangerButtonV22;
         private Controls.DefaultButton defaultButton2;
         private Controls.DashedButton dashedButton2;
         private Controls.LinkButton linkButton2;
-        private Controls.PrimaryButton primaryButton5;
+        //private Controls.PrimaryButton primaryButton5;
         private Controls.DangerButtonV2 dangerButtonV25;
         private Controls.DefaultButton defaultButton5;
         private Controls.DashedButton dashedButton5;
@@ -227,5 +212,7 @@
         private Controls.MetroLabel metroLabel1;
         private System.Windows.Forms.Label label1;
         private Controls.MetroLabel metroLabel2;
+        private Controls.PrimaryButton primaryButton1;
+        //private Controls.PrimaryButton primaryButton1;
     }
 }

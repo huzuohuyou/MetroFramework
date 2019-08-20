@@ -99,6 +99,7 @@
     <Compile Include="Controls\Button\DefaultButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\Button\Enum\AntButtonIcon.cs" />
     <Compile Include="Controls\Button\LinkButton.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -111,6 +112,7 @@
     <Compile Include="Controls\Button\PrimaryButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\IconFont.cs" />
     <Compile Include="Controls\MetroButton.cs">
       <SubType>Component</SubType>
     </Compile>

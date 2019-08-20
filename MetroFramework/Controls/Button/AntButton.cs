@@ -175,6 +175,16 @@ namespace MetroFramework.Controls
 
         #region Fields
 
+
+        private AntButtonIcon antIcon= AntButtonIcon.None;
+        [DefaultValue(AntButtonIcon.None)]
+        [Category(MetroDefaults.PropertyCategory.Appearance)]
+        public AntButtonIcon AntIcon
+        {
+            get { return antIcon; }
+            set { antIcon = value; }
+        }
+
         private AntButtonSize antSize = AntButtonSize.Default;
         [DefaultValue(AntButtonSize.Default)]
         [Category(MetroDefaults.PropertyCategory.Appearance)]
