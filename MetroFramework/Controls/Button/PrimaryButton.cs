@@ -23,10 +23,8 @@ namespace MetroFramework.Controls
 
             this.label1 = new Label();
             this.label1.AutoSize = true;
-            this.label1.Location = new Point(2, 5);
+            
             this.label1.Name = "label1";
-            this.label1.Size = new Size(30, 12);
-            this.label1.TabIndex = 6;
             this.label1.BackColor = Color.Transparent;
             this.label1.Text = "\uE670";
             this.label1.Font = new Font("anticon", 16);
@@ -38,6 +36,7 @@ namespace MetroFramework.Controls
         {
             try
             {
+                this.label1.Location = new Point(2, (int)AntSize / 2 - label1.Height / 2);
                 if (isHovered && !isPressed && Enabled)
                 {
                     using (Brush brush = new SolidBrush(BaseAntButton.ChangeColor(MetroPaint.GetStyleColor(Style), 0.2f)))

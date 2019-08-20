@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
+            this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.linkButton5 = new MetroFramework.Controls.LinkButton();
             this.linkButton2 = new MetroFramework.Controls.LinkButton();
@@ -40,7 +41,6 @@
             this.dangerButtonV22 = new MetroFramework.Controls.DangerButtonV2();
             this.primaryButton5 = new MetroFramework.Controls.PrimaryButton();
             this.primaryButton2 = new MetroFramework.Controls.PrimaryButton();
-            this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.SuspendLayout();
             // 
             // label1
@@ -50,6 +50,15 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(0, 12);
             this.label1.TabIndex = 6;
+            // 
+            // metroLabel2
+            // 
+            this.metroLabel2.AutoSize = true;
+            this.metroLabel2.Location = new System.Drawing.Point(212, 378);
+            this.metroLabel2.Name = "metroLabel2";
+            this.metroLabel2.Size = new System.Drawing.Size(83, 19);
+            this.metroLabel2.TabIndex = 7;
+            this.metroLabel2.Text = "metroLabel2";
             // 
             // metroLabel1
             // 
@@ -154,6 +163,7 @@
             // 
             // primaryButton5
             // 
+            this.primaryButton5.AntSize = MetroFramework.Controls.AntButtonSize.Large;
             this.primaryButton5.BackColor = System.Drawing.Color.Transparent;
             this.primaryButton5.ForeColor = System.Drawing.Color.Transparent;
             this.primaryButton5.IsRounded = false;
@@ -174,15 +184,6 @@
             this.primaryButton2.TabIndex = 0;
             this.primaryButton2.Text = "";
             this.primaryButton2.UseSelectable = true;
-            // 
-            // metroLabel2
-            // 
-            this.metroLabel2.AutoSize = true;
-            this.metroLabel2.Location = new System.Drawing.Point(212, 378);
-            this.metroLabel2.Name = "metroLabel2";
-            this.metroLabel2.Size = new System.Drawing.Size(83, 19);
-            this.metroLabel2.TabIndex = 7;
-            this.metroLabel2.Text = "metroLabel2";
             // 
             // UcButton
             // 
