@@ -101,6 +101,7 @@
     </Compile>
     <Compile Include="Controls\Button\Enum\AntButtonIcon.cs" />
     <Compile Include="Controls\Button\Enum\AntButtonShape.cs" />
+    <Compile Include="Controls\Button\Enum\IconLoaction.cs" />
     <Compile Include="Controls\Button\LinkButton.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -222,9 +223,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="font\iconfont.ttf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <None Include="font\iconfont.ttf" />
     <None Include="MetroFramework.pfx" />
     <None Include="MetroFramework.Public.snk" />
     <None Include="MetroFramework.snk" />
