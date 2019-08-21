@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dangerButtonV22 = new MetroFramework.Controls.DangerButtonV2();
-            this.dangerButtonV21 = new MetroFramework.Controls.DangerButtonV2();
+            this.dangerButtonV22 = new MetroFramework.Controls.DangerButton();
+            this.dangerButtonV21 = new MetroFramework.Controls.DangerButton();
             this.dashedButton1 = new MetroFramework.Controls.DashedButton();
             this.defaultButton1 = new MetroFramework.Controls.DefaultButton();
             this.primaryButton4 = new MetroFramework.Controls.PrimaryButton();
@@ -165,8 +165,8 @@
         private Controls.PrimaryButton primaryButton4;
         private Controls.DefaultButton defaultButton1;
         private Controls.DashedButton dashedButton1;
-        private Controls.DangerButtonV2 dangerButtonV21;
-        private Controls.DangerButtonV2 dangerButtonV22;
+        private Controls.DangerButton dangerButtonV21;
+        private Controls.DangerButton dangerButtonV22;
 
         //private Controls.PrimaryButton primaryButton1;
 

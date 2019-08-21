@@ -7,9 +7,10 @@ using System.Windows.Forms;
 namespace MetroFramework.Controls
 {
 
-    public class DangerButtonV2 : AntButton
+    public class DropdownButton : AntButton
     {
-        public DangerButtonV2()
+
+        public DropdownButton()
         {
             FlatStyle = FlatStyle.Flat;
             FlatAppearance.BorderSize = 0;
@@ -26,21 +27,24 @@ namespace MetroFramework.Controls
             {
                 if (isHovered && !isPressed && Enabled)
                 {
-                    using (Brush brush = new SolidBrush(Color.FromArgb(240, 65, 52)))
+                    using (Pen pen = new Pen(BaseAntButton.ChangeColor(MetroPaint.GetStyleColor(Style), 0.2f), 1.5f))
                     {
                         var rec = BaseAntButton.DrawRoundRect(0, 0, Width - 1, Height - 1, AntShape.Equals(AntButtonShape.Circle) ? (int)AntSize : 10);
                         e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                        e.Graphics.FillPath(brush, rec);
+                        e.Graphics.DrawPath(pen, rec);
                     }
+                    
                 }
                 else if (isHovered && isPressed && Enabled)
                 {
-                    using (Brush brush = new SolidBrush(BaseAntButton.ChangeColor(Color.FromArgb(240, 65, 52), -0.1f)))
+
+                    using (Pen pen = new Pen(BaseAntButton.ChangeColor(MetroPaint.GetStyleColor(Style), -0.2f), 1.5f))
                     {
                         var rec = BaseAntButton.DrawRoundRect(0, 0, Width - 1, Height - 1, AntShape.Equals(AntButtonShape.Circle) ? (int)AntSize : 10);
                         e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                        e.Graphics.FillPath(brush, rec);
+                        e.Graphics.DrawPath(pen, rec);
                     }
+                    
                 }
                 else if (!Enabled)
                 {
@@ -48,18 +52,13 @@ namespace MetroFramework.Controls
                 }
                 else if (Enabled)
                 {
-                    using (Pen pen = new Pen(Color.FromArgb(217, 217, 217)))
+                    using (Pen pen = new Pen(Color.FromArgb(217, 217, 217),1.5f))
                     {
                         var rec = BaseAntButton.DrawRoundRect(0, 0, Width - 1, Height - 1, AntShape.Equals(AntButtonShape.Circle) ? (int)AntSize : 10);
                         e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
                         e.Graphics.DrawPath(pen, rec);
                     }
-                    using (Brush brush = new SolidBrush(Color.FromArgb(247, 247, 247)))
-                    {
-                        var rec = BaseAntButton.DrawRoundRect(0, 0, Width - 1, Height - 1, AntShape.Equals(AntButtonShape.Circle) ? (int)AntSize : 10);
-                        e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                        e.Graphics.FillPath(brush, rec);
-                    }
+
                 }
 
             }
@@ -77,11 +76,11 @@ namespace MetroFramework.Controls
 
                 if (isHovered && !isPressed && Enabled)
                 {
-                    foreColor = MetroPaint.ForeColor.Button.Hover(Theme);
+                    foreColor = BaseAntButton.ChangeColor(MetroPaint.GetStyleColor(Style), 0.2f);
                 }
                 else if (isHovered && isPressed && Enabled)
                 {
-                    foreColor = MetroPaint.ForeColor.Button.Press(Theme);
+                    foreColor = BaseAntButton.ChangeColor(MetroPaint.GetStyleColor(Style), -0.2f);
                 }
                 else if (!Enabled)
                 {
@@ -91,8 +90,8 @@ namespace MetroFramework.Controls
                 {
                     foreColor = MetroPaint.ForeColor.Button.Disabled(Theme);
                 }
-
                 e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+
                 if (AntIcon.Equals(AntButtonIcon.None))
                 {
                     TextRenderer.DrawText(e.Graphics, Text, MetroFonts.Button(metroButtonSize, metroButtonWeight),
@@ -140,12 +139,20 @@ namespace MetroFramework.Controls
 
                    , foreColor, MetroPaint.GetTextFormatFlags(TextAlign));
                 }
+
             }
             catch (Exception)
             {
                 Invalidate();
             }
-            
+
+        }
+
+        protected override void OnEnter(EventArgs e)
+        {
+            this.Controls.Add(new DefaultButton());
+
+            base.OnEnter(e);
         }
     }
 }

@@ -165,7 +165,7 @@
             this.metroTabControl1.ItemSize = new System.Drawing.Size(120, 34);
             this.metroTabControl1.Location = new System.Drawing.Point(3, 34);
             this.metroTabControl1.Name = "metroTabControl1";
-            this.metroTabControl1.SelectedIndex = 0;
+            this.metroTabControl1.SelectedIndex = 6;
             this.metroTabControl1.Size = new System.Drawing.Size(647, 344);
             this.metroTabControl1.TabIndex = 0;
             this.metroTabControl1.UseSelectable = true;
@@ -370,7 +370,6 @@
             this.metroTabPage8.VerticalScrollbarBarColor = true;
             this.metroTabPage8.VerticalScrollbarHighlightOnWheel = false;
             this.metroTabPage8.VerticalScrollbarSize = 10;
-            this.metroTabPage8.Controls.SetChildIndex(this.cTreeTaskBox1, 0);
             // 
             // cTreeTaskBox1
             // 
@@ -837,7 +836,7 @@
             // 
             this.metroDateTime2.Enabled = false;
             this.metroDateTime2.Location = new System.Drawing.Point(201, 87);
-            this.metroDateTime2.MinimumSize = new System.Drawing.Size(4, 29);
+            this.metroDateTime2.MinimumSize = new System.Drawing.Size(0, 29);
             this.metroDateTime2.Name = "metroDateTime2";
             this.metroDateTime2.Size = new System.Drawing.Size(213, 29);
             this.metroDateTime2.TabIndex = 20;
@@ -854,14 +853,14 @@
             // metroDateTime1
             // 
             this.metroDateTime1.Location = new System.Drawing.Point(201, 51);
-            this.metroDateTime1.MinimumSize = new System.Drawing.Size(4, 29);
+            this.metroDateTime1.MinimumSize = new System.Drawing.Size(0, 29);
             this.metroDateTime1.Name = "metroDateTime1";
             this.metroDateTime1.Size = new System.Drawing.Size(213, 29);
             this.metroDateTime1.TabIndex = 18;
             // 
             // metroButton5
             // 
-            this.metroButton5.Location = new System.Drawing.Point(443, 51);
+            this.metroButton5.Location = new System.Drawing.Point(464, 87);
             this.metroButton5.Name = "metroButton5";
             this.metroButton5.Size = new System.Drawing.Size(123, 29);
             this.metroButton5.TabIndex = 17;

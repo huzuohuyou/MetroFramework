@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Button");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Icon");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("DropDown");
             System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("General", new System.Windows.Forms.TreeNode[] {
             treeNode1,
             treeNode2});
@@ -176,10 +176,10 @@
             this.metroTreeView1.Location = new System.Drawing.Point(0, 0);
             this.metroTreeView1.Margin = new System.Windows.Forms.Padding(0);
             this.metroTreeView1.Name = "metroTreeView1";
-            treeNode1.Name = "节点3";
+            treeNode1.Name = "Button";
             treeNode1.Text = "Button";
-            treeNode2.Name = "节点0";
-            treeNode2.Text = "Icon";
+            treeNode2.Name = "DropDown";
+            treeNode2.Text = "DropDown";
             treeNode3.Name = "节点0";
             treeNode3.Text = "General";
             treeNode4.Name = "节点4";

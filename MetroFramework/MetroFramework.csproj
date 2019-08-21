@@ -89,11 +89,13 @@
     <Compile Include="Controls\Button\AntButton.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\Button\DangerButtonV2.cs">
+    <Compile Include="Controls\Button\DangerButton.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\Button\DangerButton.cs" />
     <Compile Include="Controls\Button\DashedButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\Button\DropdownButton.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\Button\DefaultButton.cs">

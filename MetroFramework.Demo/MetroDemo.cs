@@ -1,4 +1,5 @@
 ﻿using MetroFramework.Demo.Button;
+using MetroFramework.Demo.DropDown;
 using MetroFramework.Forms;
 using System.Windows.Forms;
 
@@ -13,7 +14,15 @@ namespace MetroFramework.Demo
 
         private void metroTreeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            AddMetroTabPage(e.Node.Name, e.Node.Text, new UcButton());
+            if (e.Node.Name.Equals("Button"))
+            {
+                AddMetroTabPage(e.Node.Name, e.Node.Text, new UcButton());
+            }
+            else if (e.Node.Name.Equals("DropDown"))
+            {
+                AddMetroTabPage(e.Node.Name, e.Node.Text, new ucDropDown());
+            }
+           
         }
 
         public void AddMetroTabPage(string name, string text, UserControl uc)
