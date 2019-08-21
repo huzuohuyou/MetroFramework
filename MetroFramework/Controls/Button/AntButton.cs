@@ -208,14 +208,14 @@ namespace MetroFramework.Controls
             set { isRounded = value; }
         }
 
-        //private AntButtonSytle antSytle = AntButtonSytle.Danger;
-        //[DefaultValue(AntButtonSytle.Danger)]
-        //[Category(MetroDefaults.PropertyCategory.Appearance)]
-        //public AntButtonSytle AntSytle
-        //{
-        //    get { return antSytle; }
-        //    set { antSytle = value; }
-        //}
+        private AntButtonShape antShape = AntButtonShape.Round;
+        [DefaultValue(AntButtonShape.Round)]
+        [Category(MetroDefaults.PropertyCategory.Appearance)]
+        public AntButtonShape AntShape
+        {
+            get { return antShape; }
+            set { antShape = value; }
+        }
 
 
         private bool displayFocusRectangle = false;

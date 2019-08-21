@@ -30,7 +30,7 @@ namespace MetroFramework.Controls
 
                     using (Pen pen = new Pen(BaseAntButton.ChangeColor(MetroPaint.GetStyleColor(Style), 0.2f)))
                     {
-                        var rec = BaseAntButton.DrawRoundRect(0, 0, Width - 1, Height - 1, IsRounded ? (int)AntSize : 10);
+                        var rec = BaseAntButton.DrawRoundRect(0, 0, Width - 1, Height - 1, AntShape.Equals(AntButtonShape.Circle) ? (int)AntSize : 10);
                         e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
                         e.Graphics.DrawPath(pen, rec);
                     }
@@ -41,7 +41,7 @@ namespace MetroFramework.Controls
 
                     using (Pen pen = new Pen(BaseAntButton.ChangeColor(MetroPaint.GetStyleColor(Style), -0.2f)))
                     {
-                        var rec = BaseAntButton.DrawRoundRect(0, 0, Width - 1, Height - 1, IsRounded ? (int)AntSize : 10);
+                        var rec = BaseAntButton.DrawRoundRect(0, 0, Width - 1, Height - 1, AntShape.Equals(AntButtonShape.Circle) ? (int)AntSize : 10);
                         e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
                         e.Graphics.DrawPath(pen, rec);
                     }
@@ -55,7 +55,7 @@ namespace MetroFramework.Controls
                 {
                     using (Pen pen = new Pen(Color.FromArgb(217, 217, 217)))
                     {
-                        var rec = BaseAntButton.DrawRoundRect(0, 0, Width - 1, Height - 1, IsRounded ? (int)AntSize : 10);
+                        var rec = BaseAntButton.DrawRoundRect(0, 0, Width - 1, Height - 1, AntShape.Equals(AntButtonShape.Circle) ? (int)AntSize : 10);
                         e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
                         e.Graphics.DrawPath(pen, rec);
                     }

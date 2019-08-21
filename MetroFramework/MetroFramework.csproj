@@ -100,6 +100,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\Button\Enum\AntButtonIcon.cs" />
+    <Compile Include="Controls\Button\Enum\AntButtonShape.cs" />
     <Compile Include="Controls\Button\LinkButton.cs">
       <SubType>Component</SubType>
     </Compile>

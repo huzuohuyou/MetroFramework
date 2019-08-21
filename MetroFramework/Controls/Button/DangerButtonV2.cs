@@ -28,7 +28,7 @@ namespace MetroFramework.Controls
                 {
                     using (Brush brush = new SolidBrush(Color.FromArgb(240, 65, 52)))
                     {
-                        var rec = BaseAntButton.DrawRoundRect(0, 0, Width - 1, Height - 1, IsRounded ? (int)AntSize : 10);
+                        var rec = BaseAntButton.DrawRoundRect(0, 0, Width - 1, Height - 1, AntShape.Equals(AntButtonShape.Circle) ? (int)AntSize : 10);
                         e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
                         e.Graphics.FillPath(brush, rec);
                     }
@@ -37,7 +37,7 @@ namespace MetroFramework.Controls
                 {
                     using (Brush brush = new SolidBrush(BaseAntButton.ChangeColor(Color.FromArgb(240, 65, 52), -0.1f)))
                     {
-                        var rec = BaseAntButton.DrawRoundRect(0, 0, Width - 1, Height - 1, IsRounded ? (int)AntSize : 10);
+                        var rec = BaseAntButton.DrawRoundRect(0, 0, Width - 1, Height - 1, AntShape.Equals(AntButtonShape.Circle) ? (int)AntSize : 10);
                         e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
                         e.Graphics.FillPath(brush, rec);
                     }
@@ -50,13 +50,13 @@ namespace MetroFramework.Controls
                 {
                     using (Pen pen = new Pen(Color.FromArgb(217, 217, 217)))
                     {
-                        var rec = BaseAntButton.DrawRoundRect(0, 0, Width - 1, Height - 1, IsRounded ? (int)AntSize : 10);
+                        var rec = BaseAntButton.DrawRoundRect(0, 0, Width - 1, Height - 1, AntShape.Equals(AntButtonShape.Circle) ? (int)AntSize : 10);
                         e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
                         e.Graphics.DrawPath(pen, rec);
                     }
                     using (Brush brush = new SolidBrush(Color.FromArgb(247, 247, 247)))
                     {
-                        var rec = BaseAntButton.DrawRoundRect(0, 0, Width - 1, Height - 1, IsRounded ? (int)AntSize : 10);
+                        var rec = BaseAntButton.DrawRoundRect(0, 0, Width - 1, Height - 1, AntShape.Equals(AntButtonShape.Circle) ? (int)AntSize : 10);
                         e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
                         e.Graphics.FillPath(brush, rec);
                     }
