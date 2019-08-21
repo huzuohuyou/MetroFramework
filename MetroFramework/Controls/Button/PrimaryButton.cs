@@ -24,25 +24,7 @@ namespace MetroFramework.Controls
         }
 
 
-        public Font UseFileFont(float size)
-        {
-            PrivateFontCollection pfc = new PrivateFontCollection();
-            string appPath = @"D:\GitHub\MetroFramework\MetroFramework.Demo\bin\Debug\font\";
-            string fontFile = appPath + "iconfont.ttf";
-            pfc.AddFontFile(fontFile);
-            Font font = new Font(pfc.Families[0], size, FontStyle.Regular, GraphicsUnit.Point, 0);
-            return font;
-        }
-
-        public Font UseMemoryFont(float size)
-        {
-            System.Runtime.InteropServices.GCHandle hObject = System.Runtime.InteropServices.GCHandle.Alloc(Properties.Resources.iconfont, System.Runtime.InteropServices.GCHandleType.Pinned);
-            IntPtr intptr = hObject.AddrOfPinnedObject();
-            PrivateFontCollection fc = new PrivateFontCollection();
-            fc.AddMemoryFont(intptr, Properties.Resources.iconfont.Length);
-            Font font = new Font(fc.Families[0], size, FontStyle.Regular, GraphicsUnit.Point, 0);
-            return font;
-        }
+        
 
        
 
@@ -97,6 +79,9 @@ namespace MetroFramework.Controls
 
         protected override void OnPaintForeground(PaintEventArgs e)
         {
+            try
+            {
+
             Color foreColor = Color.Empty;
 
             if (isHovered && !isPressed && Enabled)
@@ -113,9 +98,6 @@ namespace MetroFramework.Controls
             }
 
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-           
-
-            
             if (AntIcon.Equals(AntButtonIcon.None))
             {
                 TextRenderer.DrawText(e.Graphics, Text, MetroFonts.Button(metroButtonSize, metroButtonWeight),
@@ -153,7 +135,7 @@ namespace MetroFramework.Controls
                     }
                     e.Graphics.DrawString(
            Icon.Style[AntIcon],
-           UseFileFont(iconSize),
+           UseMemoryFont(iconSize),
            brush, new RectangleF() { X = iconX, Y = iconY, Width = (int)AntSize, Height = (int)AntSize });
 
                 }
@@ -166,6 +148,11 @@ namespace MetroFramework.Controls
 
             OnCustomPaintForeground(new MetroPaintEventArgs(Color.Empty, foreColor, e.Graphics));
 
+            }
+            catch (Exception)
+            {
+                Invalidate();
+            }
         }
 
 

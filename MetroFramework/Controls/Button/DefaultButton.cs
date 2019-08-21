@@ -28,7 +28,7 @@ namespace MetroFramework.Controls
                 if (isHovered && !isPressed && Enabled)
                 {
 
-                    using (Pen pen = new Pen(BaseAntButton.ChangeColor(MetroPaint.GetStyleColor(Style), 0.2f)))
+                    using (Pen pen = new Pen(BaseAntButton.ChangeColor(MetroPaint.GetStyleColor(Style), 0.2f), 1.5f))
                     {
                         var rec = BaseAntButton.DrawRoundRect(0, 0, Width - 1, Height - 1, AntShape.Equals(AntButtonShape.Circle) ? (int)AntSize : 10);
                         e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
@@ -39,7 +39,7 @@ namespace MetroFramework.Controls
                 else if (isHovered && isPressed && Enabled)
                 {
 
-                    using (Pen pen = new Pen(BaseAntButton.ChangeColor(MetroPaint.GetStyleColor(Style), -0.2f)))
+                    using (Pen pen = new Pen(BaseAntButton.ChangeColor(MetroPaint.GetStyleColor(Style), -0.2f), 1.5f))
                     {
                         var rec = BaseAntButton.DrawRoundRect(0, 0, Width - 1, Height - 1, AntShape.Equals(AntButtonShape.Circle) ? (int)AntSize : 10);
                         e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
@@ -53,7 +53,7 @@ namespace MetroFramework.Controls
                 }
                 else if (Enabled)
                 {
-                    using (Pen pen = new Pen(Color.FromArgb(217, 217, 217)))
+                    using (Pen pen = new Pen(Color.FromArgb(217, 217, 217),1.5f))
                     {
                         var rec = BaseAntButton.DrawRoundRect(0, 0, Width - 1, Height - 1, AntShape.Equals(AntButtonShape.Circle) ? (int)AntSize : 10);
                         e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
@@ -88,8 +88,60 @@ namespace MetroFramework.Controls
                 {
                     foreColor = MetroPaint.ForeColor.Button.Disabled(Theme);
                 }
+                else if (Enabled)
+                {
+                    foreColor = MetroPaint.ForeColor.Button.Disabled(Theme);
+                }
                 e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                TextRenderer.DrawText(e.Graphics, Text, MetroFonts.Button(metroButtonSize, metroButtonWeight), ClientRectangle, foreColor, MetroPaint.GetTextFormatFlags(TextAlign));
+
+                if (AntIcon.Equals(AntButtonIcon.None))
+                {
+                    TextRenderer.DrawText(e.Graphics, Text, MetroFonts.Button(metroButtonSize, metroButtonWeight),
+                  ClientRectangle
+                    , foreColor, MetroPaint.GetTextFormatFlags(TextAlign));
+                }
+                else
+                {
+                    int iconX = 0, iconY = 0, iconSize = 20, textLeftPadding = 0;
+
+                    if (AntSize.Equals(AntButtonSize.Large))
+                    {
+                        iconX = (int)IconLoaction.LargeIconX;
+                        iconY = (int)IconLoaction.LargeIconY;
+                        iconSize = (int)IconLoaction.LargeSize;
+                        textLeftPadding = 20;
+                    }
+                    else if (AntSize.Equals(AntButtonSize.Default))
+                    {
+                        iconX = (int)IconLoaction.DefaultIconX;
+                        iconY = (int)IconLoaction.DefaultIconY;
+                        iconSize = (int)IconLoaction.DefaultSize;
+                        textLeftPadding = 20;
+                    }
+                    else if (AntSize.Equals(AntButtonSize.Small))
+                    {
+                        iconX = (int)IconLoaction.SmallIconX;
+                        iconY = (int)IconLoaction.SmallIconY;
+                        iconSize = (int)IconLoaction.SmallISize;
+                        textLeftPadding = 20;
+                    }
+                    using (Brush brush = new SolidBrush(foreColor))
+                    {
+                        var rec = BaseAntButton.DrawRoundRect(0, 0, Width - 1, Height - 1, AntShape.Equals(AntButtonShape.Circle) ? (int)AntSize : 10);
+                        e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+
+                        e.Graphics.DrawString(
+               Icon.Style[AntIcon],
+               UseMemoryFont(iconSize),
+               brush, new RectangleF() { X = iconX, Y = iconY, Width = (int)AntSize, Height = (int)AntSize });
+
+                    }
+                    TextRenderer.DrawText(e.Graphics, Text, MetroFonts.Button(metroButtonSize, metroButtonWeight),
+                  new Rectangle { X = textLeftPadding, Y = ClientRectangle.Y, Width = ClientRectangle.Width - textLeftPadding, Height = ClientRectangle.Height }
+
+                   , foreColor, MetroPaint.GetTextFormatFlags(TextAlign));
+                }
+
             }
             catch (Exception)
             {

@@ -31,6 +31,7 @@ namespace MetroFramework.Controls
     using System.ComponentModel;
     using System.Drawing;
     using System.Drawing.Drawing2D;
+    using System.Drawing.Text;
     using System.Windows.Forms;
 
     [Designer("MetroFramework.Design.Controls.AntButtonDesigner, " + AssemblyRef.MetroFrameworkDesignSN)]
@@ -610,6 +611,28 @@ namespace MetroFramework.Controls
             Invalidate();
         }
 
+        #endregion
+
+        #region Common Methods
+        public Font UseFileFont(float size)
+        {
+            PrivateFontCollection pfc = new PrivateFontCollection();
+            string appPath = @"D:\GitHub\MetroFramework\MetroFramework.Demo\bin\Debug\font\";
+            string fontFile = appPath + "iconfont.ttf";
+            pfc.AddFontFile(fontFile);
+            Font font = new Font(pfc.Families[0], size, FontStyle.Regular, GraphicsUnit.Point, 0);
+            return font;
+        }
+
+        public Font UseMemoryFont(float size)
+        {
+            System.Runtime.InteropServices.GCHandle hObject = System.Runtime.InteropServices.GCHandle.Alloc(Properties.Resources.iconfont, System.Runtime.InteropServices.GCHandleType.Pinned);
+            IntPtr intptr = hObject.AddrOfPinnedObject();
+            PrivateFontCollection fc = new PrivateFontCollection();
+            fc.AddMemoryFont(intptr, Properties.Resources.iconfont.Length);
+            Font font = new Font(fc.Families[0], size, FontStyle.Regular, GraphicsUnit.Point, 0);
+            return font;
+        }
         #endregion
     }
 }

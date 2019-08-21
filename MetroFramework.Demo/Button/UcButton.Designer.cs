@@ -28,11 +28,64 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.dangerButtonV22 = new MetroFramework.Controls.DangerButtonV2();
+            this.dangerButtonV21 = new MetroFramework.Controls.DangerButtonV2();
+            this.dashedButton1 = new MetroFramework.Controls.DashedButton();
+            this.defaultButton1 = new MetroFramework.Controls.DefaultButton();
             this.primaryButton4 = new MetroFramework.Controls.PrimaryButton();
             this.primaryButton3 = new MetroFramework.Controls.PrimaryButton();
             this.primaryButton2 = new MetroFramework.Controls.PrimaryButton();
             this.primaryButton1 = new MetroFramework.Controls.PrimaryButton();
             this.SuspendLayout();
+            // 
+            // dangerButtonV22
+            // 
+            this.dangerButtonV22.AntIcon = MetroFramework.Controls.AntButtonIcon.Delete;
+            this.dangerButtonV22.AntShape = MetroFramework.Controls.AntButtonShape.Circle;
+            this.dangerButtonV22.BackColor = System.Drawing.Color.Transparent;
+            this.dangerButtonV22.ForeColor = System.Drawing.Color.Transparent;
+            this.dangerButtonV22.Location = new System.Drawing.Point(427, 78);
+            this.dangerButtonV22.Name = "dangerButtonV22";
+            this.dangerButtonV22.Size = new System.Drawing.Size(143, 32);
+            this.dangerButtonV22.TabIndex = 7;
+            this.dangerButtonV22.Text = "dangerButtonV22";
+            this.dangerButtonV22.UseSelectable = true;
+            // 
+            // dangerButtonV21
+            // 
+            this.dangerButtonV21.BackColor = System.Drawing.Color.Transparent;
+            this.dangerButtonV21.ForeColor = System.Drawing.Color.Transparent;
+            this.dangerButtonV21.Location = new System.Drawing.Point(234, 135);
+            this.dangerButtonV21.Name = "dangerButtonV21";
+            this.dangerButtonV21.Size = new System.Drawing.Size(123, 32);
+            this.dangerButtonV21.TabIndex = 6;
+            this.dangerButtonV21.Text = "dangerButtonV21";
+            this.dangerButtonV21.UseSelectable = true;
+            // 
+            // dashedButton1
+            // 
+            this.dashedButton1.AntIcon = MetroFramework.Controls.AntButtonIcon.Save;
+            this.dashedButton1.BackColor = System.Drawing.Color.Transparent;
+            this.dashedButton1.ForeColor = System.Drawing.Color.Transparent;
+            this.dashedButton1.Location = new System.Drawing.Point(234, 78);
+            this.dashedButton1.Name = "dashedButton1";
+            this.dashedButton1.Size = new System.Drawing.Size(143, 32);
+            this.dashedButton1.TabIndex = 5;
+            this.dashedButton1.Text = "dashedButton1";
+            this.dashedButton1.UseSelectable = true;
+            // 
+            // defaultButton1
+            // 
+            this.defaultButton1.AntIcon = MetroFramework.Controls.AntButtonIcon.Delete;
+            this.defaultButton1.AntSize = MetroFramework.Controls.AntButtonSize.Large;
+            this.defaultButton1.BackColor = System.Drawing.Color.Transparent;
+            this.defaultButton1.ForeColor = System.Drawing.Color.Transparent;
+            this.defaultButton1.Location = new System.Drawing.Point(234, 20);
+            this.defaultButton1.Name = "defaultButton1";
+            this.defaultButton1.Size = new System.Drawing.Size(143, 40);
+            this.defaultButton1.TabIndex = 4;
+            this.defaultButton1.Text = "defaultButton1";
+            this.defaultButton1.UseSelectable = true;
             // 
             // primaryButton4
             // 
@@ -82,7 +135,7 @@
             this.primaryButton1.Name = "primaryButton1";
             this.primaryButton1.Size = new System.Drawing.Size(155, 40);
             this.primaryButton1.TabIndex = 0;
-            this.primaryButton1.Text = "删除";
+            this.primaryButton1.Text = "DELETE";
             this.primaryButton1.UseSelectable = true;
             // 
             // UcButton
@@ -91,6 +144,10 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.dangerButtonV22);
+            this.Controls.Add(this.dangerButtonV21);
+            this.Controls.Add(this.dashedButton1);
+            this.Controls.Add(this.defaultButton1);
             this.Controls.Add(this.primaryButton4);
             this.Controls.Add(this.primaryButton3);
             this.Controls.Add(this.primaryButton2);
@@ -106,6 +163,10 @@
         private Controls.PrimaryButton primaryButton2;
         private Controls.PrimaryButton primaryButton3;
         private Controls.PrimaryButton primaryButton4;
+        private Controls.DefaultButton defaultButton1;
+        private Controls.DashedButton dashedButton1;
+        private Controls.DangerButtonV2 dangerButtonV21;
+        private Controls.DangerButtonV2 dangerButtonV22;
 
         //private Controls.PrimaryButton primaryButton1;
 
