@@ -36,12 +36,13 @@
             // 
             // primaryButton4
             // 
-            this.primaryButton4.AntIcon = MetroFramework.Controls.AntButtonIcon.Save;
+            this.primaryButton4.AntIcon = MetroFramework.Controls.AntButtonIcon.Delete;
+            this.primaryButton4.AntSize = MetroFramework.Controls.AntButtonSize.Large;
             this.primaryButton4.BackColor = System.Drawing.Color.Transparent;
             this.primaryButton4.ForeColor = System.Drawing.Color.Transparent;
-            this.primaryButton4.Location = new System.Drawing.Point(259, 403);
+            this.primaryButton4.Location = new System.Drawing.Point(34, 78);
             this.primaryButton4.Name = "primaryButton4";
-            this.primaryButton4.Size = new System.Drawing.Size(180, 32);
+            this.primaryButton4.Size = new System.Drawing.Size(155, 40);
             this.primaryButton4.TabIndex = 3;
             this.primaryButton4.Text = "primaryButton4";
             this.primaryButton4.UseSelectable = true;
@@ -52,9 +53,9 @@
             this.primaryButton3.AntSize = MetroFramework.Controls.AntButtonSize.Small;
             this.primaryButton3.BackColor = System.Drawing.Color.Transparent;
             this.primaryButton3.ForeColor = System.Drawing.Color.Transparent;
-            this.primaryButton3.Location = new System.Drawing.Point(287, 636);
+            this.primaryButton3.Location = new System.Drawing.Point(34, 187);
             this.primaryButton3.Name = "primaryButton3";
-            this.primaryButton3.Size = new System.Drawing.Size(135, 24);
+            this.primaryButton3.Size = new System.Drawing.Size(155, 24);
             this.primaryButton3.TabIndex = 2;
             this.primaryButton3.Text = "primaryButton3";
             this.primaryButton3.UseSelectable = true;
@@ -64,9 +65,9 @@
             this.primaryButton2.AntIcon = MetroFramework.Controls.AntButtonIcon.Save;
             this.primaryButton2.BackColor = System.Drawing.Color.Transparent;
             this.primaryButton2.ForeColor = System.Drawing.Color.Transparent;
-            this.primaryButton2.Location = new System.Drawing.Point(287, 577);
+            this.primaryButton2.Location = new System.Drawing.Point(34, 135);
             this.primaryButton2.Name = "primaryButton2";
-            this.primaryButton2.Size = new System.Drawing.Size(152, 32);
+            this.primaryButton2.Size = new System.Drawing.Size(155, 32);
             this.primaryButton2.TabIndex = 1;
             this.primaryButton2.Text = "primaryButton2";
             this.primaryButton2.UseSelectable = true;
@@ -77,9 +78,9 @@
             this.primaryButton1.AntSize = MetroFramework.Controls.AntButtonSize.Large;
             this.primaryButton1.BackColor = System.Drawing.Color.Transparent;
             this.primaryButton1.ForeColor = System.Drawing.Color.Transparent;
-            this.primaryButton1.Location = new System.Drawing.Point(287, 494);
+            this.primaryButton1.Location = new System.Drawing.Point(34, 20);
             this.primaryButton1.Name = "primaryButton1";
-            this.primaryButton1.Size = new System.Drawing.Size(104, 40);
+            this.primaryButton1.Size = new System.Drawing.Size(155, 40);
             this.primaryButton1.TabIndex = 0;
             this.primaryButton1.Text = "删除";
             this.primaryButton1.UseSelectable = true;
