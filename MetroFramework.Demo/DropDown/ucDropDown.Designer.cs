@@ -28,8 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.antDropDown1 = new MetroFramework.Controls.AntDropDown();
             this.defaultButton1 = new MetroFramework.Controls.DefaultButton();
+            this.metroContextMenu1 = new MetroFramework.Controls.MetroContextMenu(this.components);
             this.SuspendLayout();
             // 
             // antDropDown1
@@ -54,6 +56,13 @@
             this.defaultButton1.Text = "defaultButton1";
             this.defaultButton1.UseSelectable = true;
             // 
+            // metroContextMenu1
+            // 
+            this.metroContextMenu1.IsHover = false;
+            this.metroContextMenu1.IsOpen = false;
+            this.metroContextMenu1.Name = "metroContextMenu1";
+            this.metroContextMenu1.Size = new System.Drawing.Size(61, 4);
+            // 
             // ucDropDown
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -70,5 +79,6 @@
         #endregion
         private Controls.AntDropDown antDropDown1;
         private Controls.DefaultButton defaultButton1;
+        private Controls.MetroContextMenu metroContextMenu1;
     }
 }

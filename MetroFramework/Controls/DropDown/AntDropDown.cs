@@ -8,20 +8,16 @@ namespace MetroFramework.Controls
 
     public class AntDropDown : DefaultButton
     {
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
         private ToolStripMenuItem toolStripMenuItem2;
-        private MetroContextMenu metroContextMenu1;
+        private AntDropDownMenu metroContextMenu1;
 
-        public event EventHandler SendMsgEvent;
-        public event EventHandler SendMsgEvent2;
+        
 
         public AntDropDown()
         {
-            this.components = new System.ComponentModel.Container();
-            this.metroContextMenu1 = new MetroContextMenu(components);
-
-            SendMsgEvent += metroContextMenu1.OnMouseEnter;
-            SendMsgEvent2 += metroContextMenu1.OnOpen;
+            this.components = new Container();
+            this.metroContextMenu1 = new AntDropDownMenu(components);
 
             this.toolStripMenuItem2 = new ToolStripMenuItem();
             this.metroContextMenu1.SuspendLayout();
