@@ -526,7 +526,7 @@ namespace MetroFramework.Controls
             isHovered = false;
             isPressed = false;
             Invalidate();
-
+            base.OnLostFocus(e);
             base.OnLeave(e);
         }
 

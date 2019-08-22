@@ -161,6 +161,45 @@ namespace MetroFramework.Controls
             this.Renderer = new MetroCTXRenderer(Theme, Style);     
         }
 
+        public bool IsHover { get; set; }
+
+        protected override void OnMouseEnter( EventArgs e)
+        {
+            IsHover = true;
+            Invalidate();
+            base.OnMouseEnter(e);
+        }
+
+        public new void OnMouseEnter(object sender, EventArgs e)
+        {
+            //this.Items[0].Select();
+            //if (IsHover)
+            //{
+            //    this.Items[0].Select();
+            //    Invalidate();
+            //}
+            //else
+            //{
+            //    this.Hide();
+            //}
+           
+        }
+
+        public bool IsOpen { get; set; }
+        public new void OnOpen(object sender, EventArgs e)
+        {
+            IsOpen = true;
+        }
+
+        protected override void OnMouseLeave(EventArgs e)
+        {
+            IsHover = false;
+            Invalidate();
+            this.Hide();
+            //IsOpen = false;
+            base.OnMouseLeave(e);
+        }
+
         private class MetroCTXRenderer : ToolStripProfessionalRenderer
         {
             public MetroCTXRenderer(MetroFramework.MetroThemeStyle Theme, MetroColorStyle Style) : base(new contextcolors(Theme, Style)) { }

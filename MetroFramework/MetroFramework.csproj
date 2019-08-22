@@ -112,6 +112,9 @@
     </Compile>
     <Compile Include="Controls\Button\Enum\AntButtonSytle.cs" />
     <Compile Include="Controls\Button\Enum\AntButtonSize.cs" />
+    <Compile Include="Controls\DropDown\AntDropDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\ICanManageStatusColor.cs" />
     <Compile Include="Controls\Button\PrimaryButton.cs">
       <SubType>Component</SubType>
@@ -281,6 +284,7 @@
   <ItemGroup>
     <Content Include="FontAwesomeNet.dll" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
