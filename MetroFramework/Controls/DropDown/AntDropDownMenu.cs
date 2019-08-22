@@ -160,9 +160,17 @@ namespace MetroFramework.Controls
             //FlatAppearance.MouseDownBackColor = Color.Transparent;
             //FlatAppearance.MouseOverBackColor = Color.Transparent;
             //border=
+
+            Margin = new Padding(0, 0, 0, 0);
+            Padding = new Padding(0, 0, 0, 0);
             BackColor = Color.Transparent;
             ForeColor = Color.Transparent;
+            ShowCheckMargin = false;
+            ShowImageMargin = false;
+            UseCustomBackColor = false;
+            UseCustomForeColor = false;
             //DropShadowEnabled = false;
+            settheme();
         }
 
         private void settheme()
@@ -185,7 +193,7 @@ namespace MetroFramework.Controls
         {
             try
             {
-                //base.OnPaint(e);
+                base.OnPaint(e);
                 if (GetStyle(ControlStyles.AllPaintingInWmPaint))
                 {
                     OnPaintBackground(e);
@@ -203,9 +211,9 @@ namespace MetroFramework.Controls
         {
             try
             {
-                using (Brush brush = new SolidBrush(Color.FromArgb(247, 247, 247)))
+                using (Brush brush = new SolidBrush(Color.Transparent))
                 {
-                    var rec = BaseAntButton.DrawRoundRect(0, 0, 50, Height - 1, 0);
+                    var rec = BaseAntButton.DrawRoundRect(0, 0, Width-11, Height - 1, 5);
                     e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
                     e.Graphics.FillPath(brush, rec);
                 }
@@ -216,7 +224,7 @@ namespace MetroFramework.Controls
             }
         }
 
-       
+
 
 
         protected override void OnMouseLeave(EventArgs e)

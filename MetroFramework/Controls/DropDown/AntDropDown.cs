@@ -9,43 +9,44 @@ namespace MetroFramework.Controls
     public class AntDropDown : DefaultButton
     {
         private IContainer components = null;
-        private ToolStripMenuItem toolStripMenuItem2;
-        private AntDropDownMenu metroContextMenu1;
+        private ToolStripMenuItem Item2;
+        private MetroContextMenu Menu1;
 
         
 
         public AntDropDown()
         {
             this.components = new Container();
-            this.metroContextMenu1 = new AntDropDownMenu(components);
+            this.Menu1 = new MetroContextMenu(components);
 
-            this.toolStripMenuItem2 = new ToolStripMenuItem();
-            this.metroContextMenu1.SuspendLayout();
+            this.Item2 = new ToolStripMenuItem();
+            this.Menu1.SuspendLayout();
             this.SuspendLayout();
 
-            this.metroContextMenu1.Items.AddRange(new ToolStripItem[] {
-            this.toolStripMenuItem2});
-            this.metroContextMenu1.Name = "metroContextMenu1";
-            this.metroContextMenu1.Size = new Size(84, 70);
+            this.Menu1.Items.AddRange(new ToolStripItem[] {
+            this.Item2});
+            this.Menu1.Name = "metroContextMenu1";
+            this.Menu1.Size = new Size(300, 70);
 
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new Size(83, 22);
-            this.toolStripMenuItem2.Text = "1";
-
-            this.metroContextMenu1.ResumeLayout(false);
+            this.Item2.Name = "toolStripMenuItem2";
+            Item2.AutoSize = false;
+            this.Item2.Size = new Size(300, 22);
+            this.Item2.Text = "1234";
+            Menu1.StyleManager = this.StyleManager;
+            this.Menu1.ResumeLayout(false);
             this.ResumeLayout(false);
         }
 
         protected override void OnEnter(EventArgs e)
         {
-            metroContextMenu1.Show(this, new Point(0, this.Height));
+            Menu1.Show(this, new Point(0, this.Height));
             Invalidate();
             base.OnEnter(e);
         }
 
         protected override void OnMouseEnter(EventArgs e)
         {
-            metroContextMenu1.Show(this, new Point(0, this.Height));
+            Menu1.Show(this, new Point(0, this.Height));
             Invalidate();
             base.OnMouseEnter(e);
         }
@@ -57,9 +58,9 @@ namespace MetroFramework.Controls
         }
         void bw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            if (!toolStripMenuItem2.Selected)
+            if (!Item2.Selected)
             {
-                metroContextMenu1.Hide();
+                Menu1.Hide();
             }
         }
 

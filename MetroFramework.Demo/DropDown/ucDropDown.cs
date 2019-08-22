@@ -15,5 +15,9 @@ namespace MetroFramework.Demo.DropDown
             InitializeComponent();
         }
 
+        private void DefaultButton1_Click(object sender, EventArgs e)
+        {
+            metroContextMenu1.Show(defaultButton1, new Point(0,defaultButton1.Height));
+        }
     }
 }

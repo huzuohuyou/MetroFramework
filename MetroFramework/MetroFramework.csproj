@@ -118,6 +118,9 @@
     <Compile Include="Controls\DropDown\AntDropDownMenu.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\DropDown\AntMenuItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\ICanManageStatusColor.cs" />
     <Compile Include="Controls\Button\PrimaryButton.cs">
       <SubType>Component</SubType>

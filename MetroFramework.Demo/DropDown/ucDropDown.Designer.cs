@@ -32,6 +32,10 @@
             this.antDropDown1 = new MetroFramework.Controls.AntDropDown();
             this.defaultButton1 = new MetroFramework.Controls.DefaultButton();
             this.metroContextMenu1 = new MetroFramework.Controls.MetroContextMenu(this.components);
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.metroContextMenu1.SuspendLayout();
             this.SuspendLayout();
             // 
             // antDropDown1
@@ -49,19 +53,42 @@
             // 
             this.defaultButton1.BackColor = System.Drawing.Color.Transparent;
             this.defaultButton1.ForeColor = System.Drawing.Color.Transparent;
-            this.defaultButton1.Location = new System.Drawing.Point(317, 153);
+            this.defaultButton1.Location = new System.Drawing.Point(350, 145);
             this.defaultButton1.Name = "defaultButton1";
-            this.defaultButton1.Size = new System.Drawing.Size(75, 32);
+            this.defaultButton1.Size = new System.Drawing.Size(144, 32);
             this.defaultButton1.TabIndex = 4;
             this.defaultButton1.Text = "defaultButton1";
             this.defaultButton1.UseSelectable = true;
+            this.defaultButton1.Click += new System.EventHandler(this.DefaultButton1_Click);
             // 
             // metroContextMenu1
             // 
             this.metroContextMenu1.IsHover = false;
             this.metroContextMenu1.IsOpen = false;
+            this.metroContextMenu1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1,
+            this.toolStripMenuItem2,
+            this.toolStripMenuItem3});
             this.metroContextMenu1.Name = "metroContextMenu1";
-            this.metroContextMenu1.Size = new System.Drawing.Size(61, 4);
+            this.metroContextMenu1.Size = new System.Drawing.Size(193, 70);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(192, 22);
+            this.toolStripMenuItem1.Text = "toolStripMenuItem1";
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(192, 22);
+            this.toolStripMenuItem2.Text = "toolStripMenuItem2";
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(192, 22);
+            this.toolStripMenuItem3.Text = "toolStripMenuItem3";
             // 
             // ucDropDown
             // 
@@ -72,6 +99,7 @@
             this.Controls.Add(this.antDropDown1);
             this.Name = "ucDropDown";
             this.Size = new System.Drawing.Size(621, 493);
+            this.metroContextMenu1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -80,5 +108,8 @@
         private Controls.AntDropDown antDropDown1;
         private Controls.DefaultButton defaultButton1;
         private Controls.MetroContextMenu metroContextMenu1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
     }
 }

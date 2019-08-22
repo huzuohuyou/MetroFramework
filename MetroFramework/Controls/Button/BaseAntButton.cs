@@ -55,6 +55,18 @@ namespace MetroFramework.Controls
             return gp;
         }
 
+        //public static GraphicsPath DrawRoundRect(GraphicsPath gp,int x, int y, int width, int height, int radius)
+        //{
+        //    //四边圆角
+        //    GraphicsPath gp = new GraphicsPath();
+        //    gp.AddArc(x, y, radius, radius, 180, 90);
+        //    gp.AddArc(width - radius, y, radius, radius, 270, 90);
+        //    gp.AddArc(width - radius, height - radius, radius, radius, 0, 90);
+        //    gp.AddArc(x, height - radius, radius, radius, 90, 90);
+        //    gp.CloseAllFigures();
+        //    return gp;
+        //}
+
         public static GraphicsPath CreateRoundedRectanglePath(Rectangle rect, int cornerRadius)
         {
             GraphicsPath roundedRect = new GraphicsPath();
