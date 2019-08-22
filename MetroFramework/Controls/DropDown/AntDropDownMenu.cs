@@ -103,7 +103,8 @@ namespace MetroFramework.Controls
         public MetroStyleManager StyleManager
         {
             get { return metroStyleManager; }
-            set { 
+            set
+            {
                 metroStyleManager = value;
                 settheme();
             }
@@ -154,6 +155,7 @@ namespace MetroFramework.Controls
             {
                 Container.Add(this);
             }
+            this.DropShadowEnabled = true;
             //FlatStyle = FlatStyle.Flat;
             //FlatAppearance.BorderSize = 0;
             //FlatAppearance.BorderColor = Color.FromArgb(0, 0, 0, 0);
@@ -161,68 +163,68 @@ namespace MetroFramework.Controls
             //FlatAppearance.MouseOverBackColor = Color.Transparent;
             //border=
 
-            Margin = new Padding(0, 0, 0, 0);
-            Padding = new Padding(0, 0, 0, 0);
-            BackColor = Color.Transparent;
-            ForeColor = Color.Transparent;
-            ShowCheckMargin = false;
-            ShowImageMargin = false;
-            UseCustomBackColor = false;
-            UseCustomForeColor = false;
-            //DropShadowEnabled = false;
-            settheme();
+            //Margin = new Padding(0, 0, 0, 0);
+            //Padding = new Padding(0, 0, 0, 0);
+            //BackColor = Color.Transparent;
+            //ForeColor = Color.Transparent;
+            //ShowCheckMargin = false;
+            //ShowImageMargin = false;
+            //UseCustomBackColor = false;
+            //UseCustomForeColor = false;
+            ////DropShadowEnabled = false;
+            //settheme();
         }
 
         private void settheme()
         {
             this.BackColor = MetroPaint.BackColor.Form(Theme);
-            this.ForeColor = MetroPaint.ForeColor.Button.Normal(Theme);            
-            this.Renderer = new MetroCTXRenderer(Theme, Style);     
+            this.ForeColor = MetroPaint.ForeColor.Button.Normal(Theme);
+            this.Renderer = new MetroCTXRenderer(Theme, Style);
         }
 
         public bool IsHover { get; set; }
 
-        protected override void OnMouseEnter( EventArgs e)
+        protected override void OnMouseEnter(EventArgs e)
         {
             IsHover = true;
             Invalidate();
             base.OnMouseEnter(e);
         }
 
-        protected override void OnPaint(PaintEventArgs e)
-        {
-            try
-            {
-                base.OnPaint(e);
-                if (GetStyle(ControlStyles.AllPaintingInWmPaint))
-                {
-                    OnPaintBackground(e);
-                }
-                //OnPaintForeground(e);
-            }
-            catch
-            {
-                Invalidate();
-            }
+        //protected override void OnPaint(PaintEventArgs e)
+        //{
+        //    try
+        //    {
+        //        base.OnPaint(e);
+        //        if (GetStyle(ControlStyles.AllPaintingInWmPaint))
+        //        {
+        //            OnPaintBackground(e);
+        //        }
+        //        //OnPaintForeground(e);
+        //    }
+        //    catch
+        //    {
+        //        Invalidate();
+        //    }
 
-        }
+        //}
 
-        protected override void OnPaintBackground(PaintEventArgs e)
-        {
-            try
-            {
-                using (Brush brush = new SolidBrush(Color.Transparent))
-                {
-                    var rec = BaseAntButton.DrawRoundRect(0, 0, Width-11, Height - 1, 5);
-                    e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                    e.Graphics.FillPath(brush, rec);
-                }
-            }
-            catch
-            {
-                Invalidate();
-            }
-        }
+        //protected override void OnPaintBackground(PaintEventArgs e)
+        //{
+        //    try
+        //    {
+        //        using (Brush brush = new SolidBrush(Color.Transparent))
+        //        {
+        //            var rec = BaseAntButton.DrawRoundRect(0, 0, Width - 11, Height - 1, 5);
+        //            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+        //            e.Graphics.FillPath(brush, rec);
+        //        }
+        //    }
+        //    catch
+        //    {
+        //        Invalidate();
+        //    }
+        //}
 
 
 
@@ -238,6 +240,94 @@ namespace MetroFramework.Controls
         private class MetroCTXRenderer : ToolStripProfessionalRenderer
         {
             public MetroCTXRenderer(MetroFramework.MetroThemeStyle Theme, MetroColorStyle Style) : base(new contextcolors(Theme, Style)) { }
+
+            protected override void OnRenderToolStripBackground(
+            ToolStripRenderEventArgs e)
+            {
+                base.OnRenderToolStripBackground(e);
+                using (SolidBrush brush = new SolidBrush(Color.Red))
+                {
+                    var rec = BaseAntButton.DrawRoundRect(0, 0, e.AffectedBounds.Width, e.AffectedBounds.Height, 15);
+                    e.Graphics.SmoothingMode = SmoothingMode.HighQuality;
+                    e.Graphics.FillPath(brush, rec);
+                    //g.FillRectangle(brush, bounds);
+                }
+            }
+
+            protected override void OnRenderToolStripBorder(ToolStripRenderEventArgs e)
+            {
+                ///不调用该方法
+                //base.OnRenderToolStripBorder(e);
+            }
+            protected override void OnRenderArrow(ToolStripArrowRenderEventArgs e)
+            {
+                e.ArrowColor = Color.Green;
+                base.OnRenderArrow(e);
+            }
+
+            public static GraphicsPath GetRoundedRectPath(Rectangle rect, int radius)
+            {
+                int diameter = radius;
+                Rectangle arcRect = new Rectangle(rect.Location, new Size(diameter, diameter));
+                GraphicsPath path = new GraphicsPath();
+                path.AddArc(arcRect, 180, 90);
+                arcRect.X = rect.Right - diameter;
+                path.AddArc(arcRect, 270, 90);
+                arcRect.Y = rect.Bottom - diameter;
+                path.AddArc(arcRect, 0, 90);
+                arcRect.X = rect.Left;
+                path.AddArc(arcRect, 90, 90);
+                path.CloseFigure();
+                return path;
+            }
+            protected override void OnRenderMenuItemBackground(ToolStripItemRenderEventArgs e)
+            {
+                Graphics g = e.Graphics;
+                ToolStripItem item = e.Item;
+                ToolStrip toolstrip = e.ToolStrip;
+                //渲染顶级项
+                if (toolstrip is MenuStrip)
+                {
+                    SolidBrush lgbrush = new SolidBrush(Color.FromArgb(100, Color.White));
+                    SolidBrush brush = new SolidBrush(Color.FromArgb(255, Color.White));
+                    if (e.Item.Selected)
+                    {
+                        GraphicsPath gp = GetRoundedRectPath(new Rectangle(new Point(0, 0), item.Size), 5);
+                        g.FillPath(lgbrush, gp);
+                    }
+                    if (item.Pressed)
+                    {
+                        g.FillRectangle(Brushes.White, new Rectangle(Point.Empty, item.Size));
+                    }
+                }
+                else if (toolstrip is ToolStripDropDown)
+                {
+                    g.SmoothingMode = SmoothingMode.HighQuality;
+                    SolidBrush lgbrush = new SolidBrush(Color.FromArgb(100, Color.White));
+                    if (item.Selected)
+                    {
+                        GraphicsPath gp = GetRoundedRectPath(new Rectangle(0, 0, item.Width, item.Height), 10);
+                        g.FillPath(lgbrush, gp);
+                    }
+                }
+                else
+                {
+                    base.OnRenderMenuItemBackground(e);
+                }
+            }
+
+            protected override void OnRenderSeparator(ToolStripSeparatorRenderEventArgs e)
+            {
+                Graphics g = e.Graphics;
+                LinearGradientBrush lgbrush = new LinearGradientBrush(new Point(0, 0), new Point(e.Item.Width, 0), Color.AntiqueWhite, Color.FromArgb(0, Color.AntiqueWhite));
+                g.FillRectangle(lgbrush, new Rectangle(3, e.Item.Height / 2, e.Item.Width, 1));
+            }
+
+            protected override void OnRenderImageMargin(ToolStripRenderEventArgs e)
+            {
+                //base.OnRenderImageMargin(e);
+            }
+
         }
 
         private class contextcolors : ProfessionalColorTable
@@ -253,7 +343,7 @@ namespace MetroFramework.Controls
 
             public override Color MenuItemSelected
             {
-                get { return MetroPaint.GetStyleColor(_style); }
+                get { return Color.FromArgb(230, 247, 255); }
             }
 
             public override Color MenuBorder
@@ -263,7 +353,7 @@ namespace MetroFramework.Controls
 
             public override Color MenuItemBorder
             {
-                get { return MetroPaint.GetStyleColor(_style); }
+                get { return Color.FromArgb(230, 247, 255); }
             }
 
             public override Color ImageMarginGradientBegin
@@ -280,6 +370,8 @@ namespace MetroFramework.Controls
             {
                 get { return MetroPaint.BackColor.Form(_theme); }
             }
+
+
         }
     }
 }

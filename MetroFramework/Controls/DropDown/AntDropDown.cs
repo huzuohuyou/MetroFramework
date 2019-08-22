@@ -10,28 +10,35 @@ namespace MetroFramework.Controls
     {
         private IContainer components = null;
         private ToolStripMenuItem Item2;
-        private MetroContextMenu Menu1;
+        private ToolStripMenuItem Item3;
+        private ToolStripMenuItem Item4;
+        private AntDropDownMenu Menu1;
 
         
 
         public AntDropDown()
         {
             this.components = new Container();
-            this.Menu1 = new MetroContextMenu(components);
+            this.Menu1 = new AntDropDownMenu(components);
 
             this.Item2 = new ToolStripMenuItem();
+            this.Item3 = new ToolStripMenuItem();
+            this.Item4 = new ToolStripMenuItem();
             this.Menu1.SuspendLayout();
             this.SuspendLayout();
 
             this.Menu1.Items.AddRange(new ToolStripItem[] {
-            this.Item2});
+            this.Item2,this.Item3,this.Item4});
             this.Menu1.Name = "metroContextMenu1";
             this.Menu1.Size = new Size(300, 70);
 
             this.Item2.Name = "toolStripMenuItem2";
-            Item2.AutoSize = false;
-            this.Item2.Size = new Size(300, 22);
             this.Item2.Text = "1234";
+            this.Item3.Name = "toolStripMenuItem2";
+            this.Item3.Text = "1234";
+            this.Item4.Name = "toolStripMenuItem2";
+            this.Item4.Text = "1234";
+
             Menu1.StyleManager = this.StyleManager;
             this.Menu1.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -39,7 +46,7 @@ namespace MetroFramework.Controls
 
         protected override void OnEnter(EventArgs e)
         {
-            Menu1.Show(this, new Point(0, this.Height));
+            Menu1.Show(this, new Point(10, this.Height+4));
             Invalidate();
             base.OnEnter(e);
         }
