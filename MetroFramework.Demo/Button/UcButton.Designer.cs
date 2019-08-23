@@ -36,6 +36,7 @@
             this.primaryButton3 = new MetroFramework.Controls.PrimaryButton();
             this.primaryButton2 = new MetroFramework.Controls.PrimaryButton();
             this.primaryButton1 = new MetroFramework.Controls.PrimaryButton();
+            this.dropDownButton1 = new MetroFramework.Controls.DropDownButton();
             this.SuspendLayout();
             // 
             // dangerButtonV22
@@ -138,12 +139,24 @@
             this.primaryButton1.Text = "DELETE";
             this.primaryButton1.UseSelectable = true;
             // 
+            // dropDownButton1
+            // 
+            this.dropDownButton1.BackColor = System.Drawing.Color.Transparent;
+            this.dropDownButton1.ForeColor = System.Drawing.Color.Transparent;
+            this.dropDownButton1.Location = new System.Drawing.Point(34, 243);
+            this.dropDownButton1.Name = "dropDownButton1";
+            this.dropDownButton1.Size = new System.Drawing.Size(155, 32);
+            this.dropDownButton1.TabIndex = 8;
+            this.dropDownButton1.Text = "dropDownButton1";
+            this.dropDownButton1.UseSelectable = true;
+            // 
             // UcButton
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.dropDownButton1);
             this.Controls.Add(this.dangerButtonV22);
             this.Controls.Add(this.dangerButtonV21);
             this.Controls.Add(this.dashedButton1);
@@ -167,6 +180,7 @@
         private Controls.DashedButton dashedButton1;
         private Controls.DangerButton dangerButtonV21;
         private Controls.DangerButton dangerButtonV22;
+        private Controls.DropDownButton dropDownButton1;
 
         //private Controls.PrimaryButton primaryButton1;
 

@@ -95,9 +95,6 @@
     <Compile Include="Controls\Button\DashedButton.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\Button\DropdownButton.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Controls\Button\DefaultButton.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -112,10 +109,10 @@
     </Compile>
     <Compile Include="Controls\Button\Enum\AntButtonSytle.cs" />
     <Compile Include="Controls\Button\Enum\AntButtonSize.cs" />
-    <Compile Include="Controls\DropDown\AntDropDown.cs">
+    <Compile Include="Controls\Button\DropDownButton.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\DropDown\AntDropDownMenu.cs">
+    <Compile Include="Controls\Button\AntDropDownMenu.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\DropDown\AntMenuItem.cs">

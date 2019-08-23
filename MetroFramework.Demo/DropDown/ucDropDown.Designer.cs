@@ -29,31 +29,20 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.antDropDown1 = new MetroFramework.Controls.AntDropDown();
             this.defaultButton1 = new MetroFramework.Controls.DefaultButton();
             this.metroContextMenu1 = new MetroFramework.Controls.MetroContextMenu(this.components);
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.dropDownButton1 = new MetroFramework.Controls.DropDownButton();
             this.metroContextMenu1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // antDropDown1
-            // 
-            this.antDropDown1.BackColor = System.Drawing.Color.Transparent;
-            this.antDropDown1.ForeColor = System.Drawing.Color.Transparent;
-            this.antDropDown1.Location = new System.Drawing.Point(47, 145);
-            this.antDropDown1.Name = "antDropDown1";
-            this.antDropDown1.Size = new System.Drawing.Size(144, 32);
-            this.antDropDown1.TabIndex = 3;
-            this.antDropDown1.Text = "antDropDown1";
-            this.antDropDown1.UseSelectable = true;
             // 
             // defaultButton1
             // 
             this.defaultButton1.BackColor = System.Drawing.Color.Transparent;
             this.defaultButton1.ForeColor = System.Drawing.Color.Transparent;
-            this.defaultButton1.Location = new System.Drawing.Point(350, 145);
+            this.defaultButton1.Location = new System.Drawing.Point(281, 52);
             this.defaultButton1.Name = "defaultButton1";
             this.defaultButton1.Size = new System.Drawing.Size(144, 32);
             this.defaultButton1.TabIndex = 4;
@@ -90,13 +79,26 @@
             this.toolStripMenuItem3.Size = new System.Drawing.Size(192, 22);
             this.toolStripMenuItem3.Text = "toolStripMenuItem3";
             // 
+            // dropDownButton1
+            // 
+            this.dropDownButton1.AntShape = MetroFramework.Controls.AntButtonShape.Circle;
+            this.dropDownButton1.AntSize = MetroFramework.Controls.AntButtonSize.Large;
+            this.dropDownButton1.BackColor = System.Drawing.Color.Transparent;
+            this.dropDownButton1.ForeColor = System.Drawing.Color.Transparent;
+            this.dropDownButton1.Location = new System.Drawing.Point(58, 44);
+            this.dropDownButton1.Name = "dropDownButton1";
+            this.dropDownButton1.Size = new System.Drawing.Size(161, 40);
+            this.dropDownButton1.TabIndex = 6;
+            this.dropDownButton1.Text = "dropDownButton1";
+            this.dropDownButton1.UseSelectable = true;
+            // 
             // ucDropDown
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.dropDownButton1);
             this.Controls.Add(this.defaultButton1);
-            this.Controls.Add(this.antDropDown1);
             this.Name = "ucDropDown";
             this.Size = new System.Drawing.Size(621, 493);
             this.metroContextMenu1.ResumeLayout(false);
@@ -105,11 +107,11 @@
         }
 
         #endregion
-        private Controls.AntDropDown antDropDown1;
         private Controls.DefaultButton defaultButton1;
         private Controls.MetroContextMenu metroContextMenu1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
+        private Controls.DropDownButton dropDownButton1;
     }
 }
