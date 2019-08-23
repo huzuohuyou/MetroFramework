@@ -24,6 +24,14 @@ namespace MetroFramework.Controls
             this.Item2 = new ToolStripMenuItem();
             this.Item3 = new ToolStripMenuItem();
             this.Item4 = new ToolStripMenuItem();
+
+            Item2.DropDown.AutoSize = false;
+            Item2.DropDown.Size = new Size(50, Item2.DropDown.Height);
+            Item3.DropDown.AutoSize = false;
+            Item3.DropDown.Size = new Size(50, Item3.DropDown.Height);
+            Item4.DropDown.AutoSize = false;
+            Item4.DropDown.Size = new Size(50, Item4.DropDown.Height);
+
             this.Menu1.SuspendLayout();
             this.SuspendLayout();
 
