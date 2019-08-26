@@ -38,14 +38,14 @@ namespace MetroFramework.Controls
             this.Menu1.Items.AddRange(new ToolStripItem[] {
             this.Item2,this.Item3,this.Item4});
             this.Menu1.Name = "metroContextMenu1";
-            this.Menu1.Size = new Size(300, 70);
+            this.Menu1.Size = new Size(150, 170);
 
             this.Item2.Name = "toolStripMenuItem2";
             this.Item2.Text = "1234";
             this.Item3.Name = "toolStripMenuItem2";
-            this.Item3.Text = "1234";
+            this.Item3.Text = "456";
             this.Item4.Name = "toolStripMenuItem2";
-            this.Item4.Text = "1234";
+            this.Item4.Text = "789";
 
             Menu1.StyleManager = this.StyleManager;
             this.Menu1.ResumeLayout(false);
