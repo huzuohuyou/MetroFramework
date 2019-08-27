@@ -61,7 +61,7 @@ namespace MetroFramework.Controls
 
         protected override void OnMouseEnter(EventArgs e)
         {
-            Menu1.Show(this, new Point(0, this.Height));
+            Menu1.Show(this, new Point(0, this.Height+3));
             Invalidate();
             base.OnMouseEnter(e);
         }

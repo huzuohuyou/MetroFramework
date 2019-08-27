@@ -172,28 +172,18 @@ namespace MetroFramework.Controls
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
-            //Bitmap bitmap = new Bitmap(Width - 20, Height - 20);
-            ////Rectangle _BacklightLTRB = new Rectangle(20, 20, 20, 20);//窗体光泽重绘边界
-            //Graphics g = Graphics.FromImage(bitmap);
-            //g.SmoothingMode = SmoothingMode.HighQuality; //高质量
-            //g.PixelOffsetMode = PixelOffsetMode.HighQuality; //高像素偏移质量
-            //                                                 //ImageDrawRect.DrawRect(g, Resources.main_light_bkg_top123, toolStrip.ClientRectangle, Rectangle.FromLTRB(_BacklightLTRB.X, _BacklightLTRB.Y, _BacklightLTRB.Width, _BacklightLTRB.Height), 1, 1);
-
-            //if (!Bitmap.IsCanonicalPixelFormat(bitmap.PixelFormat) || !Bitmap.IsAlphaPixelFormat(bitmap.PixelFormat))
-            //    throw new ApplicationException("图片必须是32位带Alhpa通道的图片。");
-
-            //g.DrawImage(bitmap, new PointF { X = Left, Y = Top });
-
-            var left = new Rectangle(new Point(0, 0), new Size { Width = 2, Height = Height });
-
-            using (LinearGradientBrush linearGradientBrush = new LinearGradientBrush(
-                        new Rectangle(new Point(2, 0), new Size { Width = 13, Height =Height }),
-                        Color.White, Color.FromArgb(255, 130, 130, 130), LinearGradientMode.Horizontal))
-            {
-                e.Graphics.SmoothingMode = SmoothingMode.HighQuality;
-                e.Graphics.FillRectangle(linearGradientBrush, left);
-            }
-
+            Bitmap bitmap = new Bitmap(Width + 5, Height + 5);
+            Rectangle _BacklightLTRB = new Rectangle(20, 20, 20, 20);//窗体光泽重绘边界
+            e.Graphics.SmoothingMode = SmoothingMode.HighQuality; //高质量
+            e.Graphics.PixelOffsetMode = PixelOffsetMode.HighQuality; //高像素偏移质量
+            ImageDrawRect.DrawRect(e.Graphics, Resources.main_light_bkg_top123,
+               new Rectangle {
+                   X = ClientRectangle.X,
+                   Y = ClientRectangle.Y - 2,
+                   Width= ClientRectangle.Width,
+                   Height= ClientRectangle.Height
+               } 
+                , Rectangle.FromLTRB(_BacklightLTRB.X, _BacklightLTRB.Y, _BacklightLTRB.Width, _BacklightLTRB.Height), 1, 1);
         }
 
         private void settheme()
@@ -222,99 +212,16 @@ namespace MetroFramework.Controls
 
         private class MetroCTXRenderer : ToolStripProfessionalRenderer
         {
-
-
             public MetroCTXRenderer(MetroFramework.MetroThemeStyle Theme, MetroColorStyle Style) : base(new contextcolors(Theme, Style)) { }
-
-            //protected override void OnRenderToolStripBackground(ToolStripRenderEventArgs e)
-            //{
-            //    ToolStrip toolStrip = e.ToolStrip;
-            //    //Graphics g = e.Graphics;
-            //    //g.SmoothingMode = SmoothingMode.HighQuality;//抗锯齿
-            //    //Rectangle bounds = e.AffectedBounds;
-            //    //SolidBrush lgbrush = new SolidBrush(Color.FromArgb(0, 250, 250));
-
-            //    //绘制绘图层背景
-            //    Bitmap bitmap = new Bitmap(toolStrip.Width - 20, toolStrip.Height - 20);
-            //    //Rectangle _BacklightLTRB = new Rectangle(20, 20, 20, 20);//窗体光泽重绘边界
-            //    Graphics g = Graphics.FromImage(bitmap);
-            //    g.SmoothingMode = SmoothingMode.HighQuality; //高质量
-            //    g.PixelOffsetMode = PixelOffsetMode.HighQuality; //高像素偏移质量
-            //    //ImageDrawRect.DrawRect(g, Resources.main_light_bkg_top123, toolStrip.ClientRectangle, Rectangle.FromLTRB(_BacklightLTRB.X, _BacklightLTRB.Y, _BacklightLTRB.Width, _BacklightLTRB.Height), 1, 1);
-
-            //    if (!Bitmap.IsCanonicalPixelFormat(bitmap.PixelFormat) || !Bitmap.IsAlphaPixelFormat(bitmap.PixelFormat))
-            //        throw new ApplicationException("图片必须是32位带Alhpa通道的图片。");
-
-            //    g.DrawImage(bitmap,new PointF { X= toolStrip.Left,Y= toolStrip.Top});
-
-            //    //if (toolStrip is MenuStrip)
-            //    //{
-            //    //    //由menuStrip的Paint方法定义 这里不做操作
-            //    //}
-            //    //else if (toolStrip is ToolStripDropDown)
-            //    //{
-            //    //    //Color.FromArgb(255, 130, 130, 130)
-            //    //    var left = new Rectangle(new Point(0, 0), new Size { Width = 5, Height = toolStrip.Size.Height });
-
-            //    //    using (LinearGradientBrush linearGradientBrush = new LinearGradientBrush(
-            //    //        new Rectangle(new Point(2, 0), new Size { Width = 13, Height = toolStrip.Size.Height }),
-            //    //        Color.White, Color.FromArgb(255, 130, 130, 130), LinearGradientMode.Horizontal))
-            //    //    {
-            //    //        e.Graphics.SmoothingMode = SmoothingMode.HighQuality;
-            //    //        e.Graphics.FillRectangle(linearGradientBrush, left);
-            //    //    }
-
-            //    //    var left1 = new Rectangle(new Point(0, 0), new Size { Width = 2, Height = toolStrip.Size.Height });
-
-            //    //    using (LinearGradientBrush linearGradientBrush = new LinearGradientBrush(
-            //    //       new Rectangle(new Point(-2, 0), new Size { Width = 5, Height = toolStrip.Size.Height }),
-            //    //       Color.White, Color.Black, LinearGradientMode.Horizontal))
-            //    //    {
-            //    //        e.Graphics.SmoothingMode = SmoothingMode.HighQuality;
-            //    //        e.Graphics.FillRectangle(linearGradientBrush, left1);
-            //    //    }
-
-            //    //    //var path= GetRoundedRectPath(new Rectangle(new Point(0, 0), toolStrip.Size), 5);
-            //    //    //e.Graphics.SmoothingMode = SmoothingMode.HighQuality;
-            //    //    //g.FillPath(lgbrush, path);
-            //    //}
-            //    //else
-            //    //{
-            //    //    base.OnRenderToolStripBackground(e);
-
-            //    //}
-
-            //}
-
-
 
             protected override void OnRenderToolStripBorder(ToolStripRenderEventArgs e)
             {
-                //ControlPaint.DrawBorder(
-                //e.Graphics,
-                //e.AffectedBounds,
-                //SystemColors.ControlDarkDark, 0, ButtonBorderStyle.None, SystemColors.Control, 1, ButtonBorderStyle.Inset, SystemColors.ControlDarkDark, 0, ButtonBorderStyle.None, SystemColors.ControlDark, 0, ButtonBorderStyle.None);
-
                 ///不调用该方法
                 //base.OnRenderToolStripBorder(e);
                 ToolStrip toolStrip = e.ToolStrip;
-                //using (Pen pen = new Pen(Color.Red))
-                //{
-                //    GraphicsPath gp = GetRoundedRectPath(new Rectangle(new Point(0, 0), toolStrip.Size), 5);
-                //    e.Graphics.SmoothingMode = SmoothingMode.HighQuality;
-                //    e.Graphics.DrawPath(pen, gp);
-                //}
 
-                //  using (LinearGradientBrush _linearGradientBrush = new LinearGradientBrush(
-                //new Rectangle(new Point(0, 0), new Size { Width = 5, Height = toolStrip.Size.Height })
-                //, Color.FromArgb(255, 255, 255)
-                //, Color.FromArgb(190, 190, 190)
-                //, LinearGradientMode.Horizontal))
-                //  {
-                //      e.Graphics.SmoothingMode = SmoothingMode.HighQuality;
-                //      e.Graphics.FillRectangle(_linearGradientBrush, new Rectangle(new Point(-3, 0), new Size { Width = 5, Height = toolStrip.Size.Height }));
-                //  }
             }
+
             protected override void OnRenderArrow(ToolStripArrowRenderEventArgs e)
             {
                 e.ArrowColor = Color.Green;
@@ -336,6 +243,7 @@ namespace MetroFramework.Controls
                 path.CloseFigure();
                 return path;
             }
+
             protected override void OnRenderMenuItemBackground(ToolStripItemRenderEventArgs e)
             {
                 Graphics g = e.Graphics;
@@ -343,7 +251,7 @@ namespace MetroFramework.Controls
                 ToolStrip toolstrip = e.ToolStrip;
                 if (toolstrip is MenuStrip)
                 {
-                    SolidBrush lgbrush = new SolidBrush(Color.Blue);//Color.FromArgb(222,222,222)
+                    SolidBrush lgbrush = new SolidBrush(Color.Blue);
                     if (e.Item.Selected)
                     {
                         GraphicsPath gp = GetRoundedRectPath(new Rectangle(new Point(0, 0), item.Size), 5);
@@ -360,7 +268,7 @@ namespace MetroFramework.Controls
                     SolidBrush lgbrush = new SolidBrush(Color.FromArgb(232, 232, 232));//选项背景色
                     if (item.Selected)
                     {
-                        GraphicsPath gp = GetRoundedRectPath(new Rectangle(10, 0, item.Width, item.Height), 1);
+                        GraphicsPath gp = GetRoundedRectPath(new Rectangle(25, -0, item.Width, item.Height), 1);
                         g.FillPath(lgbrush, gp);
                     }
                 }
