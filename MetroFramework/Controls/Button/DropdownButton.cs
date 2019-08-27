@@ -26,26 +26,26 @@ namespace MetroFramework.Controls
             this.Item4 = new ToolStripMenuItem();
 
             Item2.DropDown.AutoSize = false;
-            Item2.DropDown.Size = new Size(50, Item2.DropDown.Height);
+            Item2.DropDown.Size = new Size(280, Item2.DropDown.Height);
             Item3.DropDown.AutoSize = false;
-            Item3.DropDown.Size = new Size(50, Item3.DropDown.Height);
+            Item3.DropDown.Size = new Size(80, Item3.DropDown.Height);
             Item4.DropDown.AutoSize = false;
-            Item4.DropDown.Size = new Size(50, Item4.DropDown.Height);
+            Item4.DropDown.Size = new Size(80, Item4.DropDown.Height);
 
             this.Menu1.SuspendLayout();
             this.SuspendLayout();
 
             this.Menu1.Items.AddRange(new ToolStripItem[] {
             this.Item2,this.Item3,this.Item4});
-            this.Menu1.Name = "metroContextMenu1";
-            this.Menu1.Size = new Size(150, 170);
-
+            
             this.Item2.Name = "toolStripMenuItem2";
-            this.Item2.Text = "1234";
+            this.Item2.Text = "10086北京北京北京北京";
             this.Item3.Name = "toolStripMenuItem2";
-            this.Item3.Text = "456";
+            this.Item3.Text = "北京";
             this.Item4.Name = "toolStripMenuItem2";
-            this.Item4.Text = "789";
+            this.Item4.Text = "西安";
+            this.Menu1.Name = "metroContextMenu1";
+            this.Menu1.Size = new Size(Item2.DropDown.Width + 45, Item2.DropDown.Height * 4);
 
             Menu1.StyleManager = this.StyleManager;
             this.Menu1.ResumeLayout(false);

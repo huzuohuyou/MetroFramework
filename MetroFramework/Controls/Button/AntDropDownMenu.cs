@@ -159,20 +159,19 @@ namespace MetroFramework.Controls
                 Container.Add(this);
             }
             this.AutoSize = false;
-            this.Size = new Size(50, Height);
+            this.Size = new Size(Width+40, Height+80);
             //this.Items
             this.DropShadowEnabled = false;
-            this.Padding = new Padding(20, 20, 20, 20);
+            this.Padding = new Padding(20, 40, 20, 40);
             this.Font = new Font("微软雅黑", 14);
 
-            GraphicsPathHelper.SetBits(this.Width, this.Height, this.Left, this.Top, this.ClientRectangle);
 
         }
 
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
-            Bitmap bitmap = new Bitmap(Width + 5, Height + 5);
+            Bitmap bitmap = new Bitmap(Width + 15, Height + 5);
             Rectangle _BacklightLTRB = new Rectangle(20, 20, 20, 20);//窗体光泽重绘边界
             e.Graphics.SmoothingMode = SmoothingMode.HighQuality; //高质量
             e.Graphics.PixelOffsetMode = PixelOffsetMode.HighQuality; //高像素偏移质量
