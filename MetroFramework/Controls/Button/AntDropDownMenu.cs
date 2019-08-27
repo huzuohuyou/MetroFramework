@@ -268,7 +268,7 @@ namespace MetroFramework.Controls
                     SolidBrush lgbrush = new SolidBrush(Color.FromArgb(232, 232, 232));//选项背景色
                     if (item.Selected)
                     {
-                        GraphicsPath gp = GetRoundedRectPath(new Rectangle(25, -0, item.Width, item.Height), 1);
+                        GraphicsPath gp = GetRoundedRectPath(new Rectangle(5, -0, item.Width, item.Height), 1);
                         g.FillPath(lgbrush, gp);
                     }
                 }
