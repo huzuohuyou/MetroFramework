@@ -101,9 +101,13 @@
     <Compile Include="Controls\Button\Enum\AntButtonIcon.cs" />
     <Compile Include="Controls\Button\Enum\AntButtonShape.cs" />
     <Compile Include="Controls\Button\Enum\IconLoaction.cs" />
+    <Compile Include="Controls\Button\GraphicsPathHelper.cs" />
+    <Compile Include="Controls\Button\ImageDrawRect.cs" />
     <Compile Include="Controls\Button\LinkButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\Button\RoundStyle.cs" />
+    <Compile Include="Controls\Button\Win32.cs" />
     <Compile Include="Controls\CTreeTaskBox.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -286,8 +290,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="FontAwesomeNet.dll" />
+    <None Include="Resources\main_light_bkg_top123.png" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
