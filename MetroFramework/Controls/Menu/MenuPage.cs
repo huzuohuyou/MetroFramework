@@ -75,40 +75,7 @@ namespace MetroFramework.Controls
                 verticalScrollbar.LargeChange = VerticalScroll.LargeChange;
             }
 
-            int iconX = 0, iconY = 0, iconSize = 20, textLeftPadding = 0;
-
-            if (AntSize.Equals(AntButtonSize.Large))
-            {
-                iconX = (int)IconLoaction.LargeIconX;
-                iconY = (int)IconLoaction.LargeIconY;
-                iconSize = (int)IconLoaction.LargeSize;
-                textLeftPadding = 20;
-            }
-            else if (AntSize.Equals(AntButtonSize.Default))
-            {
-                iconX = (int)IconLoaction.DefaultIconX;
-                iconY = (int)IconLoaction.DefaultIconY;
-                iconSize = (int)IconLoaction.DefaultSize;
-                textLeftPadding = 20;
-            }
-            else if (AntSize.Equals(AntButtonSize.Small))
-            {
-                iconX = (int)IconLoaction.SmallIconX;
-                iconY = (int)IconLoaction.SmallIconY;
-                iconSize = (int)IconLoaction.SmallISize;
-                textLeftPadding = 20;
-            }
-            using (Brush brush = new SolidBrush(Color.Red))
-            {
-                var rec = BaseAntButton.DrawRoundRect(0, 0, Width - 1, Height - 1, AntShape.Equals(AntButtonShape.Circle) ? (int)AntSize : 10);
-                e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-
-                e.Graphics.DrawString(
-       Icon.Style[AntIcon],
-       UseMemoryFont(iconSize),
-       brush, new RectangleF() { X = iconX, Y = iconY, Width = (int)AntSize, Height = (int)AntSize });
-
-            }
+           
 
 
             OnCustomPaintForeground(new MetroPaintEventArgs(Color.Empty, Color.Empty, e.Graphics));

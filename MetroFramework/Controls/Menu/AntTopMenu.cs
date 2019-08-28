@@ -76,7 +76,7 @@ namespace MetroFramework.Controls
 
             backColor = MetroPaint.BackColor.Form(Theme);
 
-            TabPage tabPage = TabPages[index];
+            MenuPage tabPage = (MenuPage)TabPages[index];
             Rectangle tabRect = GetTabRect(index);
 
             if (!Enabled)
@@ -105,7 +105,39 @@ namespace MetroFramework.Controls
             //}
 
 
-            
+            int iconX = 0, iconY = 0, iconSize = 20, textLeftPadding = 0;
+
+            if (tabPage.AntSize.Equals(AntButtonSize.Large))
+            {
+                iconX = (int)IconLoaction.LargeIconX;
+                iconY = (int)IconLoaction.LargeIconY;
+                iconSize = (int)IconLoaction.LargeSize;
+                textLeftPadding = 20;
+            }
+            else if (tabPage.AntSize.Equals(AntButtonSize.Default))
+            {
+                iconX = (int)IconLoaction.DefaultIconX;
+                iconY = (int)IconLoaction.DefaultIconY;
+                iconSize = (int)IconLoaction.DefaultSize;
+                textLeftPadding = 20;
+            }
+            else if (tabPage.AntSize.Equals(AntButtonSize.Small))
+            {
+                iconX = (int)IconLoaction.SmallIconX;
+                iconY = (int)IconLoaction.SmallIconY;
+                iconSize = (int)IconLoaction.SmallISize;
+                textLeftPadding = 20;
+            }
+            using (Brush brush = new SolidBrush(MetroPaint.GetStyleColor(Style)))
+            {
+                graphics.SmoothingMode = SmoothingMode.AntiAlias;
+                graphics.DrawString(
+       Icon.Style[tabPage.AntIcon],
+       UseMemoryFont(iconSize),
+       brush, new RectangleF() { X = tabRect.X-5, Y = (tabRect.Height-iconY-15)/2, Width = (int)tabPage.AntSize, Height = (int)tabPage.AntSize });
+            }
+
+
             TextRenderer.DrawText(
                 graphics,
                 $@"{tabPage.Text}",
