@@ -45,11 +45,12 @@ namespace MetroFramework.Controls
     using MetroFramework.Drawing;
     using MetroFramework.Interfaces;
     using MetroFramework.Native;
+    using System.Drawing.Text;
 
     #region MetroTabPageCollection
 
     [ToolboxItem(false)]
-    [Editor("MetroFramework.Design.MetroTabPageCollectionEditor, " + AssemblyRef.MetroFrameworkDesignSN, typeof(UITypeEditor))]
+    [Editor("MetroFramework.Design.AntMenuPageCollectionEditor, " + AssemblyRef.MetroFrameworkDesignSN, typeof(UITypeEditor))]
     public class MetroTabPageCollection : TabControl.TabPageCollection
     {
         public MetroTabPageCollection(MetroTabControl owner) : base(owner)
@@ -735,6 +736,28 @@ namespace MetroFramework.Controls
             return 0;
         }
 
+        #endregion
+
+        #region Common Methods
+        public Font UseFileFont(float size)
+        {
+            PrivateFontCollection pfc = new PrivateFontCollection();
+            string appPath = @"D:\GitHub\MetroFramework\MetroFramework.Demo\bin\Debug\font\";
+            string fontFile = appPath + "iconfont.ttf";
+            pfc.AddFontFile(fontFile);
+            Font font = new Font(pfc.Families[0], size, FontStyle.Regular, GraphicsUnit.Point, 0);
+            return font;
+        }
+
+        public Font UseMemoryFont(float size)
+        {
+            GCHandle hObject = GCHandle.Alloc(Properties.Resources.iconfont, GCHandleType.Pinned);
+            IntPtr intptr = hObject.AddrOfPinnedObject();
+            PrivateFontCollection fc = new PrivateFontCollection();
+            fc.AddMemoryFont(intptr, Properties.Resources.iconfont.Length);
+            Font font = new Font(fc.Families[0], size, FontStyle.Regular, GraphicsUnit.Point, 0);
+            return font;
+        }
         #endregion
 
     }

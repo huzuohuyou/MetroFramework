@@ -3,13 +3,14 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Text;
 using System.Windows.Forms;
 
 namespace MetroFramework.Controls
 {
-    //[Designer("MetroFramework.Design.Controls.AntTopMenuDesigner, " + AssemblyRef.MetroFrameworkDesignSN)]
-    //[ToolboxBitmap(typeof(TabControl))]
+    [Designer("MetroFramework.Design.Controls.AntTopMenuDesigner, " + AssemblyRef.MetroFrameworkDesignSN)]
+    [ToolboxBitmap(typeof(TabControl))]
     public class AntTopMenu: MetroTabControl
     {
         public AntTopMenu() : base()
@@ -18,6 +19,7 @@ namespace MetroFramework.Controls
             base.TextAlign = ContentAlignment.MiddleCenter;
         }
 
+        
         protected override void OnPaintBackground(PaintEventArgs e)
         {
             try
@@ -97,11 +99,13 @@ namespace MetroFramework.Controls
 
             tabRect.Width += 20;
 
-            using (Brush bgBrush = new SolidBrush(backColor))
-            {
-                graphics.FillRectangle(bgBrush, bgRect);
-            }
+            //using (Brush bgBrush = new SolidBrush(backColor))
+            //{
+            //    graphics.FillRectangle(bgBrush, bgRect);
+            //}
 
+
+            
             TextRenderer.DrawText(
                 graphics,
                 $@"{tabPage.Text}",

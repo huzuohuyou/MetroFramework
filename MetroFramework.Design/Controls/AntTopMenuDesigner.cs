@@ -107,7 +107,7 @@ namespace MetroFramework.Design.Controls
 
             RaiseComponentChanging(TypeDescriptor.GetProperties(parentControl)["TabPages"]);
 
-            var p = (MetroTabPage)(DesignerHost.CreateComponent(typeof(MetroTabPage)));
+            var p = (MenuPage)(DesignerHost.CreateComponent(typeof(MenuPage)));
             p.Text = p.Name;
             parentControl.TabPages.Add(p);
 

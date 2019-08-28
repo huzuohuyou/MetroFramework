@@ -34,6 +34,8 @@ namespace MetroFramework.Controls
     using MetroFramework.Components;
     using MetroFramework.Interfaces;
     using MetroFramework.Native;
+    using System.Runtime.InteropServices;
+    using System.Drawing.Text;
 
     [ToolboxItem(false)]
     [Designer("MetroFramework.Design.Controls.MetroTabPageDesigner, " + AssemblyRef.MetroFrameworkDesignSN)]
@@ -172,8 +174,8 @@ namespace MetroFramework.Controls
 
         #region Fields
 
-        private MetroScrollBar verticalScrollbar = new MetroScrollBar(MetroScrollOrientation.Vertical);
-        private MetroScrollBar horizontalScrollbar = new MetroScrollBar(MetroScrollOrientation.Horizontal);
+        protected MetroScrollBar verticalScrollbar = new MetroScrollBar(MetroScrollOrientation.Vertical);
+        protected MetroScrollBar horizontalScrollbar = new MetroScrollBar(MetroScrollOrientation.Horizontal);
 
         private bool showHorizontalScrollbar = false;
         [DefaultValue(false)]
@@ -404,7 +406,7 @@ namespace MetroFramework.Controls
 
         #region Management Methods
 
-        private void UpdateScrollBarPositions()
+        protected void UpdateScrollBarPositions()
         {
             if (DesignMode)
             {
@@ -435,6 +437,28 @@ namespace MetroFramework.Controls
             }
         }
 
+        #endregion
+
+        #region Common Methods
+        public Font UseFileFont(float size)
+        {
+            PrivateFontCollection pfc = new PrivateFontCollection();
+            string appPath = @"D:\GitHub\MetroFramework\MetroFramework.Demo\bin\Debug\font\";
+            string fontFile = appPath + "iconfont.ttf";
+            pfc.AddFontFile(fontFile);
+            Font font = new Font(pfc.Families[0], size, FontStyle.Regular, GraphicsUnit.Point, 0);
+            return font;
+        }
+
+        public Font UseMemoryFont(float size)
+        {
+            GCHandle hObject = GCHandle.Alloc(Properties.Resources.iconfont, GCHandleType.Pinned);
+            IntPtr intptr = hObject.AddrOfPinnedObject();
+            PrivateFontCollection fc = new PrivateFontCollection();
+            fc.AddMemoryFont(intptr, Properties.Resources.iconfont.Length);
+            Font font = new Font(fc.Families[0], size, FontStyle.Regular, GraphicsUnit.Point, 0);
+            return font;
+        }
         #endregion
     }
 }

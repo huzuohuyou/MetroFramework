@@ -34,8 +34,8 @@
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
             this.antTopMenu1 = new MetroFramework.Controls.AntTopMenu();
-            this.metroTabPage1 = new MetroFramework.Controls.MetroTabPage();
-            this.metroTabPage2 = new MetroFramework.Controls.MetroTabPage();
+            this.menuPage1 = new MetroFramework.Controls.MenuPage();
+            this.menuPage2 = new MetroFramework.Controls.MenuPage();
             this.contextMenuStrip1.SuspendLayout();
             this.antTopMenu1.SuspendLayout();
             this.SuspendLayout();
@@ -69,44 +69,46 @@
             // 
             // antTopMenu1
             // 
-            this.antTopMenu1.Controls.Add(this.metroTabPage1);
-            this.antTopMenu1.Controls.Add(this.metroTabPage2);
+            this.antTopMenu1.Controls.Add(this.menuPage1);
+            this.antTopMenu1.Controls.Add(this.menuPage2);
             this.antTopMenu1.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
             this.antTopMenu1.Location = new System.Drawing.Point(12, 12);
             this.antTopMenu1.Name = "antTopMenu1";
-            this.antTopMenu1.SelectedIndex = 1;
+            this.antTopMenu1.SelectedIndex = 0;
             this.antTopMenu1.Size = new System.Drawing.Size(776, 100);
             this.antTopMenu1.TabIndex = 1;
             this.antTopMenu1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.antTopMenu1.UseSelectable = true;
             // 
-            // metroTabPage1
+            // menuPage1
             // 
-            this.metroTabPage1.HorizontalScrollbarBarColor = true;
-            this.metroTabPage1.HorizontalScrollbarHighlightOnWheel = false;
-            this.metroTabPage1.HorizontalScrollbarSize = 10;
-            this.metroTabPage1.Location = new System.Drawing.Point(4, 58);
-            this.metroTabPage1.Name = "metroTabPage1";
-            this.metroTabPage1.Size = new System.Drawing.Size(202, 38);
-            this.metroTabPage1.TabIndex = 0;
-            this.metroTabPage1.Text = "metroTabPage1";
-            this.metroTabPage1.VerticalScrollbarBarColor = true;
-            this.metroTabPage1.VerticalScrollbarHighlightOnWheel = false;
-            this.metroTabPage1.VerticalScrollbarSize = 10;
+            this.menuPage1.AntIcon = MetroFramework.Controls.AntButtonIcon.Home;
+            this.menuPage1.HorizontalScrollbarBarColor = true;
+            this.menuPage1.HorizontalScrollbarHighlightOnWheel = false;
+            this.menuPage1.HorizontalScrollbarSize = 10;
+            this.menuPage1.Location = new System.Drawing.Point(4, 58);
+            this.menuPage1.Name = "menuPage1";
+            this.menuPage1.Size = new System.Drawing.Size(778, 38);
+            this.menuPage1.TabIndex = 0;
+            this.menuPage1.Text = "menuPage1";
+            this.menuPage1.VerticalScrollbarBarColor = true;
+            this.menuPage1.VerticalScrollbarHighlightOnWheel = false;
+            this.menuPage1.VerticalScrollbarSize = 10;
             // 
-            // metroTabPage2
+            // menuPage2
             // 
-            this.metroTabPage2.HorizontalScrollbarBarColor = true;
-            this.metroTabPage2.HorizontalScrollbarHighlightOnWheel = false;
-            this.metroTabPage2.HorizontalScrollbarSize = 10;
-            this.metroTabPage2.Location = new System.Drawing.Point(4, 58);
-            this.metroTabPage2.Name = "metroTabPage2";
-            this.metroTabPage2.Size = new System.Drawing.Size(778, 38);
-            this.metroTabPage2.TabIndex = 1;
-            this.metroTabPage2.Text = "metroTabPage2";
-            this.metroTabPage2.VerticalScrollbarBarColor = true;
-            this.metroTabPage2.VerticalScrollbarHighlightOnWheel = false;
-            this.metroTabPage2.VerticalScrollbarSize = 10;
+            this.menuPage2.AntIcon = MetroFramework.Controls.AntButtonIcon.Delete;
+            this.menuPage2.HorizontalScrollbarBarColor = true;
+            this.menuPage2.HorizontalScrollbarHighlightOnWheel = false;
+            this.menuPage2.HorizontalScrollbarSize = 10;
+            this.menuPage2.Location = new System.Drawing.Point(4, 58);
+            this.menuPage2.Name = "menuPage2";
+            this.menuPage2.Size = new System.Drawing.Size(523, 38);
+            this.menuPage2.TabIndex = 1;
+            this.menuPage2.Text = "menuPage2";
+            this.menuPage2.VerticalScrollbarBarColor = true;
+            this.menuPage2.VerticalScrollbarHighlightOnWheel = false;
+            this.menuPage2.VerticalScrollbarSize = 10;
             // 
             // Form2
             // 
@@ -130,7 +132,7 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
         private Controls.AntTopMenu antTopMenu1;
-        private Controls.MetroTabPage metroTabPage1;
-        private Controls.MetroTabPage metroTabPage2;
+        private Controls.MenuPage menuPage1;
+        private Controls.MenuPage menuPage2;
     }
 }

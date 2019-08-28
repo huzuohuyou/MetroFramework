@@ -46,6 +46,8 @@
   <ItemGroup>
     <Compile Include="Components\MetroStyleManagerDesigner.cs" />
     <Compile Include="Controls\AntButtonDesigner.cs" />
+    <Compile Include="Controls\AntMenuPageCollectionEditor.cs" />
+    <Compile Include="Controls\AntTopMenuDesigner.cs" />
     <Compile Include="Controls\MetroToggleDesigner.cs" />
     <Compile Include="Controls\MetroRadioButtonDesigner.cs" />
     <Compile Include="Controls\MetroCheckBoxDesigner.cs" />
