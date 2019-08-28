@@ -198,7 +198,7 @@ namespace MetroFramework.Controls
         private SubClass scUpDown = null;
         private bool bUpDown = false;
 
-        private const int TabBottomBorderHeight = 3;
+        protected const int TabBottomBorderHeight = 3;
 
         private MetroTabControlSize metroLabelSize = MetroTabControlSize.Medium;
         [DefaultValue(MetroTabControlSize.Medium)]

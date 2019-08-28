@@ -29,27 +29,16 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.button1 = new System.Windows.Forms.Button();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
-            this.dropDownButton1 = new MetroFramework.Controls.DropDownButton();
-            this.buttonGroup1 = new MetroFramework.Controls.ButtonGroup();
-            this.defaultButton1 = new MetroFramework.Controls.DefaultButton();
-            this.defaultButton2 = new MetroFramework.Controls.DefaultButton();
+            this.antTopMenu1 = new MetroFramework.Controls.AntTopMenu();
+            this.metroTabPage1 = new MetroFramework.Controls.MetroTabPage();
+            this.metroTabPage2 = new MetroFramework.Controls.MetroTabPage();
             this.contextMenuStrip1.SuspendLayout();
+            this.antTopMenu1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(189, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // contextMenuStrip1
             // 
@@ -78,49 +67,46 @@
             this.toolStripMenuItem4.Size = new System.Drawing.Size(118, 22);
             this.toolStripMenuItem4.Text = "555555";
             // 
-            // dropDownButton1
+            // antTopMenu1
             // 
-            this.dropDownButton1.BackColor = System.Drawing.Color.Transparent;
-            this.dropDownButton1.ForeColor = System.Drawing.Color.Transparent;
-            this.dropDownButton1.Location = new System.Drawing.Point(12, 12);
-            this.dropDownButton1.Name = "dropDownButton1";
-            this.dropDownButton1.Size = new System.Drawing.Size(171, 32);
-            this.dropDownButton1.TabIndex = 0;
-            this.dropDownButton1.Text = "dropDownButton1";
-            this.dropDownButton1.UseSelectable = true;
+            this.antTopMenu1.Controls.Add(this.metroTabPage1);
+            this.antTopMenu1.Controls.Add(this.metroTabPage2);
+            this.antTopMenu1.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
+            this.antTopMenu1.Location = new System.Drawing.Point(12, 12);
+            this.antTopMenu1.Name = "antTopMenu1";
+            this.antTopMenu1.SelectedIndex = 1;
+            this.antTopMenu1.Size = new System.Drawing.Size(776, 100);
+            this.antTopMenu1.TabIndex = 1;
+            this.antTopMenu1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.antTopMenu1.UseSelectable = true;
             // 
-            // buttonGroup1
+            // metroTabPage1
             // 
-            this.buttonGroup1.BackColor = System.Drawing.Color.Transparent;
-            this.buttonGroup1.ForeColor = System.Drawing.Color.Transparent;
-            this.buttonGroup1.Location = new System.Drawing.Point(12, 50);
-            this.buttonGroup1.Name = "buttonGroup1";
-            this.buttonGroup1.Size = new System.Drawing.Size(252, 32);
-            this.buttonGroup1.TabIndex = 3;
-            this.buttonGroup1.Text = "buttonGroup1";
-            this.buttonGroup1.UseSelectable = true;
+            this.metroTabPage1.HorizontalScrollbarBarColor = true;
+            this.metroTabPage1.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroTabPage1.HorizontalScrollbarSize = 10;
+            this.metroTabPage1.Location = new System.Drawing.Point(4, 58);
+            this.metroTabPage1.Name = "metroTabPage1";
+            this.metroTabPage1.Size = new System.Drawing.Size(202, 38);
+            this.metroTabPage1.TabIndex = 0;
+            this.metroTabPage1.Text = "metroTabPage1";
+            this.metroTabPage1.VerticalScrollbarBarColor = true;
+            this.metroTabPage1.VerticalScrollbarHighlightOnWheel = false;
+            this.metroTabPage1.VerticalScrollbarSize = 10;
             // 
-            // defaultButton1
+            // metroTabPage2
             // 
-            this.defaultButton1.BackColor = System.Drawing.Color.Transparent;
-            this.defaultButton1.ForeColor = System.Drawing.Color.Transparent;
-            this.defaultButton1.Location = new System.Drawing.Point(0, 0);
-            this.defaultButton1.Name = "defaultButton1";
-            this.defaultButton1.Size = new System.Drawing.Size(75, 23);
-            this.defaultButton1.TabIndex = 0;
-            this.defaultButton1.Text = "defaultButton1";
-            this.defaultButton1.UseSelectable = true;
-            // 
-            // defaultButton2
-            // 
-            this.defaultButton2.BackColor = System.Drawing.Color.Transparent;
-            this.defaultButton2.ForeColor = System.Drawing.Color.Transparent;
-            this.defaultButton2.Location = new System.Drawing.Point(0, 0);
-            this.defaultButton2.Name = "defaultButton2";
-            this.defaultButton2.Size = new System.Drawing.Size(75, 23);
-            this.defaultButton2.TabIndex = 0;
-            this.defaultButton2.Text = "defaultButton2";
-            this.defaultButton2.UseSelectable = true;
+            this.metroTabPage2.HorizontalScrollbarBarColor = true;
+            this.metroTabPage2.HorizontalScrollbarHighlightOnWheel = false;
+            this.metroTabPage2.HorizontalScrollbarSize = 10;
+            this.metroTabPage2.Location = new System.Drawing.Point(4, 58);
+            this.metroTabPage2.Name = "metroTabPage2";
+            this.metroTabPage2.Size = new System.Drawing.Size(778, 38);
+            this.metroTabPage2.TabIndex = 1;
+            this.metroTabPage2.Text = "metroTabPage2";
+            this.metroTabPage2.VerticalScrollbarBarColor = true;
+            this.metroTabPage2.VerticalScrollbarHighlightOnWheel = false;
+            this.metroTabPage2.VerticalScrollbarSize = 10;
             // 
             // Form2
             // 
@@ -128,27 +114,23 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.buttonGroup1);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.dropDownButton1);
+            this.Controls.Add(this.antTopMenu1);
             this.Name = "Form2";
             this.Text = "Form2";
             this.contextMenuStrip1.ResumeLayout(false);
+            this.antTopMenu1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private Controls.DropDownButton dropDownButton1;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
-        private Controls.ButtonGroup buttonGroup1;
-        private Controls.DefaultButton defaultButton1;
-        private Controls.DefaultButton defaultButton2;
+        private Controls.AntTopMenu antTopMenu1;
+        private Controls.MetroTabPage metroTabPage1;
+        private Controls.MetroTabPage metroTabPage2;
     }
 }

@@ -17,7 +17,7 @@ namespace MetroFramework.Demo
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            contextMenuStrip1.Show(button1, 0, button1.Height);
+            //contextMenuStrip1.Show(button1, 0, button1.Height);
         }
     }
 }
