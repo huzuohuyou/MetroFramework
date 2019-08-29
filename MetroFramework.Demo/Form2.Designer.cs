@@ -80,6 +80,7 @@
             this.antTopMenu1.TabIndex = 10;
             this.antTopMenu1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.antTopMenu1.UseSelectable = true;
+            this.antTopMenu1.MouseHover += new System.EventHandler(this.antTopMenu1_MouseHover);
             // 
             // menuPage1
             // 

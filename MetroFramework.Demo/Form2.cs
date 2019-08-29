@@ -19,5 +19,10 @@ namespace MetroFramework.Demo
         {
             //contextMenuStrip1.Show(button1, 0, button1.Height);
         }
+
+        private void antTopMenu1_MouseHover(object sender, EventArgs e)
+        {
+
+        }
     }
 }

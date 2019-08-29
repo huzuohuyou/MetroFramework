@@ -32,15 +32,21 @@ namespace MetroFramework.Controls
 
         protected override void OnMouseEnter(EventArgs e)
         {
-            InitMenuItems();
-            Menu1.Show(this, new Point(10, this.Height));
-            Invalidate();
+            try
+            {
+                InitMenuItems();
+            }
+            catch 
+            {
+                Invalidate();
+            }
             base.OnMouseEnter(e);
         }
 
         private void InitMenuItems()
         {
-            this.Menu1.Items.Clear();
+            Menu1.Hide();
+            Menu1.Items.Clear();
             MenuPage tabPage = (MenuPage)TabPages[SelectedIndex];
             for (int i = 0; i < tabPage.Titles.Length; i++)
             {
@@ -52,6 +58,7 @@ namespace MetroFramework.Controls
                 Menu1.Items.Add(tabPage.Titles[i]);
             }
             Menu1.StyleManager = this.StyleManager;
+            Menu1.Show(this, new Point(10, 70));
         }
 
         void bw_DoWork(object sender, DoWorkEventArgs e)
@@ -74,7 +81,14 @@ namespace MetroFramework.Controls
             if (hide)
             {
                 Menu1.Hide();
+                Menu1.Items.Clear();
             }
+        }
+
+        protected override void OnSelectedIndexChanged(EventArgs e)
+        {
+            base.OnSelectedIndexChanged(e);
+            InitMenuItems();
         }
 
         protected override void OnMouseLeave(EventArgs e)
@@ -140,6 +154,24 @@ namespace MetroFramework.Controls
             {
                 Invalidate();
             }
+        }
+
+        protected override void OnMouseMove(MouseEventArgs e)
+        {
+            Rectangle mouseRect = new Rectangle(e.X, e.Y, 1, 1);
+            for (int i = 0; i < this.TabCount; i++)
+            {
+                if (this.GetTabRect(i).IntersectsWith(mouseRect))
+                {
+                    this.SelectedIndex = i;
+                    break;
+                }
+            }
+        }
+
+        protected override void OnClick(EventArgs e)
+        {
+
         }
 
 
