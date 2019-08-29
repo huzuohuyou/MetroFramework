@@ -58,7 +58,7 @@ namespace MetroFramework.Controls
                 Menu1.Items.Add(tabPage.Titles[i]);
             }
             Menu1.StyleManager = this.StyleManager;
-            Menu1.Show(this, new Point(10, 70));
+            Menu1.Show(this, new Point(10, 60));
         }
 
         void bw_DoWork(object sender, DoWorkEventArgs e)
@@ -156,9 +156,12 @@ namespace MetroFramework.Controls
             }
         }
 
+       
+
         protected override void OnMouseMove(MouseEventArgs e)
         {
             Rectangle mouseRect = new Rectangle(e.X, e.Y, 1, 1);
+            Console.WriteLine($@"X:{e.X} Y:{e.Y}");
             for (int i = 0; i < this.TabCount; i++)
             {
                 if (this.GetTabRect(i).IntersectsWith(mouseRect))
@@ -171,7 +174,14 @@ namespace MetroFramework.Controls
 
         protected override void OnClick(EventArgs e)
         {
-
+            try
+            {
+                InitMenuItems();
+            }
+            catch
+            {
+                Invalidate();
+            }
         }
 
 

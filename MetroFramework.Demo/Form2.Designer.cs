@@ -33,12 +33,14 @@
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
+            this.metroTile1 = new MetroFramework.Controls.MetroTile();
             this.antTopMenu1 = new MetroFramework.Controls.AntTopMenu();
             this.menuPage1 = new MetroFramework.Controls.MenuPage();
             this.menuPage2 = new MetroFramework.Controls.MenuPage();
-            this.metroTile1 = new MetroFramework.Controls.MetroTile();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.contextMenuStrip1.SuspendLayout();
             this.antTopMenu1.SuspendLayout();
+            this.menuPage1.SuspendLayout();
             this.SuspendLayout();
             // 
             // contextMenuStrip1
@@ -68,6 +70,16 @@
             this.toolStripMenuItem4.Size = new System.Drawing.Size(118, 22);
             this.toolStripMenuItem4.Text = "555555";
             // 
+            // metroTile1
+            // 
+            this.metroTile1.ActiveControl = null;
+            this.metroTile1.Location = new System.Drawing.Point(614, 330);
+            this.metroTile1.Name = "metroTile1";
+            this.metroTile1.Size = new System.Drawing.Size(75, 23);
+            this.metroTile1.TabIndex = 9;
+            this.metroTile1.Text = "metroTile1";
+            this.metroTile1.UseSelectable = true;
+            // 
             // antTopMenu1
             // 
             this.antTopMenu1.Controls.Add(this.menuPage1);
@@ -76,7 +88,7 @@
             this.antTopMenu1.Location = new System.Drawing.Point(12, 12);
             this.antTopMenu1.Name = "antTopMenu1";
             this.antTopMenu1.SelectedIndex = 0;
-            this.antTopMenu1.Size = new System.Drawing.Size(776, 100);
+            this.antTopMenu1.Size = new System.Drawing.Size(776, 338);
             this.antTopMenu1.TabIndex = 10;
             this.antTopMenu1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.antTopMenu1.UseSelectable = true;
@@ -84,12 +96,14 @@
             // 
             // menuPage1
             // 
+            this.menuPage1.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.menuPage1.Controls.Add(this.panel1);
             this.menuPage1.HorizontalScrollbarBarColor = true;
             this.menuPage1.HorizontalScrollbarHighlightOnWheel = false;
             this.menuPage1.HorizontalScrollbarSize = 10;
             this.menuPage1.Location = new System.Drawing.Point(4, 58);
             this.menuPage1.Name = "menuPage1";
-            this.menuPage1.Size = new System.Drawing.Size(778, 38);
+            this.menuPage1.Size = new System.Drawing.Size(778, 276);
             this.menuPage1.TabIndex = 0;
             this.menuPage1.Text = "menuPage1";
             this.menuPage1.Titles = new string[] {
@@ -105,9 +119,9 @@
             this.menuPage2.HorizontalScrollbarBarColor = true;
             this.menuPage2.HorizontalScrollbarHighlightOnWheel = false;
             this.menuPage2.HorizontalScrollbarSize = 10;
-            this.menuPage2.Location = new System.Drawing.Point(4, 58);
+            this.menuPage2.Location = new System.Drawing.Point(4, 56);
             this.menuPage2.Name = "menuPage2";
-            this.menuPage2.Size = new System.Drawing.Size(778, 38);
+            this.menuPage2.Size = new System.Drawing.Size(778, 278);
             this.menuPage2.TabIndex = 1;
             this.menuPage2.Text = "menuPage2";
             this.menuPage2.Titles = new string[] {
@@ -118,15 +132,12 @@
             this.menuPage2.VerticalScrollbarHighlightOnWheel = false;
             this.menuPage2.VerticalScrollbarSize = 10;
             // 
-            // metroTile1
+            // panel1
             // 
-            this.metroTile1.ActiveControl = null;
-            this.metroTile1.Location = new System.Drawing.Point(614, 330);
-            this.metroTile1.Name = "metroTile1";
-            this.metroTile1.Size = new System.Drawing.Size(75, 23);
-            this.metroTile1.TabIndex = 9;
-            this.metroTile1.Text = "metroTile1";
-            this.metroTile1.UseSelectable = true;
+            this.panel1.Location = new System.Drawing.Point(3, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(694, 251);
+            this.panel1.TabIndex = 2;
             // 
             // Form2
             // 
@@ -140,6 +151,7 @@
             this.Text = "Form2";
             this.contextMenuStrip1.ResumeLayout(false);
             this.antTopMenu1.ResumeLayout(false);
+            this.menuPage1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -154,5 +166,6 @@
         private Controls.MenuPage menuPage1;
         private Controls.MenuPage menuPage2;
         private Controls.MetroTile metroTile1;
+        private System.Windows.Forms.Panel panel1;
     }
 }
