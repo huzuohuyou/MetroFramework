@@ -11,6 +11,7 @@ namespace MetroFramework.Controls
             {AntButtonIcon.Delete,"\uE69F" },
             {AntButtonIcon.Home,"\uE65E" },
             {AntButtonIcon.Save,"\uE669" },
+            {AntButtonIcon.Close,"\uE6C2" },
             {AntButtonIcon.None,"" },
         };
     }

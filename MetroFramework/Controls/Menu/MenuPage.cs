@@ -9,7 +9,22 @@ namespace MetroFramework.Controls
 
     public class MenuPage : MetroTabPage
     {
+
+        public MenuPage()
+        {
+            //this.components = new Container();
+            //this.Menu = new AntDropDownMenu(components);
+        }
+
         #region Fields
+
+        private string[] titles;
+        [Category(MetroDefaults.PropertyCategory.Appearance)]
+        public string[] Titles
+        {
+            get { return titles; }
+            set { titles = value; }
+        }
 
         private AntButtonIcon antIcon = AntButtonIcon.None;
         [DefaultValue(AntButtonIcon.None)]
@@ -42,6 +57,8 @@ namespace MetroFramework.Controls
 
         protected override void OnPaintForeground(PaintEventArgs e)
         {
+            try
+            {
             if (DesignMode)
             {
                 horizontalScrollbar.Visible = false;
@@ -74,11 +91,13 @@ namespace MetroFramework.Controls
                 verticalScrollbar.SmallChange = VerticalScroll.SmallChange;
                 verticalScrollbar.LargeChange = VerticalScroll.LargeChange;
             }
-
-           
-
-
             OnCustomPaintForeground(new MetroPaintEventArgs(Color.Empty, Color.Empty, e.Graphics));
+            }
+            catch 
+            {
+
+                Invalidate();
+            }
         }
 
         protected override void OnPaintBackground(PaintEventArgs e)

@@ -11,5 +11,6 @@ namespace MetroFramework.Controls
         Delete,
         Edit,
         Save,
+        Close,
     }
 }

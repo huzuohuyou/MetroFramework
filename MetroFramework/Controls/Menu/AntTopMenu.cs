@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace MetroFramework.Controls
@@ -13,13 +14,79 @@ namespace MetroFramework.Controls
     [ToolboxBitmap(typeof(TabControl))]
     public class AntTopMenu: MetroTabControl
     {
+        private IContainer components { get; set; }
+        private AntDropDownMenu Menu1 { get; set; }
+
+
         public AntTopMenu() : base()
         {
+            this.components = new Container();
+            this.Menu1 = new AntDropDownMenu(components);
+
+
             base.Padding = new Point(16, 18);
             base.TextAlign = ContentAlignment.MiddleCenter;
         }
 
-        
+       
+
+        protected override void OnMouseEnter(EventArgs e)
+        {
+            InitMenuItems();
+            Menu1.Show(this, new Point(10, this.Height));
+            Invalidate();
+            base.OnMouseEnter(e);
+        }
+
+        private void InitMenuItems()
+        {
+            this.Menu1.Items.Clear();
+            MenuPage tabPage = (MenuPage)TabPages[SelectedIndex];
+            for (int i = 0; i < tabPage.Titles.Length; i++)
+            {
+                var item = new ToolStripMenuItem();
+                item.DropDown.AutoSize = false;
+                item.DropDown.Size = new Size(280, 200);
+                item.Name = $@"toolStripMenuItem{i}";
+                item.Text = tabPage.Titles[i];
+                Menu1.Items.Add(tabPage.Titles[i]);
+            }
+            Menu1.StyleManager = this.StyleManager;
+        }
+
+        void bw_DoWork(object sender, DoWorkEventArgs e)
+        {
+            Thread.Sleep(150);
+
+        }
+
+        void bw_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            var hide = true;
+            for (int i = 0; i < Menu1.Items.Count; i++)
+            {
+                var item = Menu1.Items[i];
+                if (item.Selected)
+                {
+                    hide = false;
+                }
+            }
+            if (hide)
+            {
+                Menu1.Hide();
+            }
+        }
+
+        protected override void OnMouseLeave(EventArgs e)
+        {
+            using (BackgroundWorker bw = new BackgroundWorker())
+            {
+                bw.RunWorkerCompleted += new RunWorkerCompletedEventHandler(bw_RunWorkerCompleted);
+                bw.DoWork += new DoWorkEventHandler(bw_DoWork);
+                bw.RunWorkerAsync("Tank");
+            }
+        }
+
         protected override void OnPaintBackground(PaintEventArgs e)
         {
             try
@@ -49,23 +116,30 @@ namespace MetroFramework.Controls
 
         protected override void OnPaintForeground(PaintEventArgs e)
         {
-            for (var index = 0; index < TabPages.Count; index++)
+            try
             {
-                if (index != SelectedIndex)
+                for (var index = 0; index < TabPages.Count; index++)
                 {
-                    DrawTab(index, e.Graphics);
+                    if (index != SelectedIndex)
+                    {
+                        DrawTab(index, e.Graphics);
+                    }
                 }
+                if (SelectedIndex <= -1)
+                {
+                    return;
+                }
+
+                DrawTabBottomBorder(SelectedIndex, e.Graphics);
+                DrawTab(SelectedIndex, e.Graphics);
+                DrawTabSelected(SelectedIndex, e.Graphics);
+
+                OnCustomPaintForeground(new MetroPaintEventArgs(Color.Empty, Color.Empty, e.Graphics));
             }
-            if (SelectedIndex <= -1)
+            catch
             {
-                return;
+                Invalidate();
             }
-
-            DrawTabBottomBorder(SelectedIndex, e.Graphics);
-            DrawTab(SelectedIndex, e.Graphics);
-            DrawTabSelected(SelectedIndex, e.Graphics);
-
-            OnCustomPaintForeground(new MetroPaintEventArgs(Color.Empty, Color.Empty, e.Graphics));
         }
 
 
@@ -128,6 +202,15 @@ namespace MetroFramework.Controls
                 iconSize = (int)IconLoaction.SmallISize;
                 textLeftPadding = 20;
             }
+
+            TextRenderer.DrawText(
+                graphics,
+                $@"{tabPage.Text}",
+                MetroFonts.TabControl(FontSize, FontWeight),
+                tabRect,
+                foreColor, backColor, MetroPaint.GetTextFormatFlags(TextAlign));
+
+
             using (Brush brush = new SolidBrush(MetroPaint.GetStyleColor(Style)))
             {
                 graphics.SmoothingMode = SmoothingMode.AntiAlias;
@@ -137,14 +220,7 @@ namespace MetroFramework.Controls
        brush, new RectangleF() { X = tabRect.X-5, Y = (tabRect.Height-iconY-15)/2, Width = (int)tabPage.AntSize, Height = (int)tabPage.AntSize });
             }
 
-
-            TextRenderer.DrawText(
-                graphics,
-                $@"{tabPage.Text}",
-                MetroFonts.TabControl(FontSize, FontWeight),
-                tabRect,
-                foreColor, backColor, MetroPaint.GetTextFormatFlags(TextAlign));
-
+           
         }
 
         private void DrawTabBottomBorder(int index, Graphics graphics)
