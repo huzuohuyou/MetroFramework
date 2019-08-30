@@ -13,6 +13,7 @@ namespace MetroFramework.Demo
         public Form2()
         {
             InitializeComponent();
+            //this.StyleManager = this.StyleManager;
         }
 
         private void Button1_Click(object sender, EventArgs e)
