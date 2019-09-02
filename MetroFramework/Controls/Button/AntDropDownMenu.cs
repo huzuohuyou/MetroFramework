@@ -164,9 +164,7 @@ namespace MetroFramework.Controls
             this.DropShadowEnabled = false;
             this.Padding = new Padding(20, 40, 20, 40);
             this.Font = new Font("微软雅黑", 14);
-
-
-        }
+                   }
 
         protected override void OnPaint(PaintEventArgs e)
         {

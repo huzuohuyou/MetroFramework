@@ -151,11 +151,50 @@ namespace MetroFramework.Controls
 
         #endregion
 
+
+        #region Fields
+        private MetroTabControlSize metroLabelSize = MetroTabControlSize.Medium;
+        [DefaultValue(MetroTabControlSize.Medium)]
+        [Category(MetroDefaults.PropertyCategory.Appearance)]
+        public MetroTabControlSize FontSize
+        {
+            get { return metroLabelSize; }
+            set { metroLabelSize = value; }
+        }
+
+        private MetroTabControlWeight metroLabelWeight = MetroTabControlWeight.Light;
+        [DefaultValue(MetroTabControlWeight.Light)]
+        [Category(MetroDefaults.PropertyCategory.Appearance)]
+        public MetroTabControlWeight FontWeight
+        {
+            get { return metroLabelWeight; }
+            set { metroLabelWeight = value; }
+        }
+
+        private ContentAlignment textAlign = ContentAlignment.MiddleLeft;
+        [DefaultValue(ContentAlignment.MiddleLeft)]
+        [Category(MetroDefaults.PropertyCategory.Appearance)]
+        public ContentAlignment TextAlign
+        {
+            get
+            {
+                return textAlign;
+            }
+            set
+            {
+                textAlign = value;
+            }
+        }
+
+        #endregion
         private IContainer components = null;
         private ToolStripMenuItem Item2;
         private ToolStripMenuItem Item3;
         private ToolStripMenuItem Item4;
+        private ToolStripMenuItem Item5;
+        private ToolStripMenuItem Item6;
         private AntDropDownMenu Menu1;
+        private AntDropDownMenu Menu2;
 
         public AntMenuStrip(IContainer Container)
         {
@@ -169,11 +208,15 @@ namespace MetroFramework.Controls
 
             this.components = new Container();
             this.Menu1 = new AntDropDownMenu(components);
+            this.Menu2 = new AntDropDownMenu(components);
 
             this.Item2 = new ToolStripMenuItem();
             this.Item3 = new ToolStripMenuItem();
             this.Item4 = new ToolStripMenuItem();
 
+            this.Item5 = new ToolStripMenuItem();
+            this.Item6 = new ToolStripMenuItem();
+            //Item2.DropDown = Menu2;
             Item2.DropDown.AutoSize = false;
             Item2.DropDown.Size = new Size(280, Item2.DropDown.Height);
             Item3.DropDown.AutoSize = false;
@@ -187,12 +230,20 @@ namespace MetroFramework.Controls
             this.Menu1.Items.AddRange(new ToolStripItem[] {
             this.Item2,this.Item3,this.Item4});
 
+            this.Menu2.Items.AddRange(new ToolStripItem[] {
+            this.Item5,this.Item6});
+
             this.Item2.Name = "toolStripMenuItem2";
             this.Item2.Text = "真的很长很长的文本";
             this.Item3.Name = "toolStripMenuItem2";
             this.Item3.Text = "文本1";
             this.Item4.Name = "toolStripMenuItem2";
             this.Item4.Text = "文本2";
+
+            this.Item5.Name = "toolStripMenuItem2";
+            this.Item5.Text = "文本1";
+            this.Item6.Name = "toolStripMenuItem2";
+            this.Item6.Text = "文本2";
             this.Menu1.Name = "metroContextMenu1";
             this.Menu1.Size = new Size(Item2.DropDown.Width + 45, Item2.DropDown.Height * 4);
 
@@ -212,15 +263,13 @@ namespace MetroFramework.Controls
         public AntMenuStrip()
         {
             settheme();
-            render = new MetroCTXRenderer(Theme, Style);
-            this.Renderer = render;
+           
         }
 
         private void settheme()
         {
             this.BackColor = MetroPaint.BackColor.Form(Theme);
             this.ForeColor = MetroPaint.ForeColor.Button.Normal(Theme);
-            this.Renderer = new MetroCTXRenderer(Theme, Style);
         }
 
         
@@ -228,183 +277,102 @@ namespace MetroFramework.Controls
         private Color _startColor = Color.White;
         private Color _endCoolor = Color.Blue;
 
-        private MetroCTXRenderer render;
-
-        //protected override void OnMouseHover(EventArgs e)
-        //{
-        //    this.Focus();
-        //}
 
 
-        private class MetroCTXRenderer : ToolStripProfessionalRenderer
+        #region Paint Methods
+
+        protected override void OnPaintBackground(PaintEventArgs e)
         {
-            public MetroCTXRenderer(MetroThemeStyle Theme, MetroColorStyle Style) : base(new contextcolors(Theme, Style)) { }
-
-            protected override void OnRenderMenuItemBackground(ToolStripItemRenderEventArgs e)
+            try
             {
-                Graphics g = e.Graphics;
-                ToolStripItem item = e.Item;
-                ToolStrip toolstrip = e.ToolStrip;
+                Color backColor = BackColor;
 
+                if (!useCustomBackColor)
+                {
+                    backColor = MetroPaint.BackColor.Form(Theme);
+                }
 
-                //渲染顶级项
-                if (toolstrip is MenuStrip)
+                if (backColor.A == 255 && BackgroundImage == null)
                 {
-                    LinearGradientBrush lgbrush = new LinearGradientBrush(new Point(0, 0), new Point(0, item.Height), Color.FromArgb(100, Color.White), Color.FromArgb(0, Color.White));
-                    SolidBrush brush = new SolidBrush(Color.FromArgb(255, Color.White));
-                    if (e.Item.Selected)
-                    {
-                        GraphicsPath gp = GetRoundedRectPath(new Rectangle(new Point(0, 0), item.Size), 5);
-                        g.FillPath(lgbrush, gp);
-                    }
-                    if (item.Pressed)
-                    {
-                        g.FillRectangle(Brushes.White, new Rectangle(Point.Empty, item.Size));
-                    }
+                    e.Graphics.Clear(backColor);
+                    return;
                 }
-                //渲染下拉项
-                else if (toolstrip is ToolStripDropDown)
-                {
-                    g.SmoothingMode = SmoothingMode.HighQuality;
-                    LinearGradientBrush lgbrush = new LinearGradientBrush(new Point(0, 0), new Point(item.Width, 0), Color.FromArgb(200, Color.Red), Color.FromArgb(0, Color.White));
-                    if (item.Selected)
-                    {
-                        GraphicsPath gp = GetRoundedRectPath(new Rectangle(0, 0, item.Width, item.Height), 10);
-                        g.FillPath(lgbrush, gp);
-                    }
-                }
-                else
-                {
-                    base.OnRenderMenuItemBackground(e);
-                }
+
+                base.OnPaintBackground(e);
+
+                OnCustomPaintBackground(new MetroPaintEventArgs(backColor, Color.Empty, e.Graphics));
             }
-
-            public static GraphicsPath GetRoundedRectPath(Rectangle rect, int radius)
+            catch
             {
-                int diameter = radius;
-                Rectangle arcRect = new Rectangle(rect.Location, new Size(diameter, diameter));
-                GraphicsPath path = new GraphicsPath();
-
-                // 左上角
-                path.AddArc(arcRect, 180, 90);
-
-                // 右上角
-                arcRect.X = rect.Right - diameter;
-                path.AddArc(arcRect, 270, 90);
-
-                // 右下角
-                arcRect.Y = rect.Bottom - diameter;
-                path.AddArc(arcRect, 0, 90);
-
-                // 左下角
-                arcRect.X = rect.Left;
-                path.AddArc(arcRect, 90, 90);
-                path.CloseFigure();
-                return path;
-            }
-
-            protected override void OnRenderImageMargin(ToolStripRenderEventArgs e)
-            {
-                //base.OnRenderImageMargin(e);
-                //屏蔽掉左边图片竖条
-            }
-
-            protected override void OnRenderSeparator(ToolStripSeparatorRenderEventArgs e)
-            {
-                Graphics g = e.Graphics;
-
-                LinearGradientBrush lgbrush = new LinearGradientBrush(new Point(0, 0), new Point(e.Item.Width, 0), Color.PaleGreen, Color.FromArgb(0, Color.PaleGreen));
-                g.FillRectangle(lgbrush, new Rectangle(3, e.Item.Height / 2, e.Item.Width, 1));
-                //base.OnRenderSeparator(e);
-            }
-
-            protected override void OnRenderArrow(ToolStripArrowRenderEventArgs e)
-            {
-                e.ArrowColor = Color.PaleGreen;
-                base.OnRenderArrow(e);
-            }
-
-            protected override void OnRenderToolStripBackground(ToolStripRenderEventArgs e)
-            {
-                ToolStrip toolStrip = e.ToolStrip;
-                Graphics g = e.Graphics;
-                g.SmoothingMode = SmoothingMode.HighQuality;//抗锯齿
-                Rectangle bounds = e.AffectedBounds;
-                LinearGradientBrush lgbrush = new LinearGradientBrush(new Point(0, 0), new Point(0, toolStrip.Height), Color.FromArgb(255, Color.White), Color.FromArgb(150, Color.PaleTurquoise));
-                if (toolStrip is MenuStrip)
-                {
-                    //由menuStrip的Paint方法定义 这里不做操作
-                }
-                else if (toolStrip is ToolStripDropDown)
-                {
-                    int diameter = 10;//直径
-                    GraphicsPath path = new GraphicsPath();
-                    Rectangle rect = new Rectangle(Point.Empty, toolStrip.Size);
-                    Rectangle arcRect = new Rectangle(rect.Location, new Size(diameter, diameter));
-
-                    path.AddLine(0, 0, 10, 0);
-                    // 右上角
-                    arcRect.X = rect.Right - diameter;
-                    path.AddArc(arcRect, 270, 90);
-
-                    // 右下角
-                    arcRect.Y = rect.Bottom - diameter;
-                    path.AddArc(arcRect, 0, 90);
-
-                    // 左下角
-                    arcRect.X = rect.Left;
-                    path.AddArc(arcRect, 90, 90);
-                    path.CloseFigure();
-                    toolStrip.Region = new Region(path);
-                    g.FillPath(lgbrush, path);
-                }
-                else
-                {
-                    base.OnRenderToolStripBackground(e);
-                }
+                Invalidate();
             }
         }
 
-        private class contextcolors : ProfessionalColorTable
+
+        protected override void OnPaint(PaintEventArgs e)
         {
-            MetroThemeStyle _theme = MetroThemeStyle.Light;
-            MetroColorStyle _style = MetroColorStyle.Blue;
-
-            public contextcolors(MetroFramework.MetroThemeStyle Theme, MetroColorStyle Style)
+            try
             {
-                _theme = Theme;
-                _style = Style;
+                if (GetStyle(ControlStyles.AllPaintingInWmPaint))
+                {
+                    OnPaintBackground(e);
+                }
+
+                OnCustomPaint(new MetroPaintEventArgs(Color.Empty, Color.Empty, e.Graphics));
+                OnPaintForeground(e);
             }
-
-            public override Color MenuItemSelected
+            catch
             {
-                get { return MetroPaint.GetStyleColor(_style); }
-            }
-
-            public override Color MenuBorder
-            {
-                get { return MetroPaint.BackColor.Form(_theme); }
-            }
-
-            public override Color MenuItemBorder
-            {
-                get { return MetroPaint.GetStyleColor(_style); }
-            }
-
-            public override Color ImageMarginGradientBegin
-            {
-                get { return MetroPaint.BackColor.Form(_theme); }
-            }
-
-            public override Color ImageMarginGradientMiddle
-            {
-                get { return MetroPaint.BackColor.Form(_theme); }
-            }
-
-            public override Color ImageMarginGradientEnd
-            {
-                get { return MetroPaint.BackColor.Form(_theme); }
+                Invalidate();
             }
         }
+
+        protected virtual void OnPaintForeground(PaintEventArgs e)
+        {
+            for (var index = 0; index < Items.Count; index++)
+            {
+                DrawTab(Items[index], e.Graphics);
+                if (Items[index].Selected)
+                {
+
+                    DrawTabBottomBorder(Items[index], e.Graphics);
+                }
+                
+                DrawTabSelected(Items[index], e.Graphics);
+            }
+            OnCustomPaintForeground(new MetroPaintEventArgs(Color.Empty, Color.Empty, e.Graphics));
+        }
+
+        int TabBottomBorderHeight = 2;
+        private void DrawTabBottomBorder(ToolStripItem item, Graphics graphics)
+        {
+            using (Brush bgBrush = new SolidBrush(Color.Blue))
+            {
+                Rectangle borderRectangle = new Rectangle(DisplayRectangle.X, item.Size.Height  - TabBottomBorderHeight, DisplayRectangle.Width, TabBottomBorderHeight);
+                graphics.FillRectangle(bgBrush, borderRectangle);
+            }
+        }
+
+        private void DrawTab(ToolStripItem item, Graphics graphics)
+        {
+            TextRenderer.DrawText(
+                graphics,
+                $@"{item.Text}",
+                MetroFonts.TabControl(metroLabelSize, metroLabelWeight),
+                new Rectangle { Size= item.Size },
+                Color.Red, Color.White, MetroPaint.GetTextFormatFlags(TextAlign));
+        }
+
+        private void DrawTabSelected(ToolStripItem item, Graphics graphics)
+        {
+            //using (Brush selectionBrush = new SolidBrush(MetroPaint.GetStyleColor(Style)))
+            //{
+            //    Rectangle selectedTabRect = GetTabRect(index);
+            //    Rectangle borderRectangle = new Rectangle(selectedTabRect.X + ((index == 0) ? 2 : 0), GetTabRect(index).Bottom + 2 - TabBottomBorderHeight, selectedTabRect.Width + ((index == 0) ? 0 : 2), TabBottomBorderHeight);
+            //    graphics.FillRectangle(selectionBrush, borderRectangle);
+            //}
+        }
+        #endregion
+
     }
 }
