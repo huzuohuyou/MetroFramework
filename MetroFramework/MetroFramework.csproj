@@ -136,6 +136,11 @@
     <Compile Include="Controls\Menu\AntTopMenu.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\Menu\demo\CustomContrls_MenuStrip.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\Menu\demo\CustomProfessionalRenderer.cs" />
+    <Compile Include="Controls\Menu\demo\CustomProfessionalRenderer2.cs" />
     <Compile Include="Controls\Menu\MenuPage.cs">
       <SubType>Component</SubType>
     </Compile>

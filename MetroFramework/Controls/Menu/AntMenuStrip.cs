@@ -1,6 +1,8 @@
-﻿using MetroFramework.Components;
+﻿using CCWin;
+using MetroFramework.Components;
 using MetroFramework.Drawing;
 using MetroFramework.Interfaces;
+using MetroFramework.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -149,6 +151,12 @@ namespace MetroFramework.Controls
 
         #endregion
 
+        private IContainer components = null;
+        private ToolStripMenuItem Item2;
+        private ToolStripMenuItem Item3;
+        private ToolStripMenuItem Item4;
+        private AntDropDownMenu Menu1;
+
         public AntMenuStrip(IContainer Container)
         {
             if (Container != null)
@@ -156,12 +164,49 @@ namespace MetroFramework.Controls
                 Container.Add(this);
             }
             settheme();
-            //for (int i = 0; i < this.Items.Count; i++)
-            //{
-            //    Items[i].dr
-            //}
-            
-            //DropShadowEnabled = false;
+
+           
+
+            this.components = new Container();
+            this.Menu1 = new AntDropDownMenu(components);
+
+            this.Item2 = new ToolStripMenuItem();
+            this.Item3 = new ToolStripMenuItem();
+            this.Item4 = new ToolStripMenuItem();
+
+            Item2.DropDown.AutoSize = false;
+            Item2.DropDown.Size = new Size(280, Item2.DropDown.Height);
+            Item3.DropDown.AutoSize = false;
+            Item3.DropDown.Size = new Size(80, Item3.DropDown.Height);
+            Item4.DropDown.AutoSize = false;
+            Item4.DropDown.Size = new Size(80, Item4.DropDown.Height);
+
+            this.Menu1.SuspendLayout();
+            this.SuspendLayout();
+
+            this.Menu1.Items.AddRange(new ToolStripItem[] {
+            this.Item2,this.Item3,this.Item4});
+
+            this.Item2.Name = "toolStripMenuItem2";
+            this.Item2.Text = "真的很长很长的文本";
+            this.Item3.Name = "toolStripMenuItem2";
+            this.Item3.Text = "文本1";
+            this.Item4.Name = "toolStripMenuItem2";
+            this.Item4.Text = "文本2";
+            this.Menu1.Name = "metroContextMenu1";
+            this.Menu1.Size = new Size(Item2.DropDown.Width + 45, Item2.DropDown.Height * 4);
+
+            Menu1.StyleManager = this.StyleManager;
+            this.Menu1.ResumeLayout(false);
+            this.ResumeLayout(false);
+
+            var button = new ToolStripMenuItem();
+            button.Text = "button";
+            button.DropDown = Menu1;
+
+            this.Items.Add(button);
+
+
         }
 
         public AntMenuStrip()
@@ -178,6 +223,8 @@ namespace MetroFramework.Controls
             this.Renderer = new MetroCTXRenderer(Theme, Style);
         }
 
+        
+
         private Color _startColor = Color.White;
         private Color _endCoolor = Color.Blue;
 
@@ -191,7 +238,7 @@ namespace MetroFramework.Controls
 
         private class MetroCTXRenderer : ToolStripProfessionalRenderer
         {
-            public MetroCTXRenderer(MetroFramework.MetroThemeStyle Theme, MetroColorStyle Style) : base(new contextcolors(Theme, Style)) { }
+            public MetroCTXRenderer(MetroThemeStyle Theme, MetroColorStyle Style) : base(new contextcolors(Theme, Style)) { }
 
             protected override void OnRenderMenuItemBackground(ToolStripItemRenderEventArgs e)
             {
@@ -212,20 +259,6 @@ namespace MetroFramework.Controls
                     }
                     if (item.Pressed)
                     {
-                        ////创建上面左右2圆角的矩形路径
-                        //GraphicsPath path = new GraphicsPath();
-                        //int diameter = 8;
-                        //Rectangle rect = new Rectangle(Point.Empty, item.Size);
-                        //Rectangle arcRect = new Rectangle(rect.Location, new Size(diameter, diameter));
-                        //// 左上角
-                        //path.AddArc(arcRect, 180, 90);
-                        //// 右上角
-                        //arcRect.X = rect.Right - diameter;
-                        //path.AddArc(arcRect, 270, 90);
-                        //path.AddLine(new Point(rect.Width, rect.Height), new Point(0, rect.Height));
-                        //path.CloseFigure();
-                        ////填充路径
-                        //g.FillPath(brush, path);
                         g.FillRectangle(Brushes.White, new Rectangle(Point.Empty, item.Size));
                     }
                 }
@@ -245,6 +278,7 @@ namespace MetroFramework.Controls
                     base.OnRenderMenuItemBackground(e);
                 }
             }
+
             public static GraphicsPath GetRoundedRectPath(Rectangle rect, int radius)
             {
                 int diameter = radius;
@@ -267,6 +301,67 @@ namespace MetroFramework.Controls
                 path.AddArc(arcRect, 90, 90);
                 path.CloseFigure();
                 return path;
+            }
+
+            protected override void OnRenderImageMargin(ToolStripRenderEventArgs e)
+            {
+                //base.OnRenderImageMargin(e);
+                //屏蔽掉左边图片竖条
+            }
+
+            protected override void OnRenderSeparator(ToolStripSeparatorRenderEventArgs e)
+            {
+                Graphics g = e.Graphics;
+
+                LinearGradientBrush lgbrush = new LinearGradientBrush(new Point(0, 0), new Point(e.Item.Width, 0), Color.PaleGreen, Color.FromArgb(0, Color.PaleGreen));
+                g.FillRectangle(lgbrush, new Rectangle(3, e.Item.Height / 2, e.Item.Width, 1));
+                //base.OnRenderSeparator(e);
+            }
+
+            protected override void OnRenderArrow(ToolStripArrowRenderEventArgs e)
+            {
+                e.ArrowColor = Color.PaleGreen;
+                base.OnRenderArrow(e);
+            }
+
+            protected override void OnRenderToolStripBackground(ToolStripRenderEventArgs e)
+            {
+                ToolStrip toolStrip = e.ToolStrip;
+                Graphics g = e.Graphics;
+                g.SmoothingMode = SmoothingMode.HighQuality;//抗锯齿
+                Rectangle bounds = e.AffectedBounds;
+                LinearGradientBrush lgbrush = new LinearGradientBrush(new Point(0, 0), new Point(0, toolStrip.Height), Color.FromArgb(255, Color.White), Color.FromArgb(150, Color.PaleTurquoise));
+                if (toolStrip is MenuStrip)
+                {
+                    //由menuStrip的Paint方法定义 这里不做操作
+                }
+                else if (toolStrip is ToolStripDropDown)
+                {
+                    int diameter = 10;//直径
+                    GraphicsPath path = new GraphicsPath();
+                    Rectangle rect = new Rectangle(Point.Empty, toolStrip.Size);
+                    Rectangle arcRect = new Rectangle(rect.Location, new Size(diameter, diameter));
+
+                    path.AddLine(0, 0, 10, 0);
+                    // 右上角
+                    arcRect.X = rect.Right - diameter;
+                    path.AddArc(arcRect, 270, 90);
+
+                    // 右下角
+                    arcRect.Y = rect.Bottom - diameter;
+                    path.AddArc(arcRect, 0, 90);
+
+                    // 左下角
+                    arcRect.X = rect.Left;
+                    path.AddArc(arcRect, 90, 90);
+                    path.CloseFigure();
+                    toolStrip.Region = new Region(path);
+                    g.FillPath(lgbrush, path);
+                }
+                else
+                {
+                    base.OnRenderToolStripBackground(e);
+                }
             }
         }
 
