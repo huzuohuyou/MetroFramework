@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
+using System.Drawing.Imaging;
+using System.Drawing.Drawing2D;
 
 namespace CCWin
 {
@@ -12,6 +14,30 @@ namespace CCWin
         public static ContentAlignment anyBottom = ContentAlignment.BottomRight | (ContentAlignment.BottomCenter | ContentAlignment.BottomLeft);
         public static ContentAlignment anyCenter = ContentAlignment.BottomCenter | (ContentAlignment.MiddleCenter | ContentAlignment.TopCenter);
         public static ContentAlignment anyMiddle = ContentAlignment.MiddleRight | (ContentAlignment.MiddleCenter | ContentAlignment.MiddleLeft);
+
+        private static Bitmap SetPictureAlpha(Image image, int alpha)
+        {
+            //颜色矩阵  
+            float[][] matrixItems =
+            {
+               new float[]{1,0,0,0,0},
+               new float[]{0,1,0,0,0},
+               new float[]{0,0,1,0,0},
+               new float[]{0,0,0,alpha/255f,0},
+               new float[]{0,0,0,0,1}
+           };
+            ColorMatrix colorMatrix = new ColorMatrix(matrixItems);
+            ImageAttributes imageAtt = new ImageAttributes();
+            imageAtt.SetColorMatrix(colorMatrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
+            Bitmap bmp = new Bitmap(image.Width, image.Height);
+            Graphics g = Graphics.FromImage(bmp);
+            g.DrawImage(image, new Rectangle(0, 0, image.Width, image.Height),
+                    0, 0, image.Width, image.Height, GraphicsUnit.Pixel, imageAtt);
+            g.Dispose();
+
+            return bmp;
+        }
+
         /// <summary>
         /// 绘图对像
         /// </summary>
@@ -23,6 +49,7 @@ namespace CCWin
         /// <param name="Totalindex">状态总数</param>
         public static void DrawRect(Graphics g, Bitmap img, Rectangle r, Rectangle lr, int index, int Totalindex)
         {
+            //img = SetPictureAlpha(img,200);
             if (img == null) return;
             Rectangle r1, r2;
             int x = (index - 1) * img.Width / Totalindex;
@@ -121,6 +148,51 @@ namespace CCWin
                             r.Width - lr.Left - lr.Right, r.Height - lr.Top - lr.Bottom);
                         g.DrawImage(img, r2, r1, GraphicsUnit.Pixel);
                     }
+        }
+
+        public static void SetBits(int Width, int Height, int Left, int Top, Rectangle ClientRectangle)
+        {
+            //绘制绘图层背景
+            Bitmap bitmap = new Bitmap(Width , Height );
+            Rectangle _BacklightLTRB = new Rectangle(10, 10, 10, 10);//窗体光泽重绘边界
+            Graphics g = Graphics.FromImage(bitmap);
+            g.SmoothingMode = SmoothingMode.HighQuality; //高质量
+            g.PixelOffsetMode = PixelOffsetMode.HighQuality; //高像素偏移质量
+            ImageDrawRect.DrawRect(g, MetroFramework.Properties.Resources.main_light_bkg_top123, ClientRectangle, Rectangle.FromLTRB(_BacklightLTRB.X, _BacklightLTRB.Y, _BacklightLTRB.Width, _BacklightLTRB.Height), 1, 1);
+
+            if (!Bitmap.IsCanonicalPixelFormat(bitmap.PixelFormat) || !Bitmap.IsAlphaPixelFormat(bitmap.PixelFormat))
+                throw new ApplicationException("图片必须是32位带Alhpa通道的图片。");
+            IntPtr oldBits = IntPtr.Zero;
+            IntPtr screenDC = Win32.GetDC(IntPtr.Zero);
+            IntPtr hBitmap = IntPtr.Zero;
+            IntPtr memDc = Win32.CreateCompatibleDC(screenDC);
+
+            try
+            {
+                Win32.Point topLoc = new Win32.Point(Left, Top);
+                Win32.Size bitMapSize = new Win32.Size(Width, Height);
+                Win32.BLENDFUNCTION blendFunc = new Win32.BLENDFUNCTION();
+                Win32.Point srcLoc = new Win32.Point(0, 0);
+
+                hBitmap = bitmap.GetHbitmap(Color.FromArgb(0));
+                oldBits = Win32.SelectObject(memDc, hBitmap);
+
+                blendFunc.BlendOp = Win32.AC_SRC_OVER;
+                blendFunc.SourceConstantAlpha = Byte.Parse("255");
+                blendFunc.AlphaFormat = Win32.AC_SRC_ALPHA;
+                blendFunc.BlendFlags = 0;
+
+            }
+            finally
+            {
+                if (hBitmap != IntPtr.Zero)
+                {
+                    Win32.SelectObject(memDc, oldBits);
+                    Win32.DeleteObject(hBitmap);
+                }
+                Win32.ReleaseDC(IntPtr.Zero, screenDC);
+                Win32.DeleteDC(memDc);
+            }
         }
 
         /// <summary>

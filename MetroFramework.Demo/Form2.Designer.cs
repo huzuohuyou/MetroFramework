@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.antMenuStrip1 = new MetroFramework.Controls.AntMenuStrip(this.components);
+            this.antLeftMenuStrip1 = new MetroFramework.Controls.AntLeftMenuStrip(this.components);
             this.antDropDownMenu1 = new MetroFramework.Controls.AntDropDownMenu(this.components);
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
@@ -37,17 +37,16 @@
             this.antDropDownMenu1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // antMenuStrip1
+            // antLeftMenuStrip1
             // 
-            this.antMenuStrip1.AutoSize = false;
-            this.antMenuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.antMenuStrip1.Font = new System.Drawing.Font("Microsoft YaHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.antMenuStrip1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.antMenuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.antMenuStrip1.Name = "antMenuStrip1";
-            this.antMenuStrip1.Size = new System.Drawing.Size(800, 24);
-            this.antMenuStrip1.TabIndex = 0;
-            this.antMenuStrip1.Text = "antMenuStrip1";
+            this.antLeftMenuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.antLeftMenuStrip1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.antLeftMenuStrip1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.antLeftMenuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.antLeftMenuStrip1.Name = "antLeftMenuStrip1";
+            this.antLeftMenuStrip1.Size = new System.Drawing.Size(126, 564);
+            this.antLeftMenuStrip1.TabIndex = 1;
+            this.antLeftMenuStrip1.Text = "antLeftMenuStrip1";
             // 
             // antDropDownMenu1
             // 
@@ -84,22 +83,23 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
+            this.BackColor = System.Drawing.Color.SeaShell;
             this.ClientSize = new System.Drawing.Size(800, 564);
-            this.Controls.Add(this.antMenuStrip1);
+            this.Controls.Add(this.antLeftMenuStrip1);
             this.Name = "Form2";
             this.Text = "Form2";
             this.antDropDownMenu1.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
-        private Controls.AntMenuStrip antMenuStrip1;
         private Controls.AntDropDownMenu antDropDownMenu1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
+        private Controls.AntLeftMenuStrip antLeftMenuStrip1;
     }
 }

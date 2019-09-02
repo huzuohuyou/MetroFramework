@@ -1,20 +1,15 @@
-﻿using CCWin;
-using MetroFramework.Components;
+﻿using MetroFramework.Components;
 using MetroFramework.Drawing;
 using MetroFramework.Interfaces;
-using MetroFramework.Properties;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Text;
 using System.Windows.Forms;
 
 namespace MetroFramework.Controls
 {
 
-    public class AntMenuStrip : MenuStrip, IMetroControl
+    public class AntLeftMenuStrip : MenuStrip, IMetroControl
     {
         #region Interface
 
@@ -153,6 +148,7 @@ namespace MetroFramework.Controls
 
 
         #region Fields
+
         private MetroTabControlSize metroLabelSize = MetroTabControlSize.Medium;
         [DefaultValue(MetroTabControlSize.Medium)]
         [Category(MetroDefaults.PropertyCategory.Appearance)]
@@ -196,14 +192,15 @@ namespace MetroFramework.Controls
         private AntDropDownMenu Menu1;
         private AntDropDownMenu Menu2;
 
-        public AntMenuStrip(IContainer Container)
+        public AntLeftMenuStrip(IContainer Container)
         {
+            Dock = DockStyle.Left;
             if (Container != null)
             {
                 Container.Add(this);
             }
             settheme();
-
+           
            
 
             this.components = new Container();
@@ -260,7 +257,7 @@ namespace MetroFramework.Controls
 
         }
 
-        public AntMenuStrip()
+        public AntLeftMenuStrip()
         {
             settheme();
            

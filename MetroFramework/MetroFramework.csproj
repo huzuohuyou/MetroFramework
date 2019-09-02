@@ -130,7 +130,10 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\IconFont.cs" />
-    <Compile Include="Controls\Menu\AntMenuStrip.cs">
+    <Compile Include="Controls\Menu\AntLeftMenuStrip.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\Menu\AntTopMenuStrip.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\Menu\AntTopMenu.cs">

@@ -150,7 +150,7 @@ namespace MetroFramework.Controls
         }
 
         #endregion
-
+       
 
         public AntDropDownMenu(IContainer Container)
         {
@@ -159,12 +159,12 @@ namespace MetroFramework.Controls
                 Container.Add(this);
             }
             this.AutoSize = false;
-            this.Size = new Size(Width+40, Height+80);
+            this.Size = new Size(Width + 40, Height + 80);
             //this.Items
             this.DropShadowEnabled = false;
             this.Padding = new Padding(20, 40, 20, 40);
             this.Font = new Font("微软雅黑", 14);
-                   }
+        }
 
         protected override void OnPaint(PaintEventArgs e)
         {
@@ -173,13 +173,16 @@ namespace MetroFramework.Controls
             Rectangle _BacklightLTRB = new Rectangle(20, 20, 20, 20);//窗体光泽重绘边界
             e.Graphics.SmoothingMode = SmoothingMode.HighQuality; //高质量
             e.Graphics.PixelOffsetMode = PixelOffsetMode.HighQuality; //高像素偏移质量
+
+            //ImageDrawRect.SetBits(ClientRectangle.Width, ClientRectangle.Height, ClientRectangle.Left, ClientRectangle.Top, ClientRectangle);
             ImageDrawRect.DrawRect(e.Graphics, Resources.main_light_bkg_top123,
-               new Rectangle {
+               new Rectangle
+               {
                    X = ClientRectangle.X,
                    Y = ClientRectangle.Y - 2,
-                   Width= ClientRectangle.Width,
-                   Height= ClientRectangle.Height
-               } 
+                   Width = ClientRectangle.Width,
+                   Height = ClientRectangle.Height
+               }
                 , Rectangle.FromLTRB(_BacklightLTRB.X, _BacklightLTRB.Y, _BacklightLTRB.Width, _BacklightLTRB.Height), 1, 1);
         }
 
