@@ -245,11 +245,63 @@ namespace MetroFramework.Controls
             this.Padding = new Padding(20, 40, 20, 40);
             this.Font = new Font("微软雅黑", 14);
             TransparencyKey = Color.White;
+
+            this.SetStyle(ControlStyles.UserPaint, true);
+            this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            this.SetStyle(ControlStyles.DoubleBuffer, true);
+            this.SetStyle(ControlStyles.ResizeRedraw, true);
+            this.SetStyle(ControlStyles.SupportsTransparentBackColor, true);
+
+            //Office格式颜色
+            ProfessionalColorTable ColorTable = new ProfessionalColorTable();
+            ColorTable.UseSystemColors = true;
+            //是否为设计模式
+            if (!DesignMode)
+            {
+                //this.Renderer = new ToolStripRenderer(ColorTable);
+            }
+            else
+            {
+                this.Renderer = new ToolStripProfessionalRenderer(ColorTable);
+            }
+            this.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.Font = new Font(this.Font.FontFamily, 10);
+        }
+        protected override void OnCreateControl()
+        {
+            base.OnCreateControl();
+
+            if (!DesignMode)
+            {
+                int Rgn = Win32.CreateRoundRectRgn(1, 1, ClientSize.Width, Height, 7, 7);
+                Win32.SetWindowRgn(this.Handle, Rgn, true);
+            }
+
+            //int result = Win32.SetClassLong(this.Handle, Win32.GCL_STYLE, 0);
         }
 
+        /// CreateRoundedRectanglePath
+        /// </summary>
+        /// <param name="rect">Rectangle</param>
+        /// <param name="cornerRadius"int></param>
+        /// <returns></returns>
+        internal static GraphicsPath CreateRoundedRectanglePath(Rectangle rect, int cornerRadius)
+        {
+            GraphicsPath roundedRect = new GraphicsPath();
+            roundedRect.AddArc(rect.X, rect.Y, cornerRadius * 2, cornerRadius * 2, 180, 90);
+            roundedRect.AddLine(rect.X + cornerRadius, rect.Y, rect.Right - cornerRadius * 2, rect.Y);
+            roundedRect.AddArc(rect.X + rect.Width - cornerRadius * 2, rect.Y, cornerRadius * 2, cornerRadius * 2, 270, 90);
+            roundedRect.AddLine(rect.Right, rect.Y + cornerRadius * 2, rect.Right, rect.Y + rect.Height - cornerRadius * 2);
+            roundedRect.AddArc(rect.X + rect.Width - cornerRadius * 2, rect.Y + rect.Height - cornerRadius * 2, cornerRadius * 2, cornerRadius * 2, 0, 90);
+            roundedRect.AddLine(rect.Right - cornerRadius * 2, rect.Bottom, rect.X + cornerRadius * 2, rect.Bottom);
+            roundedRect.AddArc(rect.X, rect.Bottom - cornerRadius * 2, cornerRadius * 2, cornerRadius * 2, 90, 90);
+            roundedRect.AddLine(rect.X, rect.Bottom - cornerRadius * 2, rect.X, rect.Y + cornerRadius * 2);
+            roundedRect.CloseFigure();
+            return roundedRect;
+        }
         protected override void OnPaint(PaintEventArgs e)
         {
-            base.OnPaint(e);
+            //base.OnPaint(e);
             //SetBits();
             //using (Pen pen = new Pen(BaseAntButton.ChangeColor(MetroPaint.GetStyleColor(Style), 0.2f), 1.5f))
             //{
@@ -258,23 +310,41 @@ namespace MetroFramework.Controls
             //    e.Graphics.DrawPath(pen, rec);
             //}
 
-            Bitmap bitmap = new Bitmap(Width + 15, Height + 5);
-            Rectangle _BacklightLTRB = new Rectangle(20, 20, 20, 20);//窗体光泽重绘边界
-            e.Graphics.SmoothingMode = SmoothingMode.HighQuality; //高质量
-            e.Graphics.PixelOffsetMode = PixelOffsetMode.HighQuality; //高像素偏移质量
-            ImageDrawRect.DrawRect(
-                e.Graphics,
-                Resources.main_light_bkg_top123,
-                new Rectangle
-                {
-                    X = ClientRectangle.X,
-                    Y = ClientRectangle.Y - 3,
-                    Width = ClientRectangle.Width + 3,
-                    Height = ClientRectangle.Height + 6
-                },
-                Rectangle.FromLTRB(_BacklightLTRB.X, _BacklightLTRB.Y, _BacklightLTRB.Width, _BacklightLTRB.Height),
-                1,
-                1);
+            if (!DesignMode)
+            {
+                Graphics g = e.Graphics;
+                e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+                SolidBrush bruch = new SolidBrush(Color.Red);
+
+                g.FillRectangle(bruch, 0, 0, 25, this.Height);
+
+                bruch = new SolidBrush(Color.White);
+                g.FillRectangle(bruch, 27, 0, this.Width - 27, this.Height);
+
+                Pen pen = new Pen(Color.Blue, 1f);
+                e.Graphics.DrawPath(pen, CreateRoundedRectanglePath(new Rectangle(1, 1, ClientSize.Width - 3, Height - 3), 10));
+            }
+
+            base.OnPaint(e);
+            //base.OnPaint(e);
+
+            //Bitmap bitmap = new Bitmap(Width + 15, Height + 5);
+            //Rectangle _BacklightLTRB = new Rectangle(20, 20, 20, 20);//窗体光泽重绘边界
+            //e.Graphics.SmoothingMode = SmoothingMode.HighQuality; //高质量
+            //e.Graphics.PixelOffsetMode = PixelOffsetMode.HighQuality; //高像素偏移质量
+            //ImageDrawRect.DrawRect(
+            //    e.Graphics,
+            //    Resources.main_light_bkg_top123,
+            //    new Rectangle
+            //    {
+            //        X = ClientRectangle.X,
+            //        Y = ClientRectangle.Y - 3,
+            //        Width = ClientRectangle.Width + 3,
+            //        Height = ClientRectangle.Height + 6
+            //    },
+            //    Rectangle.FromLTRB(_BacklightLTRB.X, _BacklightLTRB.Y, _BacklightLTRB.Width, _BacklightLTRB.Height),
+            //    1,
+            //    1);
 
         }
 
