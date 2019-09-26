@@ -10,6 +10,9 @@ namespace MetroFramework.Controls
     using System.ComponentModel;
     using System.Drawing;
     using System.Drawing.Drawing2D;
+    using System.Drawing.Text;
+    using System.Runtime.InteropServices;
+    using System.Threading;
     using System.Windows.Forms;
 
     public class AntDropDownMenu : ContextMenuStrip, IMetroControl
@@ -149,11 +152,88 @@ namespace MetroFramework.Controls
             set { SetStyle(ControlStyles.Selectable, value); }
         }
 
+        [System.ComponentModel.Browsable(false)]
+        public System.Drawing.Color TransparencyKey { get; set; }
+
+        //[Browsable(false)]
+        //[EditorBrowsable(EditorBrowsableState.Never)]
+        //[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        //public new FormBorderStyle FormBorderStyle
+        //{
+        //    get { return base.FormBorderStyle; }
+        //    set { base.bor = FormBorderStyle.None; }
+        //}
         #endregion
-       
+
+        #region 减少闪烁
+        private void SetStyles()
+        {
+            SetStyle(
+                ControlStyles.UserPaint |
+                ControlStyles.AllPaintingInWmPaint |
+                ControlStyles.OptimizedDoubleBuffer |
+                ControlStyles.ResizeRedraw |
+                ControlStyles.DoubleBuffer, true);
+            //强制分配样式重新应用到控件上
+            UpdateStyles();
+            //base.AutoScaleMode = AutoScaleMode.None;
+        }
+        #endregion
+
+        public void SetBits()
+        {
+            //绘制绘图层背景
+            Bitmap bitmap = new Bitmap(Resources.main_light_bkg_top123,Width,Height);
+            Color backColor = bitmap.GetPixel(1, 1);
+            bitmap.MakeTransparent(backColor);
+
+            Rectangle _BacklightLTRB = new Rectangle(20, 20, 20, 20);
+            Graphics g = Graphics.FromImage(bitmap);
+            g.SmoothingMode = SmoothingMode.HighQuality;
+            g.PixelOffsetMode = PixelOffsetMode.HighQuality;
+            ImageDrawRect.DrawRect(g, Properties.Resources.main_light_bkg_top123, ClientRectangle, Rectangle.FromLTRB(_BacklightLTRB.X, _BacklightLTRB.Y, _BacklightLTRB.Width, _BacklightLTRB.Height), 1, 1);
+
+            if (!Bitmap.IsCanonicalPixelFormat(bitmap.PixelFormat) || !Bitmap.IsAlphaPixelFormat(bitmap.PixelFormat))
+                throw new ApplicationException("图片必须是32位带Alhpa通道的图片。");
+            IntPtr oldBits = IntPtr.Zero;
+            IntPtr screenDC = Win32.GetDC(IntPtr.Zero);
+            IntPtr hBitmap = IntPtr.Zero;
+            IntPtr memDc = Win32.CreateCompatibleDC(screenDC);
+
+            try
+            {
+                Win32.Point topLoc = new Win32.Point(Left, Top);
+                Win32.Size bitMapSize = new Win32.Size(Width, Height);
+                Win32.BLENDFUNCTION blendFunc = new Win32.BLENDFUNCTION();
+                Win32.Point srcLoc = new Win32.Point(0, 0);
+
+                hBitmap = bitmap.GetHbitmap(Color.FromArgb(0));
+                oldBits = Win32.SelectObject(memDc, hBitmap);
+
+                blendFunc.BlendOp = Win32.AC_SRC_OVER;
+                blendFunc.SourceConstantAlpha = Byte.Parse("255");
+                blendFunc.AlphaFormat = Win32.AC_SRC_ALPHA;
+                blendFunc.BlendFlags = 0;
+
+                Win32.UpdateLayeredWindow(Handle, screenDC, ref topLoc, ref bitMapSize, memDc, ref srcLoc, 0, ref blendFunc, Win32.ULW_ALPHA);
+            }
+            finally
+            {
+                if (hBitmap != IntPtr.Zero)
+                {
+                    Win32.SelectObject(memDc, oldBits);
+                    Win32.DeleteObject(hBitmap);
+                }
+                Win32.ReleaseDC(IntPtr.Zero, screenDC);
+                Win32.DeleteDC(memDc);
+            }
+        }
 
         public AntDropDownMenu(IContainer Container)
         {
+            //BackgroundImage = Properties.Resources.main_light_bkg_top123;
+            BackColor = Color.White;
+           
             if (Container != null)
             {
                 Container.Add(this);
@@ -164,26 +244,38 @@ namespace MetroFramework.Controls
             this.DropShadowEnabled = false;
             this.Padding = new Padding(20, 40, 20, 40);
             this.Font = new Font("微软雅黑", 14);
+            TransparencyKey = Color.White;
         }
 
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
+            //SetBits();
+            //using (Pen pen = new Pen(BaseAntButton.ChangeColor(MetroPaint.GetStyleColor(Style), 0.2f), 1.5f))
+            //{
+            //    var rec = BaseAntButton.DrawRoundRect(0, 0, Width - 1, Height - 1,  10);
+            //    e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+            //    e.Graphics.DrawPath(pen, rec);
+            //}
+
             Bitmap bitmap = new Bitmap(Width + 15, Height + 5);
             Rectangle _BacklightLTRB = new Rectangle(20, 20, 20, 20);//窗体光泽重绘边界
             e.Graphics.SmoothingMode = SmoothingMode.HighQuality; //高质量
             e.Graphics.PixelOffsetMode = PixelOffsetMode.HighQuality; //高像素偏移质量
+            ImageDrawRect.DrawRect(
+                e.Graphics,
+                Resources.main_light_bkg_top123,
+                new Rectangle
+                {
+                    X = ClientRectangle.X,
+                    Y = ClientRectangle.Y - 3,
+                    Width = ClientRectangle.Width + 3,
+                    Height = ClientRectangle.Height + 6
+                },
+                Rectangle.FromLTRB(_BacklightLTRB.X, _BacklightLTRB.Y, _BacklightLTRB.Width, _BacklightLTRB.Height),
+                1,
+                1);
 
-            //ImageDrawRect.SetBits(ClientRectangle.Width, ClientRectangle.Height, ClientRectangle.Left, ClientRectangle.Top, ClientRectangle);
-            ImageDrawRect.DrawRect(e.Graphics, Resources.main_light_bkg_top123,
-               new Rectangle
-               {
-                   X = ClientRectangle.X,
-                   Y = ClientRectangle.Y - 2,
-                   Width = ClientRectangle.Width,
-                   Height = ClientRectangle.Height
-               }
-                , Rectangle.FromLTRB(_BacklightLTRB.X, _BacklightLTRB.Y, _BacklightLTRB.Width, _BacklightLTRB.Height), 1, 1);
         }
 
         private void settheme()

@@ -111,6 +111,7 @@
     </Compile>
     <Compile Include="Controls\Button\RoundStyle.cs" />
     <Compile Include="Controls\Button\Win32.cs" />
+    <Compile Include="Controls\Common\BitmapRegion.cs" />
     <Compile Include="Controls\CTreeTaskBox.cs">
       <SubType>Component</SubType>
     </Compile>

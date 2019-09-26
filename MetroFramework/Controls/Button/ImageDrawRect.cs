@@ -49,7 +49,7 @@ namespace CCWin
         /// <param name="Totalindex">状态总数</param>
         public static void DrawRect(Graphics g, Bitmap img, Rectangle r, Rectangle lr, int index, int Totalindex)
         {
-            //img = SetPictureAlpha(img,200);
+            img = SetPictureAlpha(img, 120);
             if (img == null) return;
             Rectangle r1, r2;
             int x = (index - 1) * img.Width / Totalindex;
@@ -72,7 +72,7 @@ namespace CCWin
                 r2 = new Rectangle(x1, y1 + r.Height - lr.Bottom, r.Width, lr.Bottom);
                 g.DrawImage(img, r2, r1, GraphicsUnit.Pixel);
             }
-            else
+            else//
                 if (r.Height <= img.Height && r.Width > img.Width / Totalindex)
                 {
                     r1 = new Rectangle(x, y, lr.Left, img.Height);
@@ -120,15 +120,15 @@ namespace CCWin
                         r2 = new Rectangle(x1 + r.Width - lr.Right, y1, lr.Right, lr.Top);
                         g.DrawImage(img, r2, r1, GraphicsUnit.Pixel);
 
-                        //Right
-                        r1 = new Rectangle(x + img.Width / Totalindex - lr.Right, y + lr.Top,
-                            lr.Right, img.Height - lr.Top - lr.Bottom);
-                        r2 = new Rectangle(x1 + r.Width - lr.Right, y1 + lr.Top,
-                            lr.Right, r.Height - lr.Top - lr.Bottom);
-                        g.DrawImage(img, r2, r1, GraphicsUnit.Pixel);
+                //Right
+                r1 = new Rectangle(x + img.Width / Totalindex - lr.Right, y + lr.Top,
+                    lr.Right, img.Height - lr.Top - lr.Bottom);
+                r2 = new Rectangle(x1 + r.Width - lr.Right, y1 + lr.Top,
+                    lr.Right, r.Height - lr.Top - lr.Bottom);
+                g.DrawImage(img, r2, r1, GraphicsUnit.Pixel);
 
-                        //right-bottom
-                        r1 = new Rectangle(x + img.Width / Totalindex - lr.Right, y + img.Height - lr.Bottom,
+                //right-bottom
+                r1 = new Rectangle(x + img.Width / Totalindex - lr.Right, y + img.Height - lr.Bottom,
                             lr.Right, lr.Bottom);
                         r2 = new Rectangle(x1 + r.Width - lr.Right, y1 + r.Height - lr.Bottom,
                             lr.Right, lr.Bottom);
