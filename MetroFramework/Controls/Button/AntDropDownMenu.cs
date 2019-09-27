@@ -264,7 +264,7 @@ namespace MetroFramework.Controls
             {
                 this.Renderer = new ToolStripProfessionalRenderer(ColorTable);
             }
-            this.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.GripStyle = ToolStripGripStyle.Hidden;
             this.Font = new Font(this.Font.FontFamily, 10);
         }
         protected override void OnCreateControl()
@@ -301,51 +301,35 @@ namespace MetroFramework.Controls
         }
         protected override void OnPaint(PaintEventArgs e)
         {
-            //base.OnPaint(e);
-            //SetBits();
-            //using (Pen pen = new Pen(BaseAntButton.ChangeColor(MetroPaint.GetStyleColor(Style), 0.2f), 1.5f))
-            //{
-            //    var rec = BaseAntButton.DrawRoundRect(0, 0, Width - 1, Height - 1,  10);
-            //    e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-            //    e.Graphics.DrawPath(pen, rec);
-            //}
-
             if (!DesignMode)
             {
-                Graphics g = e.Graphics;
-                e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-                SolidBrush bruch = new SolidBrush(Color.Red);
+                //Graphics g = e.Graphics;
+                //e.Graphics.SmoothingMode = SmoothingMode.HighQuality;
+                //using (SolidBrush bruch = new SolidBrush(Color.Transparent))
+                //{
+                //    g.FillRectangle(bruch, 0, 0, 25, this.Height);
+                //    g.FillRectangle(bruch, 27, 0, this.Width - 27, this.Height);
+                //}
 
-                g.FillRectangle(bruch, 0, 0, 25, this.Height);
-
-                bruch = new SolidBrush(Color.White);
-                g.FillRectangle(bruch, 27, 0, this.Width - 27, this.Height);
-
-                Pen pen = new Pen(Color.Blue, 1f);
-                e.Graphics.DrawPath(pen, CreateRoundedRectanglePath(new Rectangle(1, 1, ClientSize.Width - 3, Height - 3), 10));
+                Bitmap bitmap = new Bitmap(Width + 15, Height + 5);
+                Rectangle _BacklightLTRB = new Rectangle(20, 20, 20, 20);
+                e.Graphics.SmoothingMode = SmoothingMode.HighQuality; 
+                e.Graphics.PixelOffsetMode = PixelOffsetMode.HighQuality; 
+                ImageDrawRect.DrawRect(
+                    e.Graphics,
+                    Resources.main_light_bkg_top123,
+                    new Rectangle
+                    {
+                        X = ClientRectangle.X,
+                        Y = ClientRectangle.Y - 3,
+                        Width = ClientRectangle.Width + 3,
+                        Height = ClientRectangle.Height + 6
+                    },
+                    Rectangle.FromLTRB(_BacklightLTRB.X, _BacklightLTRB.Y, _BacklightLTRB.Width, _BacklightLTRB.Height),
+                    1,
+                    1);
             }
-
             base.OnPaint(e);
-            //base.OnPaint(e);
-
-            //Bitmap bitmap = new Bitmap(Width + 15, Height + 5);
-            //Rectangle _BacklightLTRB = new Rectangle(20, 20, 20, 20);//窗体光泽重绘边界
-            //e.Graphics.SmoothingMode = SmoothingMode.HighQuality; //高质量
-            //e.Graphics.PixelOffsetMode = PixelOffsetMode.HighQuality; //高像素偏移质量
-            //ImageDrawRect.DrawRect(
-            //    e.Graphics,
-            //    Resources.main_light_bkg_top123,
-            //    new Rectangle
-            //    {
-            //        X = ClientRectangle.X,
-            //        Y = ClientRectangle.Y - 3,
-            //        Width = ClientRectangle.Width + 3,
-            //        Height = ClientRectangle.Height + 6
-            //    },
-            //    Rectangle.FromLTRB(_BacklightLTRB.X, _BacklightLTRB.Y, _BacklightLTRB.Width, _BacklightLTRB.Height),
-            //    1,
-            //    1);
-
         }
 
         private void settheme()
@@ -374,7 +358,7 @@ namespace MetroFramework.Controls
 
         private class MetroCTXRenderer : ToolStripProfessionalRenderer
         {
-            public MetroCTXRenderer(MetroFramework.MetroThemeStyle Theme, MetroColorStyle Style) : base(new contextcolors(Theme, Style)) { }
+            public MetroCTXRenderer(MetroThemeStyle Theme, MetroColorStyle Style) : base(new contextcolors(Theme, Style)) { }
 
             protected override void OnRenderToolStripBorder(ToolStripRenderEventArgs e)
             {
