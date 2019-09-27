@@ -200,9 +200,6 @@ namespace MetroFramework.Controls
                 Container.Add(this);
             }
             settheme();
-           
-           
-
             this.components = new Container();
             this.Menu1 = new AntDropDownMenu(components);
             this.Menu2 = new AntDropDownMenu(components);
@@ -213,23 +210,19 @@ namespace MetroFramework.Controls
 
             this.Item5 = new ToolStripMenuItem();
             this.Item6 = new ToolStripMenuItem();
-            //Item2.DropDown = Menu2;
-            Item2.DropDown.AutoSize = false;
-            Item2.DropDown.Size = new Size(280, Item2.DropDown.Height);
-            Item3.DropDown.AutoSize = false;
-            Item3.DropDown.Size = new Size(80, Item3.DropDown.Height);
-            Item4.DropDown.AutoSize = false;
-            Item4.DropDown.Size = new Size(80, Item4.DropDown.Height);
 
             this.Menu1.SuspendLayout();
+            //this.Menu2.SuspendLayout();
             this.SuspendLayout();
-
+            
             this.Menu1.Items.AddRange(new ToolStripItem[] {
             this.Item2,this.Item3,this.Item4});
 
             this.Menu2.Items.AddRange(new ToolStripItem[] {
             this.Item5,this.Item6});
-
+            //Item2.Margin = new Padding(0,5,0,5);
+            Item2.Padding = new Padding(0, 5, 0, 5);
+            Item2.TextAlign = ContentAlignment.BottomCenter;
             this.Item2.Name = "toolStripMenuItem2";
             this.Item2.Text = "真的很长很长的文本";
             this.Item3.Name = "toolStripMenuItem2";
@@ -242,9 +235,10 @@ namespace MetroFramework.Controls
             this.Item6.Name = "toolStripMenuItem2";
             this.Item6.Text = "文本2";
             this.Menu1.Name = "metroContextMenu1";
-            this.Menu1.Size = new Size(Item2.DropDown.Width + 45, Item2.DropDown.Height * 4);
+            this.Menu1.Size = new Size(202, Item2.DropDown.Height * 4);
 
             Menu1.StyleManager = this.StyleManager;
+            Menu2.StyleManager = this.StyleManager;
             this.Menu1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -252,6 +246,8 @@ namespace MetroFramework.Controls
             button.Text = "button";
             button.DropDown = Menu1;
 
+
+            Item2.DropDown = Menu2;
             this.Items.Add(button);
 
 

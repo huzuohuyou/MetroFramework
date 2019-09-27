@@ -180,59 +180,11 @@ namespace MetroFramework.Controls
         }
         #endregion
 
-        public void SetBits()
-        {
-            //绘制绘图层背景
-            Bitmap bitmap = new Bitmap(Resources.main_light_bkg_top123,Width,Height);
-            Color backColor = bitmap.GetPixel(1, 1);
-            bitmap.MakeTransparent(backColor);
-
-            Rectangle _BacklightLTRB = new Rectangle(20, 20, 20, 20);
-            Graphics g = Graphics.FromImage(bitmap);
-            g.SmoothingMode = SmoothingMode.HighQuality;
-            g.PixelOffsetMode = PixelOffsetMode.HighQuality;
-            ImageDrawRect.DrawRect(g, Properties.Resources.main_light_bkg_top123, ClientRectangle, Rectangle.FromLTRB(_BacklightLTRB.X, _BacklightLTRB.Y, _BacklightLTRB.Width, _BacklightLTRB.Height), 1, 1);
-
-            if (!Bitmap.IsCanonicalPixelFormat(bitmap.PixelFormat) || !Bitmap.IsAlphaPixelFormat(bitmap.PixelFormat))
-                throw new ApplicationException("图片必须是32位带Alhpa通道的图片。");
-            IntPtr oldBits = IntPtr.Zero;
-            IntPtr screenDC = Win32.GetDC(IntPtr.Zero);
-            IntPtr hBitmap = IntPtr.Zero;
-            IntPtr memDc = Win32.CreateCompatibleDC(screenDC);
-
-            try
-            {
-                Win32.Point topLoc = new Win32.Point(Left, Top);
-                Win32.Size bitMapSize = new Win32.Size(Width, Height);
-                Win32.BLENDFUNCTION blendFunc = new Win32.BLENDFUNCTION();
-                Win32.Point srcLoc = new Win32.Point(0, 0);
-
-                hBitmap = bitmap.GetHbitmap(Color.FromArgb(0));
-                oldBits = Win32.SelectObject(memDc, hBitmap);
-
-                blendFunc.BlendOp = Win32.AC_SRC_OVER;
-                blendFunc.SourceConstantAlpha = Byte.Parse("255");
-                blendFunc.AlphaFormat = Win32.AC_SRC_ALPHA;
-                blendFunc.BlendFlags = 0;
-
-                Win32.UpdateLayeredWindow(Handle, screenDC, ref topLoc, ref bitMapSize, memDc, ref srcLoc, 0, ref blendFunc, Win32.ULW_ALPHA);
-            }
-            finally
-            {
-                if (hBitmap != IntPtr.Zero)
-                {
-                    Win32.SelectObject(memDc, oldBits);
-                    Win32.DeleteObject(hBitmap);
-                }
-                Win32.ReleaseDC(IntPtr.Zero, screenDC);
-                Win32.DeleteDC(memDc);
-            }
-        }
+        
 
         public AntDropDownMenu(IContainer Container)
         {
-            //BackgroundImage = Properties.Resources.main_light_bkg_top123;
-            BackColor = Color.White;
+            BackColor = Color.Transparent;
            
             if (Container != null)
             {
@@ -267,6 +219,7 @@ namespace MetroFramework.Controls
             this.GripStyle = ToolStripGripStyle.Hidden;
             this.Font = new Font(this.Font.FontFamily, 10);
         }
+
         protected override void OnCreateControl()
         {
             base.OnCreateControl();
@@ -276,8 +229,6 @@ namespace MetroFramework.Controls
                 int Rgn = Win32.CreateRoundRectRgn(1, 1, ClientSize.Width, Height, 7, 7);
                 Win32.SetWindowRgn(this.Handle, Rgn, true);
             }
-
-            //int result = Win32.SetClassLong(this.Handle, Win32.GCL_STYLE, 0);
         }
 
         /// CreateRoundedRectanglePath
@@ -320,9 +271,9 @@ namespace MetroFramework.Controls
                     Resources.main_light_bkg_top123,
                     new Rectangle
                     {
-                        X = ClientRectangle.X,
+                        X = ClientRectangle.X-3,
                         Y = ClientRectangle.Y - 3,
-                        Width = ClientRectangle.Width + 3,
+                        Width = ClientRectangle.Width + 6,
                         Height = ClientRectangle.Height + 6
                     },
                     Rectangle.FromLTRB(_BacklightLTRB.X, _BacklightLTRB.Y, _BacklightLTRB.Width, _BacklightLTRB.Height),
@@ -350,10 +301,10 @@ namespace MetroFramework.Controls
 
         protected override void OnMouseLeave(EventArgs e)
         {
-            IsHover = false;
-            Invalidate();
-            this.Hide();
-            base.OnMouseLeave(e);
+            //IsHover = false;
+            //Invalidate();
+            //this.Hide();
+            //base.OnMouseLeave(e);
         }
 
         private class MetroCTXRenderer : ToolStripProfessionalRenderer
@@ -395,26 +346,13 @@ namespace MetroFramework.Controls
                 Graphics g = e.Graphics;
                 ToolStripItem item = e.Item;
                 ToolStrip toolstrip = e.ToolStrip;
-                if (toolstrip is MenuStrip)
-                {
-                    SolidBrush lgbrush = new SolidBrush(Color.Blue);
-                    if (e.Item.Selected)
-                    {
-                        GraphicsPath gp = GetRoundedRectPath(new Rectangle(new Point(0, 0), item.Size), 5);
-                        g.FillPath(lgbrush, gp);
-                    }
-                    if (item.Pressed)
-                    {
-                        g.FillRectangle(Brushes.White, new Rectangle(Point.Empty, item.Size));
-                    }
-                }
-                else if (toolstrip is ToolStripDropDown)
+                if (toolstrip is ToolStripDropDown)
                 {
                     g.SmoothingMode = SmoothingMode.HighQuality;
                     SolidBrush lgbrush = new SolidBrush(Color.FromArgb(232, 232, 232));//选项背景色
                     if (item.Selected)
                     {
-                        GraphicsPath gp = GetRoundedRectPath(new Rectangle(5, -0, item.Width, item.Height), 1);
+                        GraphicsPath gp = GetRoundedRectPath(new Rectangle(2, 0, item.Width , item.Height), 4);
                         g.FillPath(lgbrush, gp);
                     }
                 }

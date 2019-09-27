@@ -34,12 +34,13 @@
             // 
             // antLeftMenuStrip1
             // 
+            this.antLeftMenuStrip1.AutoSize = false;
             this.antLeftMenuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.antLeftMenuStrip1.Dock = System.Windows.Forms.DockStyle.Left;
             this.antLeftMenuStrip1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.antLeftMenuStrip1.Location = new System.Drawing.Point(0, 0);
             this.antLeftMenuStrip1.Name = "antLeftMenuStrip1";
-            this.antLeftMenuStrip1.Size = new System.Drawing.Size(30, 564);
+            this.antLeftMenuStrip1.Size = new System.Drawing.Size(182, 564);
             this.antLeftMenuStrip1.TabIndex = 1;
             this.antLeftMenuStrip1.Text = "antLeftMenuStrip1";
             // 
@@ -54,7 +55,6 @@
             this.Text = "Form2";
             this.TransparencyKey = System.Drawing.Color.Red;
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
