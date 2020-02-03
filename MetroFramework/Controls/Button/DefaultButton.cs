@@ -74,6 +74,7 @@ namespace MetroFramework.Controls
         {
             try
             {
+                //base.OnPaintForeground(e);
                 Color foreColor = Color.Empty;
 
                 if (isHovered && !isPressed && Enabled)

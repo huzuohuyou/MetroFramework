@@ -10,6 +10,9 @@ namespace MetroFramework.Controls
     using System.ComponentModel;
     using System.Drawing;
     using System.Drawing.Drawing2D;
+    using System.Drawing.Text;
+    using System.Runtime.InteropServices;
+    using System.Threading;
     using System.Windows.Forms;
 
     public class AntDropDownMenu : ContextMenuStrip, IMetroControl
@@ -149,40 +152,135 @@ namespace MetroFramework.Controls
             set { SetStyle(ControlStyles.Selectable, value); }
         }
 
+        [System.ComponentModel.Browsable(false)]
+        public System.Drawing.Color TransparencyKey { get; set; }
+
+        //[Browsable(false)]
+        //[EditorBrowsable(EditorBrowsableState.Never)]
+        //[DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        //public new FormBorderStyle FormBorderStyle
+        //{
+        //    get { return base.FormBorderStyle; }
+        //    set { base.bor = FormBorderStyle.None; }
+        //}
         #endregion
 
+        #region 减少闪烁
+        private void SetStyles()
+        {
+            SetStyle(
+                ControlStyles.UserPaint |
+                ControlStyles.AllPaintingInWmPaint |
+                ControlStyles.OptimizedDoubleBuffer |
+                ControlStyles.ResizeRedraw |
+                ControlStyles.DoubleBuffer, true);
+            //强制分配样式重新应用到控件上
+            UpdateStyles();
+            //base.AutoScaleMode = AutoScaleMode.None;
+        }
+        #endregion
+
+        
 
         public AntDropDownMenu(IContainer Container)
         {
+            BackColor = Color.Transparent;
+           
             if (Container != null)
             {
                 Container.Add(this);
             }
             this.AutoSize = false;
-            this.Size = new Size(Width+40, Height+80);
+            this.Size = new Size(Width + 40, Height + 80);
             //this.Items
             this.DropShadowEnabled = false;
             this.Padding = new Padding(20, 40, 20, 40);
             this.Font = new Font("微软雅黑", 14);
+            TransparencyKey = Color.White;
 
+            this.SetStyle(ControlStyles.UserPaint, true);
+            this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            this.SetStyle(ControlStyles.DoubleBuffer, true);
+            this.SetStyle(ControlStyles.ResizeRedraw, true);
+            this.SetStyle(ControlStyles.SupportsTransparentBackColor, true);
 
+            //Office格式颜色
+            ProfessionalColorTable ColorTable = new ProfessionalColorTable();
+            ColorTable.UseSystemColors = true;
+            //是否为设计模式
+            if (!DesignMode)
+            {
+                //this.Renderer = new ToolStripRenderer(ColorTable);
+            }
+            else
+            {
+                this.Renderer = new ToolStripProfessionalRenderer(ColorTable);
+            }
+            this.GripStyle = ToolStripGripStyle.Hidden;
+            this.Font = new Font(this.Font.FontFamily, 10);
         }
 
+        protected override void OnCreateControl()
+        {
+            base.OnCreateControl();
+
+            if (!DesignMode)
+            {
+                int Rgn = Win32.CreateRoundRectRgn(1, 1, ClientSize.Width, Height, 7, 7);
+                Win32.SetWindowRgn(this.Handle, Rgn, true);
+            }
+        }
+
+        /// CreateRoundedRectanglePath
+        /// </summary>
+        /// <param name="rect">Rectangle</param>
+        /// <param name="cornerRadius"int></param>
+        /// <returns></returns>
+        internal static GraphicsPath CreateRoundedRectanglePath(Rectangle rect, int cornerRadius)
+        {
+            GraphicsPath roundedRect = new GraphicsPath();
+            roundedRect.AddArc(rect.X, rect.Y, cornerRadius * 2, cornerRadius * 2, 180, 90);
+            roundedRect.AddLine(rect.X + cornerRadius, rect.Y, rect.Right - cornerRadius * 2, rect.Y);
+            roundedRect.AddArc(rect.X + rect.Width - cornerRadius * 2, rect.Y, cornerRadius * 2, cornerRadius * 2, 270, 90);
+            roundedRect.AddLine(rect.Right, rect.Y + cornerRadius * 2, rect.Right, rect.Y + rect.Height - cornerRadius * 2);
+            roundedRect.AddArc(rect.X + rect.Width - cornerRadius * 2, rect.Y + rect.Height - cornerRadius * 2, cornerRadius * 2, cornerRadius * 2, 0, 90);
+            roundedRect.AddLine(rect.Right - cornerRadius * 2, rect.Bottom, rect.X + cornerRadius * 2, rect.Bottom);
+            roundedRect.AddArc(rect.X, rect.Bottom - cornerRadius * 2, cornerRadius * 2, cornerRadius * 2, 90, 90);
+            roundedRect.AddLine(rect.X, rect.Bottom - cornerRadius * 2, rect.X, rect.Y + cornerRadius * 2);
+            roundedRect.CloseFigure();
+            return roundedRect;
+        }
         protected override void OnPaint(PaintEventArgs e)
         {
+            if (!DesignMode)
+            {
+                //Graphics g = e.Graphics;
+                //e.Graphics.SmoothingMode = SmoothingMode.HighQuality;
+                //using (SolidBrush bruch = new SolidBrush(Color.Transparent))
+                //{
+                //    g.FillRectangle(bruch, 0, 0, 25, this.Height);
+                //    g.FillRectangle(bruch, 27, 0, this.Width - 27, this.Height);
+                //}
+
+                Bitmap bitmap = new Bitmap(Width + 15, Height + 5);
+                Rectangle _BacklightLTRB = new Rectangle(20, 20, 20, 20);
+                e.Graphics.SmoothingMode = SmoothingMode.HighQuality; 
+                e.Graphics.PixelOffsetMode = PixelOffsetMode.HighQuality; 
+                ImageDrawRect.DrawRect(
+                    e.Graphics,
+                    Resources.main_light_bkg_top123,
+                    new Rectangle
+                    {
+                        X = ClientRectangle.X-3,
+                        Y = ClientRectangle.Y - 3,
+                        Width = ClientRectangle.Width + 6,
+                        Height = ClientRectangle.Height + 6
+                    },
+                    Rectangle.FromLTRB(_BacklightLTRB.X, _BacklightLTRB.Y, _BacklightLTRB.Width, _BacklightLTRB.Height),
+                    1,
+                    1);
+            }
             base.OnPaint(e);
-            Bitmap bitmap = new Bitmap(Width + 15, Height + 5);
-            Rectangle _BacklightLTRB = new Rectangle(20, 20, 20, 20);//窗体光泽重绘边界
-            e.Graphics.SmoothingMode = SmoothingMode.HighQuality; //高质量
-            e.Graphics.PixelOffsetMode = PixelOffsetMode.HighQuality; //高像素偏移质量
-            ImageDrawRect.DrawRect(e.Graphics, Resources.main_light_bkg_top123,
-               new Rectangle {
-                   X = ClientRectangle.X,
-                   Y = ClientRectangle.Y - 2,
-                   Width= ClientRectangle.Width,
-                   Height= ClientRectangle.Height
-               } 
-                , Rectangle.FromLTRB(_BacklightLTRB.X, _BacklightLTRB.Y, _BacklightLTRB.Width, _BacklightLTRB.Height), 1, 1);
         }
 
         private void settheme()
@@ -203,15 +301,15 @@ namespace MetroFramework.Controls
 
         protected override void OnMouseLeave(EventArgs e)
         {
-            IsHover = false;
-            Invalidate();
-            this.Hide();
-            base.OnMouseLeave(e);
+            //IsHover = false;
+            //Invalidate();
+            //this.Hide();
+            //base.OnMouseLeave(e);
         }
 
         private class MetroCTXRenderer : ToolStripProfessionalRenderer
         {
-            public MetroCTXRenderer(MetroFramework.MetroThemeStyle Theme, MetroColorStyle Style) : base(new contextcolors(Theme, Style)) { }
+            public MetroCTXRenderer(MetroThemeStyle Theme, MetroColorStyle Style) : base(new contextcolors(Theme, Style)) { }
 
             protected override void OnRenderToolStripBorder(ToolStripRenderEventArgs e)
             {
@@ -248,26 +346,13 @@ namespace MetroFramework.Controls
                 Graphics g = e.Graphics;
                 ToolStripItem item = e.Item;
                 ToolStrip toolstrip = e.ToolStrip;
-                if (toolstrip is MenuStrip)
-                {
-                    SolidBrush lgbrush = new SolidBrush(Color.Blue);
-                    if (e.Item.Selected)
-                    {
-                        GraphicsPath gp = GetRoundedRectPath(new Rectangle(new Point(0, 0), item.Size), 5);
-                        g.FillPath(lgbrush, gp);
-                    }
-                    if (item.Pressed)
-                    {
-                        g.FillRectangle(Brushes.White, new Rectangle(Point.Empty, item.Size));
-                    }
-                }
-                else if (toolstrip is ToolStripDropDown)
+                if (toolstrip is ToolStripDropDown)
                 {
                     g.SmoothingMode = SmoothingMode.HighQuality;
                     SolidBrush lgbrush = new SolidBrush(Color.FromArgb(232, 232, 232));//选项背景色
                     if (item.Selected)
                     {
-                        GraphicsPath gp = GetRoundedRectPath(new Rectangle(5, -0, item.Width, item.Height), 1);
+                        GraphicsPath gp = GetRoundedRectPath(new Rectangle(2, 0, item.Width , item.Height), 4);
                         g.FillPath(lgbrush, gp);
                     }
                 }

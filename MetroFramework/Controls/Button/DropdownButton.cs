@@ -50,6 +50,7 @@ namespace MetroFramework.Controls
             Menu1.StyleManager = this.StyleManager;
             this.Menu1.ResumeLayout(false);
             this.ResumeLayout(false);
+
         }
 
         protected override void OnEnter(EventArgs e)
