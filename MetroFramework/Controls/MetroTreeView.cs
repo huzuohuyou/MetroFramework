@@ -358,7 +358,7 @@ namespace MetroFramework.Controls
                     base.WndProc(ref m);
                     return;
                 }
-                if (tn.Level == 0)
+                if (tn.Level >= 0&&tn.Nodes.Count>0)
                 {
                     if (tn.IsExpanded)
                     {

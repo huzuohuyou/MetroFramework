@@ -135,6 +135,17 @@
             treeNode54,
             treeNode55,
             treeNode56});
+            System.Windows.Forms.TreeNode treeNode58 = new System.Windows.Forms.TreeNode("节点4");
+            System.Windows.Forms.TreeNode treeNode59 = new System.Windows.Forms.TreeNode("节点5");
+            System.Windows.Forms.TreeNode treeNode60 = new System.Windows.Forms.TreeNode("节点1", new System.Windows.Forms.TreeNode[] {
+            treeNode58,
+            treeNode59});
+            System.Windows.Forms.TreeNode treeNode61 = new System.Windows.Forms.TreeNode("节点2");
+            System.Windows.Forms.TreeNode treeNode62 = new System.Windows.Forms.TreeNode("节点3");
+            System.Windows.Forms.TreeNode treeNode63 = new System.Windows.Forms.TreeNode("节点0", new System.Windows.Forms.TreeNode[] {
+            treeNode60,
+            treeNode61,
+            treeNode62});
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.metroTreeView1 = new MetroFramework.Controls.MetroTreeView();
             this.metroTabControl1 = new MetroFramework.Controls.MetroTabControl();
@@ -290,6 +301,18 @@
             treeNode56.Text = "LocaleProvider";
             treeNode57.Name = "节点46";
             treeNode57.Text = "Other";
+            treeNode58.Name = "节点4";
+            treeNode58.Text = "节点4";
+            treeNode59.Name = "节点5";
+            treeNode59.Text = "节点5";
+            treeNode60.Name = "节点1";
+            treeNode60.Text = "节点1";
+            treeNode61.Name = "节点2";
+            treeNode61.Text = "节点2";
+            treeNode62.Name = "节点3";
+            treeNode62.Text = "节点3";
+            treeNode63.Name = "节点0";
+            treeNode63.Text = "节点0";
             this.metroTreeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode3,
             treeNode6,
@@ -297,7 +320,8 @@
             treeNode31,
             treeNode45,
             treeNode53,
-            treeNode57});
+            treeNode57,
+            treeNode63});
             this.metroTreeView1.OverForeColor = System.Drawing.Color.DeepSkyBlue;
             this.metroTreeView1.Size = new System.Drawing.Size(240, 698);
             this.metroTreeView1.TabIndex = 0;
