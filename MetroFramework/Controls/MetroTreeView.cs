@@ -338,7 +338,7 @@ namespace MetroFramework.Controls
 
         protected override void OnDrawNode(DrawTreeNodeEventArgs e)
         {
-            
+
             //base.OnDrawNode(e);
             DrawNodeItem(e);
         }
@@ -493,49 +493,85 @@ namespace MetroFramework.Controls
                         TextFormatFlags.Left | TextFormatFlags.VerticalCenter | TextFormatFlags.EndEllipsis);
                 }
             }
-            else if (tn.Level == 1)
+            else if (tn.Level >= 1)
             {
                 //e.DrawDefault = true;
-
+                
                 using (Graphics g = e.Graphics)
                 {
-                    if (tn.IsSelected)
+                    PointF p1;
+                    PointF p2;
+                    PointF p3;
+                    Console.WriteLine($@"tn.Nodes:{tn.Nodes.Count} {tn.Text}");
+                    if (tn.Nodes.Count>0)
                     {
-                        RenderBackgroundInternalRate(
-                        g,
-                        e.Bounds,
-                        ChangeColor(MetroPaint.GetStyleColor(Style),0.3f),
-                        false
-                       );
-                        RenderBackgroundInternalRate(
-                       g,
-                       new Rectangle { X = e.Bounds.X,Y=e.Bounds.Y,Height=e.Bounds.Height,Width=5 },
-                       ChangeColor(MetroPaint.GetStyleColor(Style), -0.8f),
-                       false
-                      );
+                        if (tn.IsExpanded)
+                        {
+                            Console.WriteLine("tn.IsExpanded");
+                            p1 = new PointF(ExpandButtonBounds(e.Bounds).X + 3, ExpandButtonBounds(e.Bounds).Bottom - 4);
+                            p2 = new PointF(ExpandButtonBounds(e.Bounds).X + (ExpandButtonSize.Width) / 2, ExpandButtonBounds(e.Bounds).Top + 5);
+                            p3 = new PointF(ExpandButtonBounds(e.Bounds).Right - 3, ExpandButtonBounds(e.Bounds).Bottom - 4);
+                        }
+                        else
+                        {
+                            Console.WriteLine("tn.IsNotExpanded");
+                            p1 = new PointF(ExpandButtonBounds(e.Bounds).X + 3, ExpandButtonBounds(e.Bounds).Y + 4);
+                            p2 = new PointF(ExpandButtonBounds(e.Bounds).X + (ExpandButtonSize.Width) / 2, ExpandButtonBounds(e.Bounds).Bottom - 5);
+                            p3 = new PointF(ExpandButtonBounds(e.Bounds).Right - 3, ExpandButtonBounds(e.Bounds).Y + 4);
+                        }
+                        GraphicsPath gp = new GraphicsPath();
+                        e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+                        gp.AddLine(p1, p2);
+                        gp.AddLine(p2, p3);
+                        g.DrawPath(new Pen(Color.FromArgb(255, 255, 255, 255), 2f), gp);
                         TextRenderer.DrawText(
-                            g, 
-                            e.Node.Text, 
-                            MetroFonts.Tile(metroLabelSize, metroLabelWeight), 
-                            new Rectangle { X = e.Bounds.X + 40, Y = e.Bounds.Y, Width = e.Bounds.Width, Height = e.Bounds.Height }, 
-                            Color.White,
-                            TextFormatFlags.Left | TextFormatFlags.VerticalCenter);
+                        g,
+                        e.Node.Text,
+                        MetroFonts.Tile(metroLabelSize, metroLabelWeight), 
+                        new Rectangle { X = e.Bounds.X + 40, Y = e.Bounds.Y, Width = e.Bounds.Width, Height = e.Bounds.Height },
+                        Color.White,
+                        TextFormatFlags.Left | TextFormatFlags.VerticalCenter | TextFormatFlags.EndEllipsis);
                     }
                     else
                     {
-                        RenderBackgroundInternalRate(
-                        g,
-                        e.Bounds,
-                        BackColor,
-                        false);
-                        TextRenderer.DrawText(
-                            g, 
-                            e.Node.Text,
-                            MetroFonts.Tile(metroLabelSize, MetroTileTextWeight.Light), 
-                            new Rectangle {X= e.Bounds.X+ 40, Y= e.Bounds.Y,Width= e.Bounds.Width,Height= e.Bounds.Height } ,
-                            Color.White,
-                            TextFormatFlags.Left | TextFormatFlags.VerticalCenter);
-                        
+                        if (tn.IsSelected)
+                        {
+                            RenderBackgroundInternalRate(
+                            g,
+                            e.Bounds,
+                            ChangeColor(MetroPaint.GetStyleColor(Style), 0.3f),
+                            false
+                           );
+                            RenderBackgroundInternalRate(
+                           g,
+                           new Rectangle { X = e.Bounds.X, Y = e.Bounds.Y, Height = e.Bounds.Height, Width = 5 },
+                           ChangeColor(MetroPaint.GetStyleColor(Style), -0.8f),
+                           false
+                          );
+                            TextRenderer.DrawText(
+                                g,
+                                e.Node.Text,
+                                MetroFonts.Tile(metroLabelSize, metroLabelWeight),
+                                new Rectangle { X = e.Bounds.X + (tn.Level - 0) * 40, Y = e.Bounds.Y, Width = e.Bounds.Width, Height = e.Bounds.Height },
+                                Color.White,
+                                TextFormatFlags.Left | TextFormatFlags.VerticalCenter);
+                        }
+                        else
+                        {
+                            RenderBackgroundInternalRate(
+                            g,
+                            e.Bounds,
+                            BackColor,
+                            false);
+                            TextRenderer.DrawText(
+                                g,
+                                e.Node.Text,
+                                MetroFonts.Tile(metroLabelSize, MetroTileTextWeight.Light),
+                                new Rectangle { X = e.Bounds.X +(tn.Level - 0) * 40, Y = e.Bounds.Y, Width = e.Bounds.Width, Height = e.Bounds.Height },
+                                Color.White,
+                                TextFormatFlags.Left | TextFormatFlags.VerticalCenter);
+
+                        }
                     }
                 }
             }
